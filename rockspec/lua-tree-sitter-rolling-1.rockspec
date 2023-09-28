@@ -26,18 +26,18 @@ source = {
 build = {
 	type = 'builtin',
 	modules = {
-		['tree_sitter'] = 'lua/init.lua',
-		['tree_sitter.language'] = 'lua/language.lua',
-		['tree_sitter.node'] = 'lua/node.lua',
-		['tree_sitter.parser'] = 'lua/parser.lua',
-		['tree_sitter.point'] = 'lua/point.lua',
-		['tree_sitter.tree'] = 'lua/tree.lua',
+		['tree_sitter'] = 'lua/tree_sitter/init.lua',
+		['tree_sitter.language'] = 'lua/tree_sitter/language.lua',
+		['tree_sitter.node'] = 'lua/tree_sitter/node.lua',
+		['tree_sitter.parser'] = 'lua/tree_sitter/parser.lua',
+		['tree_sitter.point'] = 'lua/tree_sitter/point.lua',
+		['tree_sitter.tree'] = 'lua/tree_sitter/tree.lua',
 		['lua_tree_sitter'] = {
 			libdirs = { '$(TREE_SITTER_LIBDIR)' },
 			incdirs = { '$(TREE_SITTER_INCDIR)' },
 			libraries = { 'tree-sitter' },
 			sources = {
-				'c/tree_sitter.c',
+				'c/init.c',
 				'c/input.c',
 				'c/language.c',
 				'c/node.c',
