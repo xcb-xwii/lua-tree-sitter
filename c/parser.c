@@ -67,18 +67,21 @@ static int LTS_parser_parse(lua_State *L) {
 
 	switch (LTS_input_get_status(input)) {
 	case LTS_INPUT_RTERROR:
+		LTS_input_delete(input);
 		return luaL_error(L,
 			"error while executing read function: %s",
 			lua_tostring(L, -1)
 		);
 
 	case LTS_INPUT_RETTYPE:
+		LTS_input_delete(input);
 		return luaL_error(L,
 			"bad return value from read function (string expected, got %s)",
 			lua_typename(L, lua_type(L, -1))
 		);
 
 	default:
+		LTS_input_delete(input);
 		break;
 	}
 
