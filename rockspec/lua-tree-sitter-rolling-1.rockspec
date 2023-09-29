@@ -28,6 +28,7 @@ build = {
 	modules = {
 		['tree_sitter'] = 'lua/tree_sitter/init.lua',
 		['tree_sitter.input'] = 'lua/tree_sitter/input.lua',
+		['tree_sitter.input_edit'] = 'lua/tree_sitter/input_edit.lua',
 		['tree_sitter.language'] = 'lua/tree_sitter/language.lua',
 		['tree_sitter.node'] = 'lua/tree_sitter/node.lua',
 		['tree_sitter.parser'] = 'lua/tree_sitter/parser.lua',
@@ -40,6 +41,7 @@ build = {
 			sources = {
 				'c/init.c',
 				'c/input.c',
+				'c/input_edit.c',
 				'c/language.c',
 				'c/node.c',
 				'c/parser.c',

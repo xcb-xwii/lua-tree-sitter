@@ -5,6 +5,7 @@
 
 #include <tree_sitter/api.h>
 
+#include "input_edit.h"
 #include "language.h"
 #include "node.h"
 #include "util.h"
@@ -55,6 +56,14 @@ static int LTS_tree_language(lua_State *L) {
 	return 1;
 }
 
+static int LTS_tree_edit(lua_State *L) {
+	TSTree *self = LTS_check_tree(L, 1);
+	TSInputEdit *edit = LTS_check_input_edit(L, 2);
+
+	ts_tree_edit(self, edit);
+	return 0;
+}
+
 static const luaL_Reg metamethods[] = {
 	{ "__eq", LTS_tree_eq },
 	{ "__gc", LTS_tree_delete },
@@ -64,7 +73,12 @@ static const luaL_Reg metamethods[] = {
 static const luaL_Reg funcs[] = {
 	{ "copy", LTS_tree_copy },
 	{ "root_node", LTS_tree_root_node },
+	//{ "root_node_with_offset", LTS_tree_root_node_with_offset },
 	{ "language", LTS_tree_language },
+	//{ "included_ranges", LTS_tree_included_ranges },
+	{ "edit", LTS_tree_edit },
+	//{ "get_changed_ranges", LTS_tree_get_changed_ranges },
+	//{ "print_dot_graph", LTS_tree_print_dot_graph },
 	{ NULL, NULL }
 };
 

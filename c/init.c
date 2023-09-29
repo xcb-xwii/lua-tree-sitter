@@ -10,6 +10,7 @@
 #include <dlfcn.h>
 
 #include "input.h"
+#include "input_edit.h"
 #include "language.h"
 #include "node.h"
 #include "parser.h"
@@ -53,6 +54,7 @@ static const luaL_Reg reg[] = {
 
 int luaopen_lua_tree_sitter(lua_State *L) {
 	LTS_make_metatable_input(L);
+	LTS_make_metatable_input_edit(L);
 	LTS_make_metatable_language(L);
 	LTS_make_metatable_node(L);
 	LTS_make_metatable_parser(L);
@@ -63,6 +65,7 @@ int luaopen_lua_tree_sitter(lua_State *L) {
 	LTS_util_set_funcs(L, reg);
 
 	LTS_make_functable_input(L);
+	LTS_make_functable_input_edit(L);
 	LTS_make_functable_language(L);
 	LTS_make_functable_node(L);
 	LTS_make_functable_parser(L);
