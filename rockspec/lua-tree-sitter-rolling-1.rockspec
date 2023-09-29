@@ -27,6 +27,7 @@ build = {
 	type = 'builtin',
 	modules = {
 		['tree_sitter'] = 'lua/tree_sitter/init.lua',
+		['tree_sitter.input'] = 'lua/tree_sitter/input.lua',
 		['tree_sitter.language'] = 'lua/tree_sitter/language.lua',
 		['tree_sitter.node'] = 'lua/tree_sitter/node.lua',
 		['tree_sitter.parser'] = 'lua/tree_sitter/parser.lua',

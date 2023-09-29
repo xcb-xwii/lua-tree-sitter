@@ -60,28 +60,27 @@ static int LTS_parser_set_language(lua_State *L) {
 static int LTS_parser_parse(lua_State *L) {
 	TSParser *self = LTS_check_parser(L, 1);
 	TSTree *old_tree = lua_isnil(L, 2) ? NULL : LTS_check_tree(L, 2);
-	luaL_checktype(L, 3, LUA_TFUNCTION);
-	TSInput input = LTS_input_new(L, 3);
+	TSInput input = LTS_check_input(L, 3);
 
+	LTS_input_reset_status(input);
 	TSTree *tree = ts_parser_parse(self, old_tree, input);
 
 	switch (LTS_input_get_status(input)) {
 	case LTS_INPUT_RTERROR:
-		LTS_input_delete(input);
+		ts_tree_delete(tree);
 		return luaL_error(L,
 			"error while executing read function: %s",
 			lua_tostring(L, -1)
 		);
 
 	case LTS_INPUT_RETTYPE:
-		LTS_input_delete(input);
+		ts_tree_delete(tree);
 		return luaL_error(L,
 			"bad return value from read function (string expected, got %s)",
 			lua_typename(L, lua_type(L, -1))
 		);
 
 	default:
-		LTS_input_delete(input);
 		break;
 	}
 
