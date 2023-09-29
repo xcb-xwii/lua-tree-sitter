@@ -23,10 +23,7 @@ static int LTS_load(lua_State *L) {
 
 	void *dl = dlopen(path, RTLD_NOW | RTLD_LOCAL);
 	if (!dl) {
-		return luaL_error(L,
-			"could not load dynamic library '%s'",
-			path
-		);
+		return luaL_error(L, "could not load dynamic library: %s", dlerror());
 	}
 
 	size_t sym_len = snprintf(NULL, 0, "tree_sitter_%s", lang_name) + 1;
@@ -36,9 +33,10 @@ static int LTS_load(lua_State *L) {
 	TSLanguage *(*lang_func)(void) = dlsym(dl, sym);
 	free(sym);
 	if (!lang_func) {
+		dlclose(dl);
 		return luaL_error(L,
-			"dynamic library '%s' does not contain symbol for tree_sitter_%s",
-			path, lang_name
+			"could not load symbol for tree_sitter_%s: %s",
+			lang_name, dlerror()
 		);
 	}
 
