@@ -42,11 +42,6 @@ static int LTS_node_string(lua_State *L) {
 	return 1;
 }
 
-static const luaL_Reg methods[] = {
-	{ "tree", LTS_node_tree },
-	{ NULL, NULL }
-};
-
 static const luaL_Reg metamethods[] = {
 	{ "__eq", LTS_node_eq },
 	{ "__tostring", LTS_node_string },
@@ -58,7 +53,7 @@ static const luaL_Reg funcs[] = {
 };
 
 void LTS_make_metatable_node(lua_State *L) {
-	LTS_util_make_metatable(L, LTS_NODE_METATABLE_NAME, methods, metamethods);
+	LTS_util_make_metatable(L, LTS_NODE_METATABLE_NAME, NULL, metamethods);
 }
 
 void LTS_make_functable_node(lua_State *L) {
