@@ -6,8 +6,8 @@
 
 #include <tree_sitter/api.h>
 
-#define LTS_NODE_FUNCTABLE_NAME "TSNode"
-#define LTS_NODE_METATABLE_NAME "lua_tree_sitter.TSNode"
+#define LTS_NODE_FUNCTABLE_NAME "Node"
+#define LTS_NODE_METATABLE_NAME "lua_tree_sitter.Node"
 
 void LTS_make_metatable_node(lua_State *L);
 void LTS_make_functable_node(lua_State *L);

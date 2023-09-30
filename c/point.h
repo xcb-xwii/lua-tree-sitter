@@ -6,8 +6,8 @@
 
 #include <tree_sitter/api.h>
 
-#define LTS_POINT_FUNCTABLE_NAME "TSPoint"
-#define LTS_POINT_METATABLE_NAME "lua_tree_sitter.TSPoint"
+#define LTS_POINT_FUNCTABLE_NAME "Point"
+#define LTS_POINT_METATABLE_NAME "lua_tree_sitter.Point"
 
 void LTS_make_metatable_point(lua_State *L);
 void LTS_make_functable_point(lua_State *L);

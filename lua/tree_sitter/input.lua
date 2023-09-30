@@ -1,7 +1,7 @@
 local lts = require 'lua_tree_sitter'
 
 local M = {}
-for name, func in pairs(lts.TSInput) do
+for name, func in pairs(lts.Input) do
 	M[name] = func
 end
 

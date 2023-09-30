@@ -6,8 +6,8 @@
 
 #include <tree_sitter/api.h>
 
-#define LTS_LANGUAGE_FUNCTABLE_NAME "TSLanguage"
-#define LTS_LANGUAGE_METATABLE_NAME "lua_tree_sitter.TSLanguage"
+#define LTS_LANGUAGE_FUNCTABLE_NAME "Language"
+#define LTS_LANGUAGE_METATABLE_NAME "lua_tree_sitter.Language"
 
 void LTS_make_metatable_language(lua_State *L);
 void LTS_make_functable_language(lua_State *L);
