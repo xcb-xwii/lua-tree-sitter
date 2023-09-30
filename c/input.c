@@ -86,7 +86,7 @@ int LTS_input_delete(lua_State *L) {
 	TSInput self = LTS_check_input(L, 1);
 
 	LTS_InputContext *ctx = self.payload;
-	luaL_unref(L, ctx->read_ref, LUA_REGISTRYINDEX);
+	luaL_unref(L, LUA_REGISTRYINDEX, ctx->read_ref);
 	free(ctx);
 	return 0;
 }
