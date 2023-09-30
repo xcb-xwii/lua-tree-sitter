@@ -15,6 +15,10 @@
 #include "node.h"
 #include "parser.h"
 #include "point.h"
+#include "query.h"
+#include "query_capture.h"
+#include "query_cursor.h"
+#include "query_match.h"
 #include "range.h"
 #include "ranges.h"
 #include "tree.h"
@@ -61,6 +65,10 @@ int luaopen_lua_tree_sitter(lua_State *L) {
 	LTS_make_metatable_node(L);
 	LTS_make_metatable_parser(L);
 	LTS_make_metatable_point(L);
+	LTS_make_metatable_query(L);
+	LTS_make_metatable_query_capture(L);
+	LTS_make_metatable_query_cursor(L);
+	LTS_make_metatable_query_match(L);
 	LTS_make_metatable_range(L);
 	LTS_make_metatable_ranges(L);
 	LTS_make_metatable_tree(L);
@@ -74,6 +82,10 @@ int luaopen_lua_tree_sitter(lua_State *L) {
 	LTS_make_functable_node(L);
 	LTS_make_functable_parser(L);
 	LTS_make_functable_point(L);
+	LTS_make_functable_query(L);
+	LTS_make_functable_query_capture(L);
+	LTS_make_functable_query_cursor(L);
+	LTS_make_functable_query_match(L);
 	LTS_make_functable_range(L);
 	LTS_make_functable_ranges(L);
 	LTS_make_functable_tree(L);

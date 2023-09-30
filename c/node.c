@@ -8,20 +8,15 @@
 #include "tree.h"
 #include "util.h"
 
-typedef struct {
-	TSNode node;
-	int tree_ref;
-} LTS_Node;
-
-void LTS_push_node(lua_State *L, TSNode target, int tree_idx) {
+void LTS_push_node(lua_State *L, TSNode target, int parent_idx) {
 	LTS_Node *ud = lua_newuserdata(L, sizeof *ud);
 	ud->node = target;
-	lua_pushvalue(L, tree_idx);
-	ud->tree_ref = luaL_ref(L, LUA_REGISTRYINDEX);
+	lua_pushvalue(L, parent_idx);
+	ud->parent_ref = luaL_ref(L, LUA_REGISTRYINDEX);
 	LTS_util_set_metatable(L, LTS_NODE_METATABLE_NAME);
 }
 
-static LTS_Node LTS_check_lts_node(lua_State *L, int idx) {
+LTS_Node LTS_check_lts_node(lua_State *L, int idx) {
 	return *(LTS_Node *) luaL_checkudata(L, idx, LTS_NODE_METATABLE_NAME);
 }
 
@@ -32,7 +27,7 @@ TSNode LTS_check_node(lua_State *L, int idx) {
 static int LTS_node_delete(lua_State *L) {
 	LTS_Node self = LTS_check_lts_node(L, 1);
 	
-	luaL_unref(L, LUA_REGISTRYINDEX, self.tree_ref);
+	luaL_unref(L, LUA_REGISTRYINDEX, self.parent_ref);
 	return 0;
 }
 
