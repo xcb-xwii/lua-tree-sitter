@@ -30,9 +30,11 @@ void LTS_util_make_metatable(
 	luaL_newmetatable(L, name);
 	LTS_util_set_funcs(L, metamethods);
 
-	lua_newtable(L);
-	LTS_util_set_funcs(L, methods);
-	lua_setfield(L, -2, "__index");
+	if (methods) {
+		lua_newtable(L);
+		LTS_util_set_funcs(L, methods);
+		lua_setfield(L, -2, "__index");
+	}
 	
 	lua_pushstring(L, name);
 	lua_setfield(L, -2, "__name");
