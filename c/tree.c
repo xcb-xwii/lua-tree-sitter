@@ -7,11 +7,11 @@
 
 #include <stdint.h>
 
-#include "array.h"
 #include "input_edit.h"
 #include "language.h"
 #include "node.h"
 #include "range.h"
+#include "ranges.h"
 #include "util.h"
 
 void LTS_push_tree(lua_State *L, TSTree *target) {
@@ -65,11 +65,9 @@ static int LTS_tree_included_ranges(lua_State *L) {
 
 	uint32_t len;
 	TSRange *ranges = ts_tree_included_ranges(self, &len);
-	LTS_push_array(L, (LTS_Array) {
+	LTS_push_ranges(L, (LTS_Ranges) {
 		.ptr = ranges,
-		.mt_name = LTS_RANGE_METATABLE_NAME,
 		.elem_count = len,
-		.elem_size = sizeof *ranges,
 		.managed = true
 	});
 	return 1;
@@ -89,11 +87,9 @@ static int LTS_tree_get_changed_ranges(lua_State *L) {
 
 	uint32_t len;
 	TSRange *ranges = ts_tree_get_changed_ranges(old_tree, new_tree, &len);
-	LTS_push_array(L, (LTS_Array) {
+	LTS_push_ranges(L, (LTS_Ranges) {
 		.ptr = ranges,
-		.mt_name = LTS_RANGE_METATABLE_NAME,
 		.elem_count = len,
-		.elem_size = sizeof *ranges,
 		.managed = true
 	});
 	return 1;

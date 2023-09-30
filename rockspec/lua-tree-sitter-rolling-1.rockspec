@@ -27,7 +27,6 @@ build = {
 	type = 'builtin',
 	modules = {
 		['tree_sitter'] = 'lua/tree_sitter/init.lua',
-		['tree_sitter.array'] = 'lua/tree_sitter/array.lua',
 		['tree_sitter.input'] = 'lua/tree_sitter/input.lua',
 		['tree_sitter.input_edit'] = 'lua/tree_sitter/input_edit.lua',
 		['tree_sitter.language'] = 'lua/tree_sitter/language.lua',
@@ -35,6 +34,7 @@ build = {
 		['tree_sitter.parser'] = 'lua/tree_sitter/parser.lua',
 		['tree_sitter.point'] = 'lua/tree_sitter/point.lua',
 		['tree_sitter.range'] = 'lua/tree_sitter/range.lua',
+		['tree_sitter.ranges'] = 'lua/tree_sitter/ranges.lua',
 		['tree_sitter.tree'] = 'lua/tree_sitter/tree.lua',
 		['lua_tree_sitter'] = {
 			libdirs = { '$(TREE_SITTER_LIBDIR)' },
@@ -42,7 +42,6 @@ build = {
 			libraries = { 'tree-sitter' },
 			sources = {
 				'c/init.c',
-				'c/array.c',
 				'c/input.c',
 				'c/input_edit.c',
 				'c/language.c',
@@ -50,6 +49,7 @@ build = {
 				'c/parser.c',
 				'c/point.c',
 				'c/range.c',
+				'c/ranges.c',
 				'c/tree.c',
 				'c/util.c',
 			},

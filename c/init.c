@@ -9,7 +9,6 @@
 
 #include <dlfcn.h>
 
-#include "array.h"
 #include "input.h"
 #include "input_edit.h"
 #include "language.h"
@@ -17,6 +16,7 @@
 #include "parser.h"
 #include "point.h"
 #include "range.h"
+#include "ranges.h"
 #include "tree.h"
 #include "util.h"
 
@@ -55,7 +55,6 @@ static const luaL_Reg reg[] = {
 };
 
 int luaopen_lua_tree_sitter(lua_State *L) {
-	LTS_make_metatable_array(L);
 	LTS_make_metatable_input(L);
 	LTS_make_metatable_input_edit(L);
 	LTS_make_metatable_language(L);
@@ -63,12 +62,12 @@ int luaopen_lua_tree_sitter(lua_State *L) {
 	LTS_make_metatable_parser(L);
 	LTS_make_metatable_point(L);
 	LTS_make_metatable_range(L);
+	LTS_make_metatable_ranges(L);
 	LTS_make_metatable_tree(L);
 
 	lua_createtable(L, 0, 0);
 	LTS_util_set_funcs(L, reg);
 
-	LTS_make_functable_array(L);
 	LTS_make_functable_input(L);
 	LTS_make_functable_input_edit(L);
 	LTS_make_functable_language(L);
@@ -76,6 +75,7 @@ int luaopen_lua_tree_sitter(lua_State *L) {
 	LTS_make_functable_parser(L);
 	LTS_make_functable_point(L);
 	LTS_make_functable_range(L);
+	LTS_make_functable_ranges(L);
 	LTS_make_functable_tree(L);
 
 	return 1;
