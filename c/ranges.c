@@ -47,14 +47,14 @@ static int LTS_ranges_index(lua_State *L) {
 		"attempt to index "LTS_RANGES_METATABLE_NAME" beyond last element"
 	);
 
-	LTS_push_range(L, self.ptr + idx - 1);
+	LTS_push_range(L, self.ptr[idx - 1]);
 	return 1;
 }
 
 static int LTS_ranges_newindex(lua_State *L) {
 	LTS_Ranges self = LTS_check_ranges(L, 1);
 	lua_Integer idx = luaL_checkinteger(L, 2);
-	TSRange *range = LTS_check_range(L, 3);
+	TSRange range = LTS_check_range(L, 3);
 
 	luaL_argcheck(L,
 		self.managed,
@@ -72,7 +72,7 @@ static int LTS_ranges_newindex(lua_State *L) {
 		"attempt to index "LTS_RANGES_METATABLE_NAME" beyond last element"
 	);
 
-	self.ptr[idx - 1] = *range;
+	self.ptr[idx - 1] = range;
 	return 0;
 }
 

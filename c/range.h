@@ -11,7 +11,7 @@
 
 void LTS_make_metatable_range(lua_State *L);
 void LTS_make_functable_range(lua_State *L);
-void LTS_push_range(lua_State *L, TSRange *target);
-TSRange *LTS_check_range(lua_State *L, int idx);
+void LTS_push_range(lua_State *L, TSRange target);
+TSRange LTS_check_range(lua_State *L, int idx);
 
 #endif
