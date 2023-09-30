@@ -5,9 +5,13 @@
 
 #include <tree_sitter/api.h>
 
+#include <stdint.h>
+
+#include "array.h"
 #include "input_edit.h"
 #include "language.h"
 #include "node.h"
+#include "range.h"
 #include "util.h"
 
 void LTS_push_tree(lua_State *L, TSTree *target) {
@@ -56,12 +60,43 @@ static int LTS_tree_language(lua_State *L) {
 	return 1;
 }
 
+static int LTS_tree_included_ranges(lua_State *L) {
+	TSTree *self = LTS_check_tree(L, 1);
+
+	uint32_t len;
+	TSRange *ranges = ts_tree_included_ranges(self, &len);
+	LTS_push_array(L, (LTS_Array) {
+		.ptr = ranges,
+		.mt_name = LTS_RANGE_METATABLE_NAME,
+		.elem_count = len,
+		.elem_size = sizeof *ranges,
+		.managed = true
+	});
+	return 1;
+}
+
 static int LTS_tree_edit(lua_State *L) {
 	TSTree *self = LTS_check_tree(L, 1);
 	TSInputEdit *edit = LTS_check_input_edit(L, 2);
 
 	ts_tree_edit(self, edit);
 	return 0;
+}
+
+static int LTS_tree_get_changed_ranges(lua_State *L) {
+	TSTree *old_tree = LTS_check_tree(L, 1);
+	TSTree *new_tree = LTS_check_tree(L, 2);
+
+	uint32_t len;
+	TSRange *ranges = ts_tree_get_changed_ranges(old_tree, new_tree, &len);
+	LTS_push_array(L, (LTS_Array) {
+		.ptr = ranges,
+		.mt_name = LTS_RANGE_METATABLE_NAME,
+		.elem_count = len,
+		.elem_size = sizeof *ranges,
+		.managed = true
+	});
+	return 1;
 }
 
 static const luaL_Reg metamethods[] = {
@@ -75,9 +110,9 @@ static const luaL_Reg funcs[] = {
 	{ "root_node", LTS_tree_root_node },
 	//{ "root_node_with_offset", LTS_tree_root_node_with_offset },
 	{ "language", LTS_tree_language },
-	//{ "included_ranges", LTS_tree_included_ranges },
+	{ "included_ranges", LTS_tree_included_ranges },
 	{ "edit", LTS_tree_edit },
-	//{ "get_changed_ranges", LTS_tree_get_changed_ranges },
+	{ "get_changed_ranges", LTS_tree_get_changed_ranges },
 	//{ "print_dot_graph", LTS_tree_print_dot_graph },
 	{ NULL, NULL }
 };
