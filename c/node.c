@@ -8,14 +8,32 @@
 #include "tree.h"
 #include "util.h"
 
-void LTS_push_node(lua_State *L, TSNode target) {
-	TSNode *ud = lua_newuserdata(L, sizeof *ud);
-	*ud = target;
+typedef struct {
+	TSNode node;
+	int tree_ref;
+} LTS_Node;
+
+void LTS_push_node(lua_State *L, TSNode target, int tree_idx) {
+	LTS_Node *ud = lua_newuserdata(L, sizeof *ud);
+	ud->node = target;
+	lua_pushvalue(L, tree_idx);
+	ud->tree_ref = luaL_ref(L, LUA_REGISTRYINDEX);
 	LTS_util_set_metatable(L, LTS_NODE_METATABLE_NAME);
 }
 
+static LTS_Node LTS_check_lts_node(lua_State *L, int idx) {
+	return *(LTS_Node *) luaL_checkudata(L, idx, LTS_NODE_METATABLE_NAME);
+}
+
 TSNode LTS_check_node(lua_State *L, int idx) {
-	return *(TSNode *) luaL_checkudata(L, idx, LTS_NODE_METATABLE_NAME);
+	return LTS_check_lts_node(L, idx).node;
+}
+
+static int LTS_node_delete(lua_State *L) {
+	LTS_Node self = LTS_check_lts_node(L, 1);
+	
+	luaL_unref(L, LUA_REGISTRYINDEX, self.tree_ref);
+	return 0;
 }
 
 static int LTS_node_tree(lua_State *L) {
@@ -42,9 +60,15 @@ static int LTS_node_string(lua_State *L) {
 	return 1;
 }
 
+static const luaL_Reg methods[] = {
+	{ "tree", LTS_node_tree },
+	{ NULL, NULL }
+};
+
 static const luaL_Reg metamethods[] = {
 	{ "__eq", LTS_node_eq },
 	{ "__tostring", LTS_node_string },
+	{ "__gc", LTS_node_delete },
 	{ NULL, NULL }
 };
 
@@ -53,7 +77,7 @@ static const luaL_Reg funcs[] = {
 };
 
 void LTS_make_metatable_node(lua_State *L) {
-	LTS_util_make_metatable(L, LTS_NODE_METATABLE_NAME, NULL, metamethods);
+	LTS_util_make_metatable(L, LTS_NODE_METATABLE_NAME, methods, metamethods);
 }
 
 void LTS_make_functable_node(lua_State *L) {

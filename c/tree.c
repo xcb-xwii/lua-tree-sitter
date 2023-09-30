@@ -49,7 +49,7 @@ static int LTS_tree_copy(lua_State *L) {
 static int LTS_tree_root_node(lua_State *L) {
 	TSTree *self = LTS_check_tree(L, 1);
 
-	LTS_push_node(L, ts_tree_root_node(self));
+	LTS_push_node(L, ts_tree_root_node(self), 1);
 	return 1;
 }
 
