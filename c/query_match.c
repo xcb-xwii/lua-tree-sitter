@@ -65,6 +65,8 @@ static int LTS_query_match_capture_at(lua_State *L) {
 }
 
 static const luaL_Reg methods[] = {
+	//{ "unpack", LTS_query_match_unpack },
+	//{ "to_table", LTS_query_match_to_table },
 	{ "pattern_index", LTS_query_match_pattern_index },
 	{ "capture_count", LTS_query_match_capture_count },
 	{ "capture_at", LTS_query_match_capture_at },

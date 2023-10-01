@@ -87,25 +87,29 @@ static int LTS_tree_get_changed_ranges(lua_State *L) {
 	return 1;
 }
 
-static const luaL_Reg metamethods[] = {
-	{ "__gc", LTS_tree_delete },
-	{ NULL, NULL }
-};
-
-static const luaL_Reg funcs[] = {
+static const luaL_Reg methods[] = {
 	{ "copy", LTS_tree_copy },
 	{ "root_node", LTS_tree_root_node },
 	//{ "root_node_with_offset", LTS_tree_root_node_with_offset },
 	{ "language", LTS_tree_language },
 	{ "included_ranges", LTS_tree_included_ranges },
 	{ "edit", LTS_tree_edit },
-	{ "get_changed_ranges", LTS_tree_get_changed_ranges },
 	//{ "print_dot_graph", LTS_tree_print_dot_graph },
 	{ NULL, NULL }
 };
 
+static const luaL_Reg metamethods[] = {
+	{ "__gc", LTS_tree_delete },
+	{ NULL, NULL }
+};
+
+static const luaL_Reg funcs[] = {
+	{ "get_changed_ranges", LTS_tree_get_changed_ranges },
+	{ NULL, NULL }
+};
+
 void LTS_make_metatable_tree(lua_State *L) {
-	LTS_util_make_metatable(L, LTS_TREE_METATABLE_NAME, NULL, metamethods);
+	LTS_util_make_metatable(L, LTS_TREE_METATABLE_NAME, methods, metamethods);
 }
 
 void LTS_make_functable_tree(lua_State *L) {

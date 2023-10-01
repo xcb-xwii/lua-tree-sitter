@@ -87,6 +87,7 @@ static int LTS_input_edit_new_end_point(lua_State *L) {
 }
 
 static const luaL_Reg methods[] = {
+	{ "unpack", LTS_input_edit_unpack },
 	{ "start_byte", LTS_input_edit_start_byte },
 	{ "old_end_byte", LTS_input_edit_old_end_byte },
 	{ "new_end_byte", LTS_input_edit_new_end_byte },
@@ -104,9 +105,6 @@ static const luaL_Reg metamethods[] = {
 static const luaL_Reg funcs[] = {
 	{ "new", LTS_input_edit_new },
 	{ "pack", LTS_input_edit_new },
-	{ "unpack", LTS_input_edit_unpack },
-	//{ "to_table", LTS_input_edit_to_table },
-	//{ "from_table", LTS_input_edit_from_table },
 	{ NULL, NULL }
 };
 

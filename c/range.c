@@ -69,6 +69,8 @@ static int LTS_range_end_byte(lua_State *L) {
 }
 
 static const luaL_Reg methods[] = {
+	{ "unpack", LTS_range_unpack },
+	//{ "to_table", LTS_range_to_table },
 	{ "start_byte", LTS_range_start_byte },
 	{ "end_byte", LTS_range_end_byte },
 	{ "start_point", LTS_range_start_point },
@@ -84,8 +86,6 @@ static const luaL_Reg metamethods[] = {
 static const luaL_Reg funcs[] = {
 	{ "new", LTS_range_new },
 	{ "pack", LTS_range_new },
-	{ "unpack", LTS_range_unpack },
-	//{ "to_table", LTS_range_to_table },
 	//{ "from_table", LTS_range_from_table },
 	{ NULL, NULL }
 };

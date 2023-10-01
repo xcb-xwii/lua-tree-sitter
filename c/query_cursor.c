@@ -88,6 +88,18 @@ static int LTS_query_cursor_next_capture(lua_State *L) {
 	return 1;
 }
 
+static const luaL_Reg methods[] = {
+	//{ "did_exceed_match_limit", LTS_query_cursor_did_exceed_match_limit },
+	//{ "match_limit", lts_query_cursor_match_limit },
+	//{ "set_match_limit", lts_query_cursor_set_match_limit },
+	//{ "set_byte_range", LTS_query_cursor_set_byte_range },
+	//{ "set_point_range", LTS_query_cursor_set_point_range },
+	{ "next_match", LTS_query_cursor_next_match },
+	// { "remove_match", LTS_query_cursor_remove_match },
+	{ "next_capture", LTS_query_cursor_next_capture },
+	//{ "set_max_start_depth", LTS_query_cursor_set_max_start_depth },
+};
+
 static const luaL_Reg metamethods[] = {
 	{ "__gc", LTS_query_cursor_delete },
 	{ NULL, NULL }
@@ -98,20 +110,11 @@ static const luaL_Reg metamethods[] = {
 // instead, `new` takes two additional parameters and implicitly calls `exec`
 static const luaL_Reg funcs[] = {
 	{ "new", LTS_query_cursor_new },
-	//{ "did_exceed_match_limit", LTS_query_cursor_did_exceed_match_limit },
-	//{ "match_limit", lts_query_cursor_match_limit },
-	//{ "set_match_limit", lts_query_cursor_set_match_limit },
-	//{ "set_byte_range", LTS_query_cursor_set_byte_range },
-	//{ "set_point_range", LTS_query_cursor_set_point_range },
-	{ "next_match", LTS_query_cursor_next_match },
-	// { "remove_match", LTS_query_cursor_remove_match },
-	{ "next_capture", LTS_query_cursor_next_capture },
-	//{ "set_max_start_depth", LTS_query_cursor_set_max_start_depth },
 	{ NULL, NULL }
 };
 
 void LTS_make_metatable_query_cursor(lua_State *L) {
-	LTS_util_make_metatable(L, LTS_QUERY_CURSOR_METATABLE_NAME, NULL, metamethods);
+	LTS_util_make_metatable(L, LTS_QUERY_CURSOR_METATABLE_NAME, methods, metamethods);
 }
 
 void LTS_make_functable_query_cursor(lua_State *L) {

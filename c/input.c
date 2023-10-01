@@ -118,8 +118,6 @@ static const luaL_Reg metamethods[] = {
 
 static const luaL_Reg funcs[] = {
 	{ "new", LTS_input_new },
-	{ "pack", LTS_input_new },
-	{ "unpack", LTS_input_read },
 	{ NULL, NULL }
 };
 

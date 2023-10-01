@@ -85,6 +85,15 @@ static int LTS_parser_parse(lua_State *L) {
 	return 1;
 }
 
+static const luaL_Reg methods[] = {
+	{ "language", LTS_parser_language },
+	{ "set_language", LTS_parser_set_language },
+	//{ "included_ranges", LTS_parser_included_ranges },
+	//{ "set_included_ranges", LTS_parser_set_included_ranges },
+	{ "parse", LTS_parser_parse },
+	//{ "parse_string", LTS_parser_parse_string },
+};
+
 static const luaL_Reg metamethods[] = {
 	{ "__gc", LTS_parser_delete },
 	{ NULL, NULL }
@@ -92,17 +101,11 @@ static const luaL_Reg metamethods[] = {
 
 static const luaL_Reg funcs[] = {
 	{ "new", LTS_parser_new },
-	{ "language", LTS_parser_language },
-	{ "set_language", LTS_parser_set_language },
-	//{ "included_ranges", LTS_parser_included_ranges },
-	//{ "set_included_ranges", LTS_parser_set_included_ranges },
-	{ "parse", LTS_parser_parse },
-	//{ "parse_string", LTS_parser_parse_string },
 	{ NULL, NULL }
 };
 
 void LTS_make_metatable_parser(lua_State *L) {
-	LTS_util_make_metatable(L, LTS_PARSER_METATABLE_NAME, NULL, metamethods);
+	LTS_util_make_metatable(L, LTS_PARSER_METATABLE_NAME, methods, metamethods);
 }
 
 void LTS_make_functable_parser(lua_State *L) {

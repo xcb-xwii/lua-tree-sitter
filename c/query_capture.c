@@ -56,6 +56,8 @@ static int LTS_query_capture_index(lua_State *L) {
 }
 
 static const luaL_Reg methods[] = {
+	//{ "unpack", LTS_query_capture_unpack },
+	//{ "to_table", LTS_query_capture_to_table },
 	{ "node", LTS_query_capture_node },
 	{ "index", LTS_query_capture_index },
 	{ NULL, NULL }

@@ -69,6 +69,8 @@ static int LTS_point_eq(lua_State *L) {
 }
 
 static const luaL_Reg methods[] = {
+	{ "unpack", LTS_point_unpack },
+	{ "to_table", LTS_point_to_table },
 	{ "row", LTS_point_row },
 	{ "column", LTS_point_column },
 	{ NULL, NULL }
@@ -84,8 +86,6 @@ static const luaL_Reg metamethods[] = {
 static const luaL_Reg funcs[] = {
 	{ "new", LTS_point_new },
 	{ "pack", LTS_point_new },
-	{ "unpack", LTS_point_unpack },
-	{ "to_table", LTS_point_to_table },
 	//{ "from_table", LTS_point_from_table }, TODO
 	{ NULL, NULL }
 };
