@@ -5,6 +5,8 @@
 
 #include <tree_sitter/api.h>
 
+#include "query_cursor.h"
+#include "query_match.h"
 #include "node.h"
 #include "util.h"
 
@@ -32,9 +34,17 @@ static int LTS_query_capture_delete(lua_State *L) {
 }
 
 static int LTS_query_capture_node(lua_State *L) {
-	TSQueryCapture self = LTS_check_query_capture(L, 1);
+	LTS_QueryCapture self = LTS_check_lts_query_capture(L, 1);
 
-	LTS_push_node(L, self.node, 1);
+	lua_rawgeti(L, LUA_REGISTRYINDEX, self.match_ref);
+	LTS_QueryMatch *match = lua_touserdata(L, -1);
+	lua_rawgeti(L, LUA_REGISTRYINDEX, match->cursor_ref);
+	LTS_QueryCursor *cursor = lua_touserdata(L, -1);
+	lua_rawgeti(L, LUA_REGISTRYINDEX, cursor->node_ref);
+	LTS_Node *origin = lua_touserdata(L, -1);
+	lua_rawgeti(L, LUA_REGISTRYINDEX, origin->tree_ref);
+
+	LTS_push_node(L, self.capture.node, -1);
 	return 1;
 }
 

@@ -11,12 +11,12 @@
 
 typedef struct {
 	TSNode node;
-	int parent_ref;
+	int tree_ref;
 } LTS_Node;
 
 void LTS_make_metatable_node(lua_State *L);
 void LTS_make_functable_node(lua_State *L);
-void LTS_push_node(lua_State *L, TSNode target, int parent_idx);
+void LTS_push_node(lua_State *L, TSNode target, int tree_idx);
 TSNode LTS_check_node(lua_State *L, int idx);
 LTS_Node LTS_check_lts_node(lua_State *L, int idx);
 

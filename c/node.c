@@ -8,11 +8,11 @@
 #include "tree.h"
 #include "util.h"
 
-void LTS_push_node(lua_State *L, TSNode target, int parent_idx) {
+void LTS_push_node(lua_State *L, TSNode target, int tree_idx) {
 	LTS_Node *ud = lua_newuserdata(L, sizeof *ud);
 	ud->node = target;
-	lua_pushvalue(L, parent_idx);
-	ud->parent_ref = luaL_ref(L, LUA_REGISTRYINDEX);
+	lua_pushvalue(L, tree_idx);
+	ud->tree_ref = luaL_ref(L, LUA_REGISTRYINDEX);
 	LTS_util_set_metatable(L, LTS_NODE_METATABLE_NAME);
 }
 
@@ -27,14 +27,14 @@ TSNode LTS_check_node(lua_State *L, int idx) {
 static int LTS_node_delete(lua_State *L) {
 	LTS_Node self = LTS_check_lts_node(L, 1);
 	
-	luaL_unref(L, LUA_REGISTRYINDEX, self.parent_ref);
+	luaL_unref(L, LUA_REGISTRYINDEX, self.tree_ref);
 	return 0;
 }
 
 static int LTS_node_tree(lua_State *L) {
-	TSNode self = LTS_check_node(L, 1);
+	LTS_Node self = LTS_check_lts_node(L, 1);
 
-	LTS_push_tree(L, (TSTree *) self.tree);
+	lua_rawgeti(L, LUA_REGISTRYINDEX, self.tree_ref);
 	return 1;
 }
 
