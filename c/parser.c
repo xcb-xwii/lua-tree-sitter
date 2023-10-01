@@ -5,8 +5,8 @@
 
 #include <tree_sitter/api.h>
 
-#include "input.h"
 #include "language.h"
+#include "point.h"
 #include "tree.h"
 #include "util.h"
 
@@ -49,15 +49,75 @@ static int LTS_parser_set_language(lua_State *L) {
 	return 1;
 }
 
+typedef enum {
+	LTS_INPUT_OK,
+	LTS_INPUT_RTERROR,
+	LTS_INPUT_RETTYPE,
+} InputStatus;
+
+typedef struct {
+	lua_State *L;
+	InputStatus status;
+} InputContext;
+
+static const char *read(
+	void *payload,
+	uint32_t byte_index,
+	TSPoint position,
+	uint32_t *bytes_read
+) {
+	InputContext *ctx = payload;
+	lua_State *L = ctx->L;
+
+	lua_pushvalue(L, -1);
+	lua_pushinteger(L, byte_index);
+	LTS_push_point(L, position);
+	if (lua_pcall(L, 2, 1, 0) != 0) {
+		ctx->status = LTS_INPUT_RTERROR;
+		goto fail;
+	}
+
+	if (lua_isnil(L, -1)) {
+		lua_pop(L, 1);
+		goto fail;
+	}
+
+	if (lua_type(L, -1) != LUA_TSTRING) {
+		ctx->status = LTS_INPUT_RETTYPE;
+		goto fail;
+	}
+
+	size_t len;
+	const char *str = lua_tolstring(L, -1, &len);
+	*bytes_read = len;
+	lua_pop(L, 1);
+
+	return str;
+
+fail:
+	*bytes_read = 0;
+	return NULL;
+}
+
 static int LTS_parser_parse(lua_State *L) {
 	TSParser *self = LTS_check_parser(L, 1);
 	TSTree *old_tree = lua_isnil(L, 2) ? NULL : LTS_check_tree(L, 2);
-	TSInput input = LTS_check_input(L, 3);
+	luaL_checktype(L, 3, LUA_TFUNCTION);
+	lua_settop(L, 3);
 
-	LTS_input_reset_status(input);
+	InputContext ctx = {
+		.L = L,
+		.status = LTS_INPUT_OK,
+	};
+	TSInput input = {
+		.payload = &ctx,
+		.read = read,
+		.encoding = TSInputEncodingUTF8,
+	};
+
 	TSTree *tree = ts_parser_parse(self, old_tree, input);
 
-	switch (LTS_input_get_status(input)) {
+	switch (ctx.status) {
 	case LTS_INPUT_RTERROR:
 		ts_tree_delete(tree);
 		return luaL_error(L,

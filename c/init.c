@@ -4,7 +4,6 @@
 
 #include <tree_sitter/api.h>
 
-#include "input.h"
 #include "input_edit.h"
 #include "language.h"
 #include "node.h"
@@ -20,7 +19,6 @@
 #include "util.h"
 
 int luaopen_tree_sitter(lua_State *L) {
-	LTS_make_metatable_input(L);
 	LTS_make_metatable_input_edit(L);
 	LTS_make_metatable_language(L);
 	LTS_make_metatable_node(L);
@@ -35,7 +33,6 @@ int luaopen_tree_sitter(lua_State *L) {
 	LTS_make_metatable_tree(L);
 
 	lua_createtable(L, 0, 0);
-	LTS_make_functable_input(L);
 	LTS_make_functable_input_edit(L);
 	LTS_make_functable_language(L);
 	LTS_make_functable_node(L);

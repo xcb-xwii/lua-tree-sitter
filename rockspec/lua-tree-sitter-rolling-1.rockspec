@@ -32,7 +32,6 @@ build = {
 			libraries = { 'tree-sitter' },
 			sources = {
 				'c/init.c',
-				'c/input.c',
 				'c/input_edit.c',
 				'c/language.c',
 				'c/node.c',
