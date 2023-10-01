@@ -9,7 +9,7 @@
 #include <stdint.h>
 
 #define LTS_RANGES_FUNCTABLE_NAME "Ranges"
-#define LTS_RANGES_METATABLE_NAME "lua_tree_sitter.Ranges"
+#define LTS_RANGES_METATABLE_NAME "tree_sitter.Ranges"
 
 typedef struct {
 	TSRange *ptr;

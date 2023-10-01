@@ -7,7 +7,7 @@
 #include <tree_sitter/api.h>
 
 #define LTS_NODE_FUNCTABLE_NAME "Node"
-#define LTS_NODE_METATABLE_NAME "lua_tree_sitter.Node"
+#define LTS_NODE_METATABLE_NAME "tree_sitter.Node"
 
 typedef struct {
 	TSNode node;

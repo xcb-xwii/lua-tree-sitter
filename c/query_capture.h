@@ -7,7 +7,7 @@
 #include <tree_sitter/api.h>
 
 #define LTS_QUERY_CAPTURE_FUNCTABLE_NAME "QueryCapture"
-#define LTS_QUERY_CAPTURE_METATABLE_NAME "lua_tree_sitter.QueryCapture"
+#define LTS_QUERY_CAPTURE_METATABLE_NAME "tree_sitter.QueryCapture"
 
 typedef struct {
 	TSQueryCapture capture;

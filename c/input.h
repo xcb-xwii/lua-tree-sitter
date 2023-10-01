@@ -7,7 +7,7 @@
 #include <tree_sitter/api.h>
 
 #define LTS_INPUT_FUNCTABLE_NAME "Input"
-#define LTS_INPUT_METATABLE_NAME "lua_tree_sitter.Input"
+#define LTS_INPUT_METATABLE_NAME "tree_sitter.Input"
 
 typedef enum {
 	LTS_INPUT_OK,

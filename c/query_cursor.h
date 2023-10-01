@@ -7,7 +7,7 @@
 #include <tree_sitter/api.h>
 
 #define LTS_QUERY_CURSOR_FUNCTABLE_NAME "QueryCursor"
-#define LTS_QUERY_CURSOR_METATABLE_NAME "lua_tree_sitter.QueryCursor"
+#define LTS_QUERY_CURSOR_METATABLE_NAME "tree_sitter.QueryCursor"
 
 typedef struct {
 	TSQueryCursor *query_cursor;

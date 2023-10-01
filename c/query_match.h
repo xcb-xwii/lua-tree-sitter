@@ -7,7 +7,7 @@
 #include <tree_sitter/api.h>
 
 #define LTS_QUERY_MATCH_FUNCTABLE_NAME "QueryMatch"
-#define LTS_QUERY_MATCH_METATABLE_NAME "lua_tree_sitter.QueryMatch"
+#define LTS_QUERY_MATCH_METATABLE_NAME "tree_sitter.QueryMatch"
 
 typedef struct {
 	TSQueryMatch match;

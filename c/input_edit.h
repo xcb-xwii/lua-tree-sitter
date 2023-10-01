@@ -7,7 +7,7 @@
 #include <tree_sitter/api.h>
 
 #define LTS_INPUT_EDIT_FUNCTABLE_NAME "InputEdit"
-#define LTS_INPUT_EDIT_METATABLE_NAME "lua_tree_sitter.InputEdit"
+#define LTS_INPUT_EDIT_METATABLE_NAME "tree_sitter.InputEdit"
 
 void LTS_make_metatable_input_edit(lua_State *L);
 void LTS_make_functable_input_edit(lua_State *L);

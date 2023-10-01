@@ -7,7 +7,7 @@
 #include <tree_sitter/api.h>
 
 #define LTS_TREE_FUNCTABLE_NAME "Tree"
-#define LTS_TREE_METATABLE_NAME "lua_tree_sitter.Tree"
+#define LTS_TREE_METATABLE_NAME "tree_sitter.Tree"
 
 void LTS_make_metatable_tree(lua_State *L);
 void LTS_make_functable_tree(lua_State *L);

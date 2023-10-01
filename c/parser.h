@@ -7,7 +7,7 @@
 #include <tree_sitter/api.h>
 
 #define LTS_PARSER_FUNCTABLE_NAME "Parser"
-#define LTS_PARSER_METATABLE_NAME "lua_tree_sitter.Parser"
+#define LTS_PARSER_METATABLE_NAME "tree_sitter.Parser"
 
 void LTS_make_metatable_parser(lua_State *L);
 void LTS_make_functable_parser(lua_State *L);
