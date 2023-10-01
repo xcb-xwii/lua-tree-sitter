@@ -31,14 +31,6 @@ static int LTS_tree_delete(lua_State *L) {
 	return 0;
 }
 
-static int LTS_tree_eq(lua_State *L) {
-	TSTree *self = LTS_check_tree(L, 1);
-	TSTree *other = LTS_check_tree(L, 2);
-
-	lua_pushboolean(L, self == other);
-	return 1;
-}
-
 static int LTS_tree_copy(lua_State *L) {
 	TSTree *self = LTS_check_tree(L, 1);
 
@@ -96,7 +88,6 @@ static int LTS_tree_get_changed_ranges(lua_State *L) {
 }
 
 static const luaL_Reg metamethods[] = {
-	{ "__eq", LTS_tree_eq },
 	{ "__gc", LTS_tree_delete },
 	{ NULL, NULL }
 };

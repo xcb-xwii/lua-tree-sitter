@@ -34,14 +34,6 @@ static int LTS_parser_delete(lua_State *L) {
 	return 0;
 }
 
-static int LTS_parser_eq(lua_State *L) {
-	TSParser *self = LTS_check_parser(L, 1);
-	TSParser *other = LTS_check_parser(L, 2);
-
-	lua_pushboolean(L, self == other);
-	return 1;
-}
-
 static int LTS_parser_language(lua_State *L) {
 	TSParser *self = LTS_check_parser(L, 1);
 
@@ -94,7 +86,6 @@ static int LTS_parser_parse(lua_State *L) {
 }
 
 static const luaL_Reg metamethods[] = {
-	{ "__eq", LTS_parser_eq },
 	{ "__gc", LTS_parser_delete },
 	{ NULL, NULL }
 };
