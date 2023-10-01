@@ -7,9 +7,9 @@
 
 #include <stdint.h>
 
-#include "input_edit.h"
 #include "language.h"
 #include "node.h"
+#include "point.h"
 #include "range.h"
 #include "ranges.h"
 #include "util.h"
@@ -67,9 +67,16 @@ static int LTS_tree_included_ranges(lua_State *L) {
 
 static int LTS_tree_edit(lua_State *L) {
 	TSTree *self = LTS_check_tree(L, 1);
-	TSInputEdit *edit = LTS_check_input_edit(L, 2);
+	TSInputEdit edit = {
+		.start_byte = luaL_checkinteger(L, 2),
+		.old_end_byte = luaL_checkinteger(L, 3),
+		.new_end_byte = luaL_checkinteger(L, 4),
+		.start_point = LTS_check_point(L, 5),
+		.old_end_point = LTS_check_point(L, 6),
+		.new_end_point = LTS_check_point(L, 7)
+	};
 
-	ts_tree_edit(self, edit);
+	ts_tree_edit(self, &edit);
 	return 0;
 }
 
