@@ -94,7 +94,7 @@ int LTS_input_delete(lua_State *L) {
 int LTS_input_read(lua_State *L) {
 	TSInput self = LTS_check_input(L, 1);
 
-	lua_rawgeti(L, ((LTS_InputContext *) (self.payload))->read_ref, LUA_REGISTRYINDEX);
+	lua_rawgeti(L, LUA_REGISTRYINDEX, ((LTS_InputContext *) (self.payload))->read_ref);
 	return 1;
 }
 
