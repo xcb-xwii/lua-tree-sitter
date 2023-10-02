@@ -1,0 +1,270 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>lua-tree-sitter Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>lua-tree-sitter</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions </a></li>
+<li><a href="#Methods">Methods </a></li>
+</ul>
+
+
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><a href="../classes/Language.html">Language</a></li>
+  <li><a href="../classes/Node.html">Node</a></li>
+  <li><strong>Parser</strong></li>
+  <li><a href="../classes/Point.html">Point</a></li>
+  <li><a href="../classes/Tree.html">Tree</a></li>
+</ul>
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/tree_sitter.html">tree_sitter</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Class <code>Parser</code></h1>
+<p>Parses a document based on a <a href="../classes/Language.html#">Language</a> to produce a <a href="../classes/Tree.html#">Tree</a>.</p>
+<p> Analogous to <code>TSParser</code>.</p>
+
+
+<h2><a href="#Functions">Functions </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Parser.new">Parser.new ()</a></td>
+	<td class="summary">Create a new parser.</td>
+	</tr>
+</table>
+<h2><a href="#Methods">Methods </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Parser:language">Parser:language ()</a></td>
+	<td class="summary">Get the parser's current language.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Parser:set_language">Parser:set_language (lang)</a></td>
+	<td class="summary">Set the language that the parser should use for parsing.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Parser:parse">Parser:parse (old_tree, read)</a></td>
+	<td class="summary">Use the parser to parse some source code and create a syntax tree.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Parser:parse_">Parser:parse_ (old_tree, read)</a></td>
+	<td class="summary">Like <a href="../classes/Parser.html#Parser:parse">Parser.parse</a>, but the <code>read</code> function returns a <a href="https://www.lua.org/manual/5.4/manual.html#6.4">string</a>, and a
+ second integer value representing the offset at which the requested chunk of
+ text starts within the string.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Parser.new"></a>
+    <strong>Parser.new ()</strong>
+    </dt>
+    <dd>
+    Create a new parser.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Parser.html#">Parser</a></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Methods"></a>Methods </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Parser:language"></a>
+    <strong>Parser:language ()</strong>
+    </dt>
+    <dd>
+    Get the parser's current language.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Language.html#">Language</a></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Parser:set_language"></a>
+    <strong>Parser:set_language (lang)</strong>
+    </dt>
+    <dd>
+    Set the language that the parser should use for parsing.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">lang</span>
+            <span class="types"><a class="type" href="../classes/Language.html#">Language</a></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Parser:parse"></a>
+    <strong>Parser:parse (old_tree, read)</strong>
+    </dt>
+    <dd>
+    Use the parser to parse some source code and create a syntax tree. <br/>
+ If you are parsing this document for the first time, pass <code>nil</code> for the
+ <code>old_tree</code> parameter.</p>
+
+<p> Otherwise, pass the previous syntax tree for the <code>old_tree</code> parameter.
+ For this to work correctly, you must have already edited the old syntax tree
+ using <a href="../classes/Tree.html#Tree:edit">Tree:edit</a> so that it matches the source code changes.</p>
+
+<p> The reader function takes a byte offset and a <a href="../classes/Point.html#">Point</a>,
+ and returns a a chunk of text that starts at the point given.
+ Return an empty <a href="https://www.lua.org/manual/5.4/manual.html#6.4">string</a> or <code>nil</code> to signal end of the document.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">old_tree</span>
+            <span class="types"><a class="type" href="../classes/Tree.html#">Tree</a></span>
+         edited syntax tree
+        </li>
+        <li><span class="parameter">read</span>
+            <span class="types"><span class="type">func</span></span>
+         reader function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Tree.html#">Tree</a></span>
+
+
+
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/Parser.html#Parser:parse_">Parser.parse_</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "Parser:parse_"></a>
+    <strong>Parser:parse_ (old_tree, read)</strong>
+    </dt>
+    <dd>
+    Like <a href="../classes/Parser.html#Parser:parse">Parser.parse</a>, but the <code>read</code> function returns a <a href="https://www.lua.org/manual/5.4/manual.html#6.4">string</a>, and a
+ second integer value representing the offset at which the requested chunk of
+ text starts within the string. </p>
+
+<p> This is provided so you can avoid having to create substrings, improving
+ performance.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">old_tree</span>
+            <span class="types"><a class="type" href="../classes/Tree.html#">Tree</a></span>
+         edited syntax tree
+        </li>
+        <li><span class="parameter">read</span>
+            <span class="types"><span class="type">func</span></span>
+         reader function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Tree.html#">Tree</a></span>
+
+
+
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/Parser.html#Parser:parse">Parser.parse</a>
+    </ul>
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/LDoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2023-10-02 18:12:34 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

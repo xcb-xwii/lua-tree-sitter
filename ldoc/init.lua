@@ -1,5 +1,0 @@
----
--- Require only this module, as all classes reside as fields within this module
--- @module tree_sitter
--- @usage
--- local ts = require 'tree_sitter'

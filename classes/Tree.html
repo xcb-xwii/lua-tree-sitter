@@ -1,0 +1,307 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>lua-tree-sitter Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>lua-tree-sitter</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Methods">Methods </a></li>
+<li><a href="#Metamethods">Metamethods </a></li>
+</ul>
+
+
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><a href="../classes/Language.html">Language</a></li>
+  <li><a href="../classes/Node.html">Node</a></li>
+  <li><a href="../classes/Parser.html">Parser</a></li>
+  <li><a href="../classes/Point.html">Point</a></li>
+  <li><strong>Tree</strong></li>
+</ul>
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/tree_sitter.html">tree_sitter</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Class <code>Tree</code></h1>
+<p>A syntax tree.</p>
+<p> Analogous to <code>TSTree</code>.</p>
+
+
+<h2><a href="#Methods">Methods </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Tree:copy">Tree:copy ()</a></td>
+	<td class="summary">Create a shallow copy of the syntax tree.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Tree:root_node">Tree:root_node ()</a></td>
+	<td class="summary">Get the root node of the syntax tree.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Tree:language">Tree:language ()</a></td>
+	<td class="summary">Get the language that was used to parse the syntax tree.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Tree:included_ranges">Tree:included_ranges ()</a></td>
+	<td class="summary">Get the array of included ranges that was used to parse the syntax tree.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Tree:edit">Tree:edit (start_byte, old_end_byte, new_end_byte, start_point, old_end_point, new_end_point)</a></td>
+	<td class="summary">Edit the syntax tree to keep it in sync with source code that has been
+ edited.</td>
+	</tr>
+</table>
+<h2><a href="#Metamethods">Metamethods </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Tree:__eq">Tree:__eq (other)</a></td>
+	<td class="summary">Check equality of two trees by their root node.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Methods"></a>Methods </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Tree:copy"></a>
+    <strong>Tree:copy ()</strong>
+    </dt>
+    <dd>
+    Create a shallow copy of the syntax tree. </p>
+
+<p> You need to copy a syntax tree in order to use it on more than one thread at
+ a time, as syntax trees are not thread safe.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Tree.html#">Tree</a></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Tree:root_node"></a>
+    <strong>Tree:root_node ()</strong>
+    </dt>
+    <dd>
+    Get the root node of the syntax tree.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Node.html#">Node</a></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Tree:language"></a>
+    <strong>Tree:language ()</strong>
+    </dt>
+    <dd>
+    Get the language that was used to parse the syntax tree.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Language.html#">Language</a></span>
+
+
+
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/Parser.html#Parser:set_language">Parser:set_language</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "Tree:included_ranges"></a>
+    <strong>Tree:included_ranges ()</strong>
+    </dt>
+    <dd>
+    Get the array of included ranges that was used to parse the syntax tree.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">RangeArray</span></span>
+
+
+
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "Tree:edit"></a>
+    <strong>Tree:edit (start_byte, old_end_byte, new_end_byte, start_point, old_end_point, new_end_point)</strong>
+    </dt>
+    <dd>
+    Edit the syntax tree to keep it in sync with source code that has been
+ edited. </p>
+
+<p> The edits have to be described in <strong>both</strong> byte offsets and <a href="../classes/Point.html#">Point</a>s.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">start_byte</span>
+            <span class="types"><span class="type">integer</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">old_end_byte</span>
+            <span class="types"><span class="type">integer</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">new_end_byte</span>
+            <span class="types"><span class="type">integer</span></span>
+        <br/>
+        </li>
+        <li><span class="parameter">start_point</span>
+            <span class="types"><a class="type" href="../classes/Point.html#">Point</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">old_end_point</span>
+            <span class="types"><a class="type" href="../classes/Point.html#">Point</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">new_end_point</span>
+            <span class="types"><a class="type" href="../classes/Point.html#">Point</a></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Metamethods"></a>Metamethods </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Tree:__eq"></a>
+    <strong>Tree:__eq (other)</strong>
+    </dt>
+    <dd>
+    Check equality of two trees by their root node. </p>
+
+<p> Equivalent to calling <a href="../classes/Node.html#Node:__eq">Node:__eq</a> on the two root nodes.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">other</span>
+            <span class="types"><a class="type" href="../classes/Tree.html#">Tree</a></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+
+
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../classes/Tree.html#Tree:root_node">root_node</a></li>
+         <li><a href="../classes/Node.html#Node:__eq">Node.__eq</a></li>
+    </ul>
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/LDoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2023-10-02 18:12:34 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
