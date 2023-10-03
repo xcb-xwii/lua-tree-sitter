@@ -1,0 +1,421 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>lua-tree-sitter Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>lua-tree-sitter</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions </a></li>
+<li><a href="#Methods">Methods </a></li>
+<li><a href="#Metamethods">Metamethods </a></li>
+</ul>
+
+
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><a href="../classes/Language.html">Language</a></li>
+  <li><a href="../classes/Node.html">Node</a></li>
+  <li><a href="../classes/Parser.html">Parser</a></li>
+  <li><a href="../classes/Point.html">Point</a></li>
+  <li><a href="../classes/Range.html">Range</a></li>
+  <li><strong>Ranges</strong></li>
+  <li><a href="../classes/Tree.html">Tree</a></li>
+</ul>
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/tree_sitter.html">tree_sitter</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Class <code>Ranges</code></h1>
+<p>A array of <a href="../classes/Range.html#">Range</a>s.</p>
+<p> Used for efficient handling of such arrays.</p>
+
+
+<h2><a href="#Functions">Functions </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Ranges.new">Ranges.new (array)</a></td>
+	<td class="summary">Create a new array.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Ranges.pack">Ranges.pack (...)</a></td>
+	<td class="summary">Create a new array from a variable number of arguments.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Ranges.from_table">Ranges.from_table (array)</a></td>
+	<td class="summary">Alias for <a href="../classes/Ranges.html#Ranges.new">new</a>.</td>
+	</tr>
+</table>
+<h2><a href="#Methods">Methods </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Ranges:unpack">Ranges:unpack ()</a></td>
+	<td class="summary">Unpack the array.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Ranges:to_table">Ranges:to_table ()</a></td>
+	<td class="summary">Convert the array to a Lua <a href="https://www.lua.org/manual/5.4/manual.html#6.6">table</a>.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Ranges:managed">Ranges:managed ()</a></td>
+	<td class="summary">Check if this array is managed.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Ranges:copy">Ranges:copy ()</a></td>
+	<td class="summary">Create a copy of the array.</td>
+	</tr>
+</table>
+<h2><a href="#Metamethods">Metamethods </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Ranges:__len">Ranges:__len ()</a></td>
+	<td class="summary">Get the length of the array.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Ranges:__index">Ranges:__index (index)</a></td>
+	<td class="summary">Get the <a href="../classes/Range.html#">Range</a> at a given index.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Ranges:__newindex">Ranges:__newindex (index, value)</a></td>
+	<td class="summary">Set the <a href="../classes/Range.html#">Range</a> at a given index.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Ranges.new"></a>
+    <strong>Ranges.new (array)</strong>
+    </dt>
+    <dd>
+    Create a new array. </p>
+
+<p> If you do not already have a Lua <a href="https://www.lua.org/manual/5.4/manual.html#6.6">table</a>, consider using <a href="../classes/Ranges.html#Ranges.pack">pack</a>.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">array</span>
+            <span class="types"><a class="type" href="../classes/Range.html#">{Range}</a></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Ranges.html#">Ranges</a></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Ranges.pack"></a>
+    <strong>Ranges.pack (...)</strong>
+    </dt>
+    <dd>
+    Create a new array from a variable number of arguments.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">...</span>
+            <span class="types"><a class="type" href="../classes/Range.html#">Range</a></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Ranges.html#">Ranges</a></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Ranges.from_table"></a>
+    <strong>Ranges.from_table (array)</strong>
+    </dt>
+    <dd>
+    Alias for <a href="../classes/Ranges.html#Ranges.new">new</a>.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">array</span>
+            <span class="types"><a class="type" href="../classes/Range.html#">{Range}</a></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Ranges.html#">Ranges</a></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Methods"></a>Methods </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Ranges:unpack"></a>
+    <strong>Ranges:unpack ()</strong>
+    </dt>
+    <dd>
+    Unpack the array. </p>
+
+<p> Inverse of <a href="../classes/Ranges.html#Ranges.pack">pack</a>.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">Range...</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Ranges:to_table"></a>
+    <strong>Ranges:to_table ()</strong>
+    </dt>
+    <dd>
+    Convert the array to a Lua <a href="https://www.lua.org/manual/5.4/manual.html#6.6">table</a>. </p>
+
+<p> Inverse of <a href="../classes/Ranges.html#Ranges.from_table">from_table</a>.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Ranges.html#">{Ranges}</a></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Ranges:managed"></a>
+    <strong>Ranges:managed ()</strong>
+    </dt>
+    <dd>
+    Check if this array is managed. </p>
+
+<p> Only managed instances can be mutated.
+ If you need to mutate a non-managed instance, use <a href="../classes/Ranges.html#Ranges:copy">copy</a> and mutate the copy.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Ranges:copy"></a>
+    <strong>Ranges:copy ()</strong>
+    </dt>
+    <dd>
+    Create a copy of the array.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Ranges.html#">Ranges</a></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Metamethods"></a>Metamethods </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Ranges:__len"></a>
+    <strong>Ranges:__len ()</strong>
+    </dt>
+    <dd>
+    Get the length of the array.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">integer</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Ranges:__index"></a>
+    <strong>Ranges:__index (index)</strong>
+    </dt>
+    <dd>
+    Get the <a href="../classes/Range.html#">Range</a> at a given index.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">index</span>
+            <span class="types"><span class="type">integer</span></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Range.html#">Range</a></span>
+
+
+
+    </ol>
+
+    <h3>Raises:</h3>
+    Indexing a non-positive index. <br/>
+ Indexing beyond last element.
+
+
+
+</dd>
+    <dt>
+    <a name = "Ranges:__newindex"></a>
+    <strong>Ranges:__newindex (index, value)</strong>
+    </dt>
+    <dd>
+    Set the <a href="../classes/Range.html#">Range</a> at a given index.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">index</span>
+            <span class="types"><span class="type">integer</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">value</span>
+            <span class="types"><a class="type" href="../classes/Range.html#">Range</a></span>
+
+
+
+        </li>
+    </ul>
+
+
+    <h3>Raises:</h3>
+     Indexing a non-positive index. <br/>
+ Indexing beyond last element. <br/>
+ Mutating an unmanaged array.
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/LDoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2023-10-03 09:28:42 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

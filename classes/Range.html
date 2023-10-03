@@ -1,0 +1,382 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>lua-tree-sitter Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>lua-tree-sitter</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions </a></li>
+<li><a href="#Methods">Methods </a></li>
+<li><a href="#Metamethods">Metamethods </a></li>
+</ul>
+
+
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><a href="../classes/Language.html">Language</a></li>
+  <li><a href="../classes/Node.html">Node</a></li>
+  <li><a href="../classes/Parser.html">Parser</a></li>
+  <li><a href="../classes/Point.html">Point</a></li>
+  <li><strong>Range</strong></li>
+  <li><a href="../classes/Ranges.html">Ranges</a></li>
+  <li><a href="../classes/Tree.html">Tree</a></li>
+</ul>
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/tree_sitter.html">tree_sitter</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Class <code>Range</code></h1>
+<p>A range within a document.</p>
+<p> Analogous to <code>TSRange</code>.</p>
+
+
+<h2><a href="#Functions">Functions </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Range.new">Range.new (start_point, end_point, start_byte, end_byte)</a></td>
+	<td class="summary">Create a new range.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Range.pack">Range.pack (start_point, end_point, start_byte, end_byte)</a></td>
+	<td class="summary">Alias for <a href="../classes/Range.html#Range.new">new</a>.</td>
+	</tr>
+</table>
+<h2><a href="#Methods">Methods </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Range:unpack">Range:unpack ()</a></td>
+	<td class="summary">Unpack the range.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Range:start_point">Range:start_point ()</a></td>
+	<td class="summary">Get the start point of the range.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Range:end_point">Range:end_point ()</a></td>
+	<td class="summary">Get the end point of the point.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Range:start_byte">Range:start_byte ()</a></td>
+	<td class="summary">Get the start byte of the range.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Range:end_byte">Range:end_byte ()</a></td>
+	<td class="summary">Get the end byte of the point.</td>
+	</tr>
+</table>
+<h2><a href="#Metamethods">Metamethods </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Range:__eq">Range:__eq (other)</a></td>
+	<td class="summary">Check equality of two ranges by value.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Range.new"></a>
+    <strong>Range.new (start_point, end_point, start_byte, end_byte)</strong>
+    </dt>
+    <dd>
+    Create a new range.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">start_point</span>
+            <span class="types"><a class="type" href="../classes/Point.html#">Point</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">end_point</span>
+            <span class="types"><a class="type" href="../classes/Point.html#">Point</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">start_byte</span>
+            <span class="types"><span class="type">integer</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">end_byte</span>
+            <span class="types"><span class="type">integer</span></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Range.html#">Range</a></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Range.pack"></a>
+    <strong>Range.pack (start_point, end_point, start_byte, end_byte)</strong>
+    </dt>
+    <dd>
+    Alias for <a href="../classes/Range.html#Range.new">new</a>.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">start_point</span>
+            <span class="types"><a class="type" href="../classes/Point.html#">Point</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">end_point</span>
+            <span class="types"><a class="type" href="../classes/Point.html#">Point</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">start_byte</span>
+            <span class="types"><span class="type">integer</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">end_byte</span>
+            <span class="types"><span class="type">integer</span></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Range.html#">Range</a></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Methods"></a>Methods </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Range:unpack"></a>
+    <strong>Range:unpack ()</strong>
+    </dt>
+    <dd>
+    Unpack the range. </p>
+
+<p> Inverse of <a href="../classes/Range.html#Range.pack">pack</a>.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="../classes/Point.html#">Point</a></span>
+        start point</li>
+        <li>
+           <span class="types"><a class="type" href="../classes/Point.html#">Point</a></span>
+        end point</li>
+        <li>
+           <span class="types"><span class="type">integer</span></span>
+        start byte</li>
+        <li>
+           <span class="types"><span class="type">integer</span></span>
+        end byte</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Range:start_point"></a>
+    <strong>Range:start_point ()</strong>
+    </dt>
+    <dd>
+    Get the start point of the range.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Point.html#">Point</a></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Range:end_point"></a>
+    <strong>Range:end_point ()</strong>
+    </dt>
+    <dd>
+    Get the end point of the point.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">integer</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Range:start_byte"></a>
+    <strong>Range:start_byte ()</strong>
+    </dt>
+    <dd>
+    Get the start byte of the range.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Point.html#">Point</a></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Range:end_byte"></a>
+    <strong>Range:end_byte ()</strong>
+    </dt>
+    <dd>
+    Get the end byte of the point.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">integer</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Metamethods"></a>Metamethods </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Range:__eq"></a>
+    <strong>Range:__eq (other)</strong>
+    </dt>
+    <dd>
+    Check equality of two ranges by value.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">other</span>
+            <span class="types"><a class="type" href="../classes/Range.html#">Range</a></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/LDoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2023-10-03 09:28:42 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
