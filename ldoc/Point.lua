@@ -53,3 +53,15 @@ function Point:column() end
 -- @tparam Point other
 -- @treturn boolean
 function Point:__eq(other) end
+
+---
+-- Check if a point occurs before another point.
+-- @tparam Point other
+-- @treturn boolean
+function Point:__lt(other) end
+
+---
+-- Check if a point occurs before or is the same as another point.
+-- @tparam Point other
+-- @treturn boolean
+function Point:__le(other) end

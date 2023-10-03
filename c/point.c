@@ -35,17 +35,6 @@ static int LTS_point_unpack(lua_State *L) {
 	return 2;
 }
 
-static int LTS_point_to_table(lua_State *L) {
-	TSPoint self = LTS_check_point(L, 1);
-
-	lua_createtable(L, 0, 2);
-	lua_pushinteger(L, self.row);
-	lua_setfield(L, -2, "row");
-	lua_pushinteger(L, self.column);
-	lua_setfield(L, -2, "column");
-	return 1;
-}
-
 static int LTS_point_row(lua_State *L) {
 	TSPoint self = LTS_check_point(L, 1);
 
@@ -68,9 +57,28 @@ static int LTS_point_eq(lua_State *L) {
 	return 1;
 }
 
+static int LTS_point_lt(lua_State *L) {
+	TSPoint self = LTS_check_point(L, 1);
+	TSPoint other = LTS_check_point(L, 2);
+
+	lua_pushboolean(L,
+		self.row < other.row ||
+		(self.row == other.row && self.column < other.column));
+	return 1;
+}
+
+static int LTS_point_le(lua_State *L) {
+	TSPoint self = LTS_check_point(L, 1);
+	TSPoint other = LTS_check_point(L, 2);
+
+	lua_pushboolean(L,
+		self.row < other.row ||
+		(self.row == other.row && self.column == other.column));
+	return 1;
+}
+
 static const luaL_Reg methods[] = {
 	{ "unpack", LTS_point_unpack },
-	{ "to_table", LTS_point_to_table },
 	{ "row", LTS_point_row },
 	{ "column", LTS_point_column },
 	{ NULL, NULL }
@@ -78,15 +86,14 @@ static const luaL_Reg methods[] = {
 
 static const luaL_Reg metamethods[] = {
 	{ "__eq", LTS_point_eq },
-	//{ "__lt", LTS_point_lt }, TODO
-	//{ "__le", LTS_point_le }, TODO
+	{ "__lt", LTS_point_lt },
+	{ "__le", LTS_point_le },
 	{ NULL, NULL }
 };
 
 static const luaL_Reg funcs[] = {
 	{ "new", LTS_point_new },
 	{ "pack", LTS_point_new },
-	//{ "from_table", LTS_point_from_table }, TODO
 	{ NULL, NULL }
 };
 
