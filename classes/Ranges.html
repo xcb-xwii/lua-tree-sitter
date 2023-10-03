@@ -81,7 +81,7 @@
 <h2><a href="#Methods">Methods </a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#Ranges:unpack">Ranges:unpack ()</a></td>
+	<td class="name" nowrap><a href="#Ranges:unpack">Ranges:unpack ([i=1[, j=length of array]])</a></td>
 	<td class="summary">Unpack the array.</td>
 	</tr>
 	<tr>
@@ -89,12 +89,16 @@
 	<td class="summary">Convert the array to a Lua <a href="https://www.lua.org/manual/5.4/manual.html#6.6">table</a>.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Ranges:managed">Ranges:managed ()</a></td>
-	<td class="summary">Check if this array is managed.</td>
-	</tr>
-	<tr>
 	<td class="name" nowrap><a href="#Ranges:copy">Ranges:copy ()</a></td>
 	<td class="summary">Create a copy of the array.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Ranges:at">Ranges:at (index)</a></td>
+	<td class="summary">Get the <a href="../classes/Range.html#">Range</a> at a given index.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Ranges:set_at">Ranges:set_at (index, value)</a></td>
+	<td class="summary">Set the <a href="../classes/Range.html#">Range</a> at a given index.</td>
 	</tr>
 </table>
 <h2><a href="#Metamethods">Metamethods </a></h2>
@@ -104,12 +108,8 @@
 	<td class="summary">Get the length of the array.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Ranges:__index">Ranges:__index (index)</a></td>
-	<td class="summary">Get the <a href="../classes/Range.html#">Range</a> at a given index.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#Ranges:__newindex">Ranges:__newindex (index, value)</a></td>
-	<td class="summary">Set the <a href="../classes/Range.html#">Range</a> at a given index.</td>
+	<td class="name" nowrap><a href="#Ranges:__eq">Ranges:__eq (other)</a></td>
+	<td class="summary">Check equality of two arrays.</td>
 	</tr>
 </table>
 
@@ -127,7 +127,7 @@
     <dd>
     Create a new array. </p>
 
-<p> If you do not already have a Lua <a href="https://www.lua.org/manual/5.4/manual.html#6.6">table</a>, consider using <a href="../classes/Ranges.html#Ranges.pack">pack</a>.
+<p> If you do not already have a Lua <a href="https://www.lua.org/manual/5.4/manual.html#6.6">table</a> of the ranges, consider using <a href="../classes/Ranges.html#Ranges.pack">pack</a>.
 
 
     <h3>Parameters:</h3>
@@ -221,14 +221,29 @@
     <dl class="function">
     <dt>
     <a name = "Ranges:unpack"></a>
-    <strong>Ranges:unpack ()</strong>
+    <strong>Ranges:unpack ([i=1[, j=length of array]])</strong>
     </dt>
     <dd>
     Unpack the array. </p>
 
-<p> Inverse of <a href="../classes/Ranges.html#Ranges.pack">pack</a>.
+<p> Inverse of <a href="../classes/Ranges.html#Ranges.pack">pack</a> if <code>i</code> and <code>j</code> are omitted.
 
 
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">i</span>
+            <span class="types"><span class="type">integer</span></span>
+
+
+
+         (<em>default</em> 1)
+        </li>
+        <li><span class="parameter">j</span>
+            <span class="types"><span class="type">integer</span></span>
+         last index to unpack (inclusive)
+         (<em>default</em> length of array)
+        </li>
+    </ul>
 
     <h3>Returns:</h3>
     <ol>
@@ -268,31 +283,6 @@
 
 </dd>
     <dt>
-    <a name = "Ranges:managed"></a>
-    <strong>Ranges:managed ()</strong>
-    </dt>
-    <dd>
-    Check if this array is managed. </p>
-
-<p> Only managed instances can be mutated.
- If you need to mutate a non-managed instance, use <a href="../classes/Ranges.html#Ranges:copy">copy</a> and mutate the copy.
-
-
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><span class="type">boolean</span></span>
-
-
-
-    </ol>
-
-
-
-
-</dd>
-    <dt>
     <a name = "Ranges:copy"></a>
     <strong>Ranges:copy ()</strong>
     </dt>
@@ -314,35 +304,9 @@
 
 
 </dd>
-</dl>
-    <h2 class="section-header "><a name="Metamethods"></a>Metamethods </h2>
-
-    <dl class="function">
     <dt>
-    <a name = "Ranges:__len"></a>
-    <strong>Ranges:__len ()</strong>
-    </dt>
-    <dd>
-    Get the length of the array.
-
-
-
-    <h3>Returns:</h3>
-    <ol>
-
-           <span class="types"><span class="type">integer</span></span>
-
-
-
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "Ranges:__index"></a>
-    <strong>Ranges:__index (index)</strong>
+    <a name = "Ranges:at"></a>
+    <strong>Ranges:at (index)</strong>
     </dt>
     <dd>
     Get the <a href="../classes/Range.html#">Range</a> at a given index.
@@ -375,8 +339,8 @@
 
 </dd>
     <dt>
-    <a name = "Ranges:__newindex"></a>
-    <strong>Ranges:__newindex (index, value)</strong>
+    <a name = "Ranges:set_at"></a>
+    <strong>Ranges:set_at (index, value)</strong>
     </dt>
     <dd>
     Set the <a href="../classes/Range.html#">Range</a> at a given index.
@@ -408,13 +372,70 @@
 
 </dd>
 </dl>
+    <h2 class="section-header "><a name="Metamethods"></a>Metamethods </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Ranges:__len"></a>
+    <strong>Ranges:__len ()</strong>
+    </dt>
+    <dd>
+    Get the length of the array.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">integer</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Ranges:__eq"></a>
+    <strong>Ranges:__eq (other)</strong>
+    </dt>
+    <dd>
+    Check equality of two arrays.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">other</span>
+            <span class="types"><a class="type" href="../classes/Ranges.html#">Ranges</a></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+</dl>
 
 
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/lunarmodules/LDoc">LDoc 1.5.0</a></i>
-<i style="float:right;">Last updated 2023-10-03 09:52:15 </i>
+<i style="float:right;">Last updated 2023-10-03 12:20:01 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
