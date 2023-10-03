@@ -60,7 +60,6 @@ static int LTS_tree_included_ranges(lua_State *L) {
 	LTS_push_ranges(L, (LTS_Ranges) {
 		.ptr = ranges,
 		.elem_count = len,
-		.managed = true
 	});
 	return 1;
 }
@@ -89,7 +88,6 @@ static int LTS_tree_get_changed_ranges(lua_State *L) {
 	LTS_push_ranges(L, (LTS_Ranges) {
 		.ptr = ranges,
 		.elem_count = len,
-		.managed = true
 	});
 	return 1;
 }

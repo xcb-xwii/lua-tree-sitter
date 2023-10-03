@@ -14,7 +14,6 @@
 typedef struct {
 	TSRange *ptr;
 	uint32_t elem_count;
-	bool managed;
 } LTS_Ranges;
 
 void LTS_make_metatable_ranges(lua_State *L);

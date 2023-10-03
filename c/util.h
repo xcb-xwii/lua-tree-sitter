@@ -5,6 +5,10 @@
 #include <lua.h>
 #include <lauxlib.h>
 
+#if LUA_VERSION_NUM < 502
+	#define lua_rawlen lua_objlen
+#endif
+
 void LTS_util_set_funcs(lua_State *L, const luaL_Reg reg[]);
 void LTS_util_make_functable(
 	lua_State *L,
