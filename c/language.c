@@ -18,8 +18,8 @@ void LTS_push_language(lua_State *L, TSLanguage *target) {
 	LTS_util_set_metatable(L, LTS_LANGUAGE_METATABLE_NAME);
 }
 
-TSLanguage *LTS_check_language(lua_State *L, int idx) {
-	return *(TSLanguage **) luaL_checkudata(L, idx, LTS_LANGUAGE_METATABLE_NAME);
+TSLanguage **LTS_check_language(lua_State *L, int idx) {
+	return luaL_checkudata(L, idx, LTS_LANGUAGE_METATABLE_NAME);
 }
 
 static int LTS_language_new(lua_State *L) {
@@ -50,15 +50,15 @@ static int LTS_language_new(lua_State *L) {
 }
 
 static int LTS_language_version(lua_State *L) {
-	TSLanguage *self = LTS_check_language(L, 1);
+	TSLanguage *self = *LTS_check_language(L, 1);
 
 	lua_pushinteger(L, ts_language_version(self));
 	return 1;
 }
 
 static int LTS_language_eq(lua_State *L) {
-	TSLanguage *self = LTS_check_language(L, 1);
-	TSLanguage *other = LTS_check_language(L, 2);
+	TSLanguage *self = *LTS_check_language(L, 1);
+	TSLanguage *other = *LTS_check_language(L, 2);
 
 	lua_pushboolean(L, self == other);
 	return 1;

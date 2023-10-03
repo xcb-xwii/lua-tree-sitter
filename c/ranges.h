@@ -19,6 +19,6 @@ typedef struct {
 void LTS_make_metatable_ranges(lua_State *L);
 void LTS_make_functable_ranges(lua_State *L);
 void LTS_push_ranges(lua_State *L, LTS_Ranges target);
-LTS_Ranges LTS_check_ranges(lua_State *L, int idx);
+LTS_Ranges *LTS_check_ranges(lua_State *L, int idx);
 
 #endif

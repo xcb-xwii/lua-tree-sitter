@@ -12,6 +12,6 @@
 void LTS_make_metatable_point(lua_State *L);
 void LTS_make_functable_point(lua_State *L);
 void LTS_push_point(lua_State *L, TSPoint target);
-TSPoint LTS_check_point(lua_State *L, int idx);
+TSPoint *LTS_check_point(lua_State *L, int idx);
 
 #endif

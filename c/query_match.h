@@ -17,7 +17,7 @@ typedef struct {
 void LTS_make_metatable_query_match(lua_State *L);
 void LTS_make_functable_query_match(lua_State *L);
 void LTS_push_query_match(lua_State *L, TSQueryMatch target, int cursor_idx);
-TSQueryMatch LTS_check_query_match(lua_State *L, int idx);
-LTS_QueryMatch LTS_check_lts_query_match(lua_State *L, int idx);
+TSQueryMatch *LTS_check_query_match(lua_State *L, int idx);
+LTS_QueryMatch *LTS_check_lts_query_match(lua_State *L, int idx);
 
 #endif

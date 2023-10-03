@@ -28,18 +28,18 @@ void LTS_push_query_cursor(
 	LTS_util_set_metatable(L, LTS_QUERY_CURSOR_METATABLE_NAME);
 }
 
-LTS_QueryCursor LTS_check_lts_query_cursor(lua_State *L, int idx) {
-	return *(LTS_QueryCursor *) luaL_checkudata(L, idx, LTS_QUERY_CURSOR_METATABLE_NAME);
+LTS_QueryCursor *LTS_check_lts_query_cursor(lua_State *L, int idx) {
+	return luaL_checkudata(L, idx, LTS_QUERY_CURSOR_METATABLE_NAME);
 }
 
-TSQueryCursor *LTS_check_query_cursor(lua_State *L, int idx) {
-	return LTS_check_lts_query_cursor(L, idx).query_cursor;
+TSQueryCursor **LTS_check_query_cursor(lua_State *L, int idx) {
+	return &LTS_check_lts_query_cursor(L, idx)->query_cursor;
 }
 
 static int LTS_query_cursor_new(lua_State *L) {
 	TSQueryCursor *self = ts_query_cursor_new();
-	TSQuery *query = LTS_check_query(L, 1);
-	TSNode node = LTS_check_node(L, 2);
+	TSQuery *query = *LTS_check_query(L, 1);
+	TSNode node = *LTS_check_node(L, 2);
 	
 	ts_query_cursor_exec(self, query, node);
 
@@ -48,7 +48,7 @@ static int LTS_query_cursor_new(lua_State *L) {
 }
 
 static int LTS_query_cursor_delete(lua_State *L) {
-	LTS_QueryCursor self = LTS_check_lts_query_cursor(L, 1);
+	LTS_QueryCursor self = *LTS_check_lts_query_cursor(L, 1);
 	
 	ts_query_cursor_delete(self.query_cursor);
 	luaL_unref(L, LUA_REGISTRYINDEX, self.query_ref);
@@ -57,7 +57,7 @@ static int LTS_query_cursor_delete(lua_State *L) {
 }
 
 static int LTS_query_cursor_next_match(lua_State *L) {
-	TSQueryCursor *self = LTS_check_query_cursor(L, 1);
+	TSQueryCursor *self = *LTS_check_query_cursor(L, 1);
 
 	TSQueryMatch match;
 	bool ok = ts_query_cursor_next_match(self, &match);
@@ -72,7 +72,7 @@ static int LTS_query_cursor_next_match(lua_State *L) {
 }
 
 static int LTS_query_cursor_next_capture(lua_State *L) {
-	TSQueryCursor *self = LTS_check_query_cursor(L, 1);
+	TSQueryCursor *self = *LTS_check_query_cursor(L, 1);
 
 	TSQueryMatch match;
 	uint32_t capture_index;

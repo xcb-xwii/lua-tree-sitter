@@ -16,38 +16,38 @@ void LTS_push_node(lua_State *L, TSNode target, int tree_idx) {
 	LTS_util_set_metatable(L, LTS_NODE_METATABLE_NAME);
 }
 
-LTS_Node LTS_check_lts_node(lua_State *L, int idx) {
-	return *(LTS_Node *) luaL_checkudata(L, idx, LTS_NODE_METATABLE_NAME);
+LTS_Node *LTS_check_lts_node(lua_State *L, int idx) {
+	return luaL_checkudata(L, idx, LTS_NODE_METATABLE_NAME);
 }
 
-TSNode LTS_check_node(lua_State *L, int idx) {
-	return LTS_check_lts_node(L, idx).node;
+TSNode *LTS_check_node(lua_State *L, int idx) {
+	return &LTS_check_lts_node(L, idx)->node;
 }
 
 static int LTS_node_delete(lua_State *L) {
-	LTS_Node self = LTS_check_lts_node(L, 1);
+	LTS_Node self = *LTS_check_lts_node(L, 1);
 	
 	luaL_unref(L, LUA_REGISTRYINDEX, self.tree_ref);
 	return 0;
 }
 
 static int LTS_node_tree(lua_State *L) {
-	LTS_Node self = LTS_check_lts_node(L, 1);
+	LTS_Node self = *LTS_check_lts_node(L, 1);
 
 	lua_rawgeti(L, LUA_REGISTRYINDEX, self.tree_ref);
 	return 1;
 }
 
 static int LTS_node_eq(lua_State *L) {
-	TSNode self = LTS_check_node(L, 1);
-	TSNode other = LTS_check_node(L, 2);
+	TSNode self = *LTS_check_node(L, 1);
+	TSNode other = *LTS_check_node(L, 2);
 
 	lua_pushboolean(L, ts_node_eq(self, other));
 	return 1;
 }
 
 static int LTS_node_string(lua_State *L) {
-	TSNode self = LTS_check_node(L, 1);
+	TSNode self = *LTS_check_node(L, 1);
 
 	char *str = ts_node_string(self);
 	lua_pushstring(L, str);

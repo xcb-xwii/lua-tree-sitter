@@ -17,7 +17,7 @@ typedef struct {
 void LTS_make_metatable_node(lua_State *L);
 void LTS_make_functable_node(lua_State *L);
 void LTS_push_node(lua_State *L, TSNode target, int tree_idx);
-TSNode LTS_check_node(lua_State *L, int idx);
-LTS_Node LTS_check_lts_node(lua_State *L, int idx);
+TSNode *LTS_check_node(lua_State *L, int idx);
+LTS_Node *LTS_check_lts_node(lua_State *L, int idx);
 
 #endif

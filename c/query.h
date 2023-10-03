@@ -12,6 +12,6 @@
 void LTS_make_metatable_query(lua_State *L);
 void LTS_make_functable_query(lua_State *L);
 void LTS_push_query(lua_State *L, TSQuery *target);
-TSQuery *LTS_check_query(lua_State *L, int idx);
+TSQuery **LTS_check_query(lua_State *L, int idx);
 
 #endif

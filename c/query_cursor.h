@@ -22,7 +22,7 @@ void LTS_push_query_cursor(
 	int query_idx,
 	int node_idx
 );
-TSQueryCursor *LTS_check_query_cursor(lua_State *L, int idx);
-LTS_QueryCursor LTS_check_lts_query_cursor(lua_State *L, int idx);
+TSQueryCursor **LTS_check_query_cursor(lua_State *L, int idx);
+LTS_QueryCursor *LTS_check_lts_query_cursor(lua_State *L, int idx);
 
 #endif

@@ -16,12 +16,12 @@ void LTS_push_ranges(lua_State *L, LTS_Ranges target) {
 	LTS_util_set_metatable(L, LTS_RANGES_METATABLE_NAME);
 }
 
-LTS_Ranges LTS_check_ranges(lua_State *L, int idx) {
-	return *(LTS_Ranges *) luaL_checkudata(L, idx, LTS_RANGES_METATABLE_NAME);
+LTS_Ranges *LTS_check_ranges(lua_State *L, int idx) {
+	return luaL_checkudata(L, idx, LTS_RANGES_METATABLE_NAME);
 }
 
 static int LTS_ranges_delete(lua_State *L) {
-	LTS_Ranges self = LTS_check_ranges(L, 1);
+	LTS_Ranges self = *LTS_check_ranges(L, 1);
 
 	free(self.ptr);
 	return 0;
@@ -69,7 +69,7 @@ static int LTS_ranges_pack(lua_State *L) {
 	lua_getfield(L, LUA_REGISTRYINDEX, LTS_RANGE_METATABLE_NAME);
 
 	for (size_t i = 1; i <= elem_count; i++) {
-		ptr[i - 1] = LTS_check_range(L, i);
+		ptr[i - 1] = *LTS_check_range(L, i);
 	}
 
 	LTS_push_ranges(L, (LTS_Ranges) {
@@ -92,7 +92,7 @@ static int LTS_ranges_pack(lua_State *L) {
 	)
 
 static int LTS_ranges_unpack(lua_State *L) {
-	LTS_Ranges self = LTS_check_ranges(L, 1);
+	LTS_Ranges self = *LTS_check_ranges(L, 1);
 	int start = luaL_optinteger(L, 2, 1);
 	int end = luaL_optinteger(L, 3, self.elem_count);
 
@@ -109,7 +109,7 @@ static int LTS_ranges_unpack(lua_State *L) {
 }
 
 static int LTS_ranges_to_table(lua_State *L) {
-	LTS_Ranges self = LTS_check_ranges(L, 1);
+	LTS_Ranges self = *LTS_check_ranges(L, 1);
 	
 	lua_settop(L, 0);
 
@@ -122,7 +122,7 @@ static int LTS_ranges_to_table(lua_State *L) {
 }
 
 static int LTS_ranges_copy(lua_State *L) {
-	LTS_Ranges self = LTS_check_ranges(L, 1);
+	LTS_Ranges self = *LTS_check_ranges(L, 1);
 
 	TSRange *ptr = malloc(self.elem_count * sizeof *ptr);
 	memcpy(ptr, self.ptr, self.elem_count * sizeof *ptr);
@@ -135,7 +135,7 @@ static int LTS_ranges_copy(lua_State *L) {
 }
 
 static int LTS_ranges_at(lua_State *L) {
-	LTS_Ranges self = LTS_check_ranges(L, 1);
+	LTS_Ranges self = *LTS_check_ranges(L, 1);
 	lua_Integer idx = luaL_checkinteger(L, 2);
 
 	check_index(L, idx, self.elem_count);
@@ -145,9 +145,9 @@ static int LTS_ranges_at(lua_State *L) {
 }
 
 static int LTS_ranges_set_at(lua_State *L) {
-	LTS_Ranges self = LTS_check_ranges(L, 1);
+	LTS_Ranges self = *LTS_check_ranges(L, 1);
 	lua_Integer idx = luaL_checkinteger(L, 2);
-	TSRange range = LTS_check_range(L, 3);
+	TSRange range = *LTS_check_range(L, 3);
 
 	check_index(L, idx, self.elem_count);
 
@@ -158,15 +158,15 @@ static int LTS_ranges_set_at(lua_State *L) {
 #undef check_index
 
 static int LTS_ranges_len(lua_State *L) {
-	LTS_Ranges self = LTS_check_ranges(L, 1);
+	LTS_Ranges self = *LTS_check_ranges(L, 1);
 
 	lua_pushinteger(L, self.elem_count);
 	return 1;
 }
 
 static int LTS_ranges_eq(lua_State *L) {
-	LTS_Ranges self = LTS_check_ranges(L, 1);
-	LTS_Ranges other = LTS_check_ranges(L, 2);
+	LTS_Ranges self = *LTS_check_ranges(L, 1);
+	LTS_Ranges other = *LTS_check_ranges(L, 2);
 
 	if (self.elem_count == other.elem_count) {
 		int cmp = memcmp(self.ptr, other.ptr, self.elem_count * sizeof(TSRange));

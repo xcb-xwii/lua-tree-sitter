@@ -17,8 +17,8 @@ void LTS_push_query(lua_State *L, TSQuery *target) {
 	LTS_util_set_metatable(L, LTS_QUERY_METATABLE_NAME);
 }
 
-TSQuery *LTS_check_query(lua_State *L, int idx) {
-	return *(TSQuery **) luaL_checkudata(L, idx, LTS_QUERY_METATABLE_NAME);
+TSQuery **LTS_check_query(lua_State *L, int idx) {
+	return luaL_checkudata(L, idx, LTS_QUERY_METATABLE_NAME);
 }
 
 #define QUERY_ERROR_CASE(type) \
@@ -29,7 +29,7 @@ case (type): \
 	)
 
 static int LTS_query_new(lua_State *L) {
-	TSLanguage *lang = LTS_check_language(L, 1);
+	TSLanguage *lang = *LTS_check_language(L, 1);
 	size_t src_len;
 	const char *src = luaL_checklstring(L, 2, &src_len);
 
@@ -53,7 +53,7 @@ static int LTS_query_new(lua_State *L) {
 #undef QUERY_ERROR_CASE
 
 static int LTS_query_delete(lua_State *L) {
-	TSQuery *self = LTS_check_query(L, 1);
+	TSQuery *self = *LTS_check_query(L, 1);
 
 	ts_query_delete(self);
 	return 0;

@@ -14,14 +14,14 @@ void LTS_push_range(lua_State *L, TSRange target) {
 	LTS_util_set_metatable(L, LTS_RANGE_METATABLE_NAME);
 }
 
-TSRange LTS_check_range(lua_State *L, int idx) {
-	return *(TSRange *) luaL_checkudata(L, idx, LTS_RANGE_METATABLE_NAME);
+TSRange *LTS_check_range(lua_State *L, int idx) {
+	return luaL_checkudata(L, idx, LTS_RANGE_METATABLE_NAME);
 }
 
 static int LTS_range_new(lua_State *L) {
 	TSRange self = {
-		.start_point = LTS_check_point(L, 1),
-		.end_point = LTS_check_point(L, 2),
+		.start_point = *LTS_check_point(L, 1),
+		.end_point = *LTS_check_point(L, 2),
 		.start_byte = luaL_checkinteger(L, 3),
 		.end_byte = luaL_checkinteger(L, 4),
 	};
@@ -31,7 +31,7 @@ static int LTS_range_new(lua_State *L) {
 }
 
 static int LTS_range_unpack(lua_State *L) {
-	TSRange self = LTS_check_range(L, 1);
+	TSRange self = *LTS_check_range(L, 1);
 
 	LTS_push_point(L, self.start_point);
 	LTS_push_point(L, self.end_point);
@@ -41,28 +41,28 @@ static int LTS_range_unpack(lua_State *L) {
 }
 
 static int LTS_range_start_point(lua_State *L) {
-	TSRange self = LTS_check_range(L, 1);
+	TSRange self = *LTS_check_range(L, 1);
 
 	LTS_push_point(L, self.start_point);
 	return 1;
 }
 
 static int LTS_range_end_point(lua_State *L) {
-	TSRange self = LTS_check_range(L, 1);
+	TSRange self = *LTS_check_range(L, 1);
 
 	LTS_push_point(L, self.end_point);
 	return 1;
 }
 
 static int LTS_range_start_byte(lua_State *L) {
-	TSRange self = LTS_check_range(L, 1);
+	TSRange self = *LTS_check_range(L, 1);
 
 	lua_pushinteger(L, self.start_byte);
 	return 1;
 }
 
 static int LTS_range_end_byte(lua_State *L) {
-	TSRange self = LTS_check_range(L, 1);
+	TSRange self = *LTS_check_range(L, 1);
 
 	lua_pushinteger(L, self.end_byte);
 	return 1;

@@ -12,6 +12,6 @@
 void LTS_make_metatable_language(lua_State *L);
 void LTS_make_functable_language(lua_State *L);
 void LTS_push_language(lua_State *L, TSLanguage *target);
-TSLanguage *LTS_check_language(lua_State *L, int idx);
+TSLanguage **LTS_check_language(lua_State *L, int idx);
 
 #endif

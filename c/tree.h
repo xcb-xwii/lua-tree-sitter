@@ -12,6 +12,6 @@
 void LTS_make_metatable_tree(lua_State *L);
 void LTS_make_functable_tree(lua_State *L);
 void LTS_push_tree(lua_State *L, TSTree *target);
-TSTree *LTS_check_tree(lua_State *L, int idx);
+TSTree **LTS_check_tree(lua_State *L, int idx);
 
 #endif
