@@ -25,7 +25,7 @@ TSNode *LTS_check_node(lua_State *L, int idx) {
 }
 
 static int LTS_node_delete(lua_State *L) {
-	LTS_Node self = *LTS_check_lts_node(L, 1);
+	LTS_Node self = *LTS_log_gc(LTS_check_lts_node(L, 1), LTS_NODE_METATABLE_NAME);
 	
 	luaL_unref(L, LUA_REGISTRYINDEX, self.tree_ref);
 	return 0;

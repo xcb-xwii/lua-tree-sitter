@@ -48,7 +48,7 @@ static int LTS_query_cursor_new(lua_State *L) {
 }
 
 static int LTS_query_cursor_delete(lua_State *L) {
-	LTS_QueryCursor self = *LTS_check_lts_query_cursor(L, 1);
+	LTS_QueryCursor self = *LTS_log_gc(LTS_check_lts_query_cursor(L, 1), LTS_QUERY_CURSOR_METATABLE_NAME);
 	
 	ts_query_cursor_delete(self.query_cursor);
 	luaL_unref(L, LUA_REGISTRYINDEX, self.query_ref);

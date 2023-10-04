@@ -28,7 +28,7 @@ static int LTS_parser_new(lua_State *L) {
 }
 
 static int LTS_parser_delete(lua_State *L) {
-	TSParser *self = *LTS_check_parser(L, 1);
+	TSParser *self = *LTS_log_gc(LTS_check_parser(L, 1), LTS_PARSER_METATABLE_NAME);
 
 	ts_parser_delete(self);
 	return 0;

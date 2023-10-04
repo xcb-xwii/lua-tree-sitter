@@ -25,7 +25,7 @@ TSTree **LTS_check_tree(lua_State *L, int idx) {
 }
 
 static int LTS_tree_delete(lua_State *L) {
-	TSTree *self = *LTS_check_tree(L, 1);
+	TSTree *self = *LTS_log_gc(LTS_check_tree(L, 1), LTS_TREE_METATABLE_NAME);
 
 	ts_tree_delete(self);
 	return 0;

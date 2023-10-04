@@ -53,7 +53,7 @@ static int LTS_query_new(lua_State *L) {
 #undef QUERY_ERROR_CASE
 
 static int LTS_query_delete(lua_State *L) {
-	TSQuery *self = *LTS_check_query(L, 1);
+	TSQuery *self = *LTS_log_gc(LTS_check_query(L, 1), LTS_QUERY_METATABLE_NAME);
 
 	ts_query_delete(self);
 	return 0;

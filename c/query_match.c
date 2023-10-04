@@ -25,7 +25,7 @@ TSQueryMatch *LTS_check_query_match(lua_State *L, int idx) {
 }
 
 static int LTS_query_match_delete(lua_State *L) {
-	LTS_QueryMatch self = *LTS_check_lts_query_match(L, 1);
+	LTS_QueryMatch self = *LTS_log_gc(LTS_check_lts_query_match(L, 1), LTS_QUERY_MATCH_METATABLE_NAME);
 	
 	luaL_unref(L, LUA_REGISTRYINDEX, self.cursor_ref);
 	return 0;

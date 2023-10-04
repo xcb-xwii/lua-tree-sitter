@@ -21,7 +21,7 @@ LTS_Ranges *LTS_check_ranges(lua_State *L, int idx) {
 }
 
 static int LTS_ranges_delete(lua_State *L) {
-	LTS_Ranges self = *LTS_check_ranges(L, 1);
+	LTS_Ranges self = *LTS_log_gc(LTS_check_ranges(L, 1), LTS_RANGES_METATABLE_NAME);
 
 	free(self.ptr);
 	return 0;

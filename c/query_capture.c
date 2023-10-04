@@ -27,7 +27,7 @@ TSQueryCapture *LTS_check_query_capture(lua_State *L, int idx) {
 }
 
 static int LTS_query_capture_delete(lua_State *L) {
-	LTS_QueryCapture self = *LTS_check_lts_query_capture(L, 1);
+	LTS_QueryCapture self = *LTS_log_gc(LTS_check_lts_query_capture(L, 1), LTS_QUERY_CAPTURE_METATABLE_NAME);
 	
 	luaL_unref(L, LUA_REGISTRYINDEX, self.match_ref);
 	return 0;
