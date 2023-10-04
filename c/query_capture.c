@@ -13,8 +13,11 @@
 void LTS_push_query_capture(lua_State *L, TSQueryCapture target, int match_idx) {
 	LTS_QueryCapture *ud = lua_newuserdata(L, sizeof *ud);
 	ud->capture = target;
+
+	ud->match = lua_touserdata(L, match_idx);
 	lua_pushvalue(L, match_idx);
 	ud->match_ref = luaL_ref(L, LUA_REGISTRYINDEX);
+
 	LTS_util_set_metatable(L, LTS_QUERY_CAPTURE_METATABLE_NAME);
 }
 
@@ -36,14 +39,7 @@ static int LTS_query_capture_delete(lua_State *L) {
 static int LTS_query_capture_node(lua_State *L) {
 	LTS_QueryCapture self = *LTS_check_lts_query_capture(L, 1);
 
-	lua_rawgeti(L, LUA_REGISTRYINDEX, self.match_ref);
-	LTS_QueryMatch *match = lua_touserdata(L, -1);
-	lua_rawgeti(L, LUA_REGISTRYINDEX, match->cursor_ref);
-	LTS_QueryCursor *cursor = lua_touserdata(L, -1);
-	lua_rawgeti(L, LUA_REGISTRYINDEX, cursor->node_ref);
-	LTS_Node *origin = lua_touserdata(L, -1);
-	lua_rawgeti(L, LUA_REGISTRYINDEX, origin->tree_ref);
-
+	lua_rawgeti(L, LUA_REGISTRYINDEX, self.match->cursor->node->tree_ref);
 	LTS_push_node(L, self.capture.node, -1);
 	return 1;
 }

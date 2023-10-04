@@ -21,10 +21,15 @@ void LTS_push_query_cursor(
 ) {
 	LTS_QueryCursor *ud = lua_newuserdata(L, sizeof *ud);
 	ud->query_cursor = target;
+
+	ud->query = *(TSQuery **) lua_touserdata(L, query_idx);
 	lua_pushvalue(L, query_idx);
 	ud->query_ref = luaL_ref(L, LUA_REGISTRYINDEX);
+
+	ud->node = lua_touserdata(L, node_idx);
 	lua_pushvalue(L, node_idx);
 	ud->node_ref = luaL_ref(L, LUA_REGISTRYINDEX);
+
 	LTS_util_set_metatable(L, LTS_QUERY_CURSOR_METATABLE_NAME);
 }
 
@@ -39,9 +44,9 @@ TSQueryCursor **LTS_check_query_cursor(lua_State *L, int idx) {
 static int LTS_query_cursor_new(lua_State *L) {
 	TSQueryCursor *self = ts_query_cursor_new();
 	TSQuery *query = *LTS_check_query(L, 1);
-	TSNode node = *LTS_check_node(L, 2);
+	LTS_Node node = *LTS_check_lts_node(L, 2);
 	
-	ts_query_cursor_exec(self, query, node);
+	ts_query_cursor_exec(self, query, node.node);
 
 	LTS_push_query_cursor(L, self, 1, 2);
 	return 1;

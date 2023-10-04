@@ -6,12 +6,14 @@
 
 #include <tree_sitter/api.h>
 
+#include "query_cursor.h"
+
 #define LTS_QUERY_MATCH_FUNCTABLE_NAME "QueryMatch"
 #define LTS_QUERY_MATCH_METATABLE_NAME "tree_sitter.QueryMatch"
 
 typedef struct {
 	TSQueryMatch match;
-	int cursor_ref;
+	LTS_QueryCursor *cursor; int cursor_ref;
 } LTS_QueryMatch;
 
 void LTS_make_metatable_query_match(lua_State *L);

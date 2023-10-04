@@ -11,8 +11,11 @@
 void LTS_push_query_match(lua_State *L, TSQueryMatch target, int cursor_idx) {
 	LTS_QueryMatch *ud = lua_newuserdata(L, sizeof *ud);
 	ud->match = target;
+
+	ud->cursor = lua_touserdata(L, cursor_idx);
 	lua_pushvalue(L, cursor_idx);
 	ud->cursor_ref = luaL_ref(L, LUA_REGISTRYINDEX);
+
 	LTS_util_set_metatable(L, LTS_QUERY_MATCH_METATABLE_NAME);
 }
 
