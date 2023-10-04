@@ -39,6 +39,7 @@ build = {
 				'c/query.c',
 				'c/query_capture.c',
 				'c/query_cursor.c',
+				'c/query_iterator.c',
 				'c/query_match.c',
 				'c/range.c',
 				'c/ranges.c',
