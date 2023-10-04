@@ -145,13 +145,23 @@ static int LTS_parser_parse(lua_State *L) {
 	return 1;
 }
 
+static int LTS_parser_parse_string(lua_State *L) {
+	TSParser *self = *LTS_check_parser(L, 1);
+	TSTree *old_tree = lua_isnil(L, 2) ? NULL : *LTS_check_tree(L, 2);
+	size_t len;
+	const char *src = luaL_checklstring(L, 3, &len);
+
+	LTS_push_tree(L, ts_parser_parse_string(self, old_tree, src, len));
+	return 1;
+}
+
 static const luaL_Reg methods[] = {
 	{ "language", LTS_parser_language },
 	{ "set_language", LTS_parser_set_language },
 	//{ "included_ranges", LTS_parser_included_ranges },
 	//{ "set_included_ranges", LTS_parser_set_included_ranges },
 	{ "parse", LTS_parser_parse },
-	//{ "parse_string", LTS_parser_parse_string },
+	{ "parse_string", LTS_parser_parse_string },
 };
 
 static const luaL_Reg metamethods[] = {
