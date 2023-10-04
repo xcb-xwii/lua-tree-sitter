@@ -8,6 +8,7 @@
 #include <stdint.h>
 
 #include "node.h"
+#include "point.h"
 #include "query.h"
 #include "query_match.h"
 #include "tree.h"
@@ -61,6 +62,22 @@ static int LTS_query_cursor_delete(lua_State *L) {
 	return 0;
 }
 
+static int LTS_query_cursor_query(lua_State *L) {
+	LTS_QueryCursor self = *LTS_check_lts_query_cursor(L, 1);
+
+	lua_rawgeti(L, LUA_REGISTRYINDEX, self.query_ref);
+	return 1;
+}
+
+static int LTS_query_cursor_set_point_range(lua_State *L) {
+	TSQueryCursor *self = *LTS_check_query_cursor(L, 1);
+	TSPoint start = *LTS_check_point(L, 2);
+	TSPoint end = *LTS_check_point(L, 3);
+
+	ts_query_cursor_set_point_range(self, start, end);
+	return 0;
+}
+
 static int LTS_query_cursor_next_match(lua_State *L) {
 	TSQueryCursor *self = *LTS_check_query_cursor(L, 1);
 
@@ -94,15 +111,17 @@ static int LTS_query_cursor_next_capture(lua_State *L) {
 }
 
 static const luaL_Reg methods[] = {
+	{ "query", LTS_query_cursor_query },
 	//{ "did_exceed_match_limit", LTS_query_cursor_did_exceed_match_limit },
 	//{ "match_limit", lts_query_cursor_match_limit },
 	//{ "set_match_limit", lts_query_cursor_set_match_limit },
 	//{ "set_byte_range", LTS_query_cursor_set_byte_range },
-	//{ "set_point_range", LTS_query_cursor_set_point_range },
+	{ "set_point_range", LTS_query_cursor_set_point_range },
 	{ "next_match", LTS_query_cursor_next_match },
 	// { "remove_match", LTS_query_cursor_remove_match },
 	{ "next_capture", LTS_query_cursor_next_capture },
 	//{ "set_max_start_depth", LTS_query_cursor_set_max_start_depth },
+	{ NULL, NULL }
 };
 
 static const luaL_Reg metamethods[] = {
@@ -110,9 +129,6 @@ static const luaL_Reg metamethods[] = {
 	{ NULL, NULL }
 };
 
-// `exec` is not included due to safety concerns
-// if `exec` is called, any previously returned `TSMatch` gets invalidated
-// instead, `new` takes two additional parameters and implicitly calls `exec`
 static const luaL_Reg funcs[] = {
 	{ "new", LTS_query_cursor_new },
 	{ NULL, NULL }

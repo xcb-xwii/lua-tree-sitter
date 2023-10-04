@@ -5,6 +5,8 @@
 
 #include <tree_sitter/api.h>
 
+#include <stdint.h>
+
 #include "query_cursor.h"
 #include "query_match.h"
 #include "node.h"
@@ -51,11 +53,42 @@ static int LTS_query_capture_index(lua_State *L) {
 	return 1;
 }
 
+static int LTS_query_capture_match(lua_State *L) {
+	LTS_QueryCapture self = *LTS_check_lts_query_capture(L, 1);
+
+	lua_rawgeti(L, LUA_REGISTRYINDEX, self.match_ref);
+	return 1;
+}
+
+static int LTS_query_capture_query(lua_State *L) {
+	LTS_QueryCapture self = *LTS_check_lts_query_capture(L, 1);
+
+	lua_rawgeti(L, LUA_REGISTRYINDEX, self.match->cursor->query_ref);
+	return 1;
+}
+
+static int LTS_query_capture_name(lua_State *L) {
+	LTS_QueryCapture self = *LTS_check_lts_query_capture(L, 1);
+
+	uint32_t len;
+	const char *name = ts_query_capture_name_for_id(
+		self.match->cursor->query,
+		self.capture.index,
+		&len
+	);
+
+	lua_pushlstring(L, name, len);
+	return 1;
+}
+
 static const luaL_Reg methods[] = {
 	//{ "unpack", LTS_query_capture_unpack },
 	//{ "to_table", LTS_query_capture_to_table },
 	{ "node", LTS_query_capture_node },
 	{ "index", LTS_query_capture_index },
+	{ "match", LTS_query_capture_match },
+	{ "query", LTS_query_capture_query },
+	{ "name", LTS_query_capture_name },
 	{ NULL, NULL }
 };
 

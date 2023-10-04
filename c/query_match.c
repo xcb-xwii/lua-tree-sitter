@@ -67,6 +67,13 @@ static int LTS_query_match_capture_at(lua_State *L) {
 	return 1;
 }
 
+static int LTS_query_match_query(lua_State *L) {
+	LTS_QueryMatch self = *LTS_check_lts_query_match(L, 1);
+
+	lua_rawgeti(L, LUA_REGISTRYINDEX, self.cursor->query_ref);
+	return 1;
+}
+
 static const luaL_Reg methods[] = {
 	//{ "unpack", LTS_query_match_unpack },
 	//{ "to_table", LTS_query_match_to_table },
@@ -74,6 +81,7 @@ static const luaL_Reg methods[] = {
 	{ "capture_count", LTS_query_match_capture_count },
 	{ "capture_at", LTS_query_match_capture_at },
 	//{ "captures_to_table", LTS_query_match_captures_to_table },
+	{ "query", LTS_query_match_query },
 	{ NULL, NULL }
 };
 
