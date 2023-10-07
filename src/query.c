@@ -12,13 +12,42 @@
 #include "util.h"
 
 void LTS_push_query(lua_State *L, TSQuery *target) {
-	TSQuery **ud = lua_newuserdata(L, sizeof *ud);
-	*ud = target;
+	LTS_Query *ud = lua_newuserdata(L, sizeof *ud);
+
+	ud->query = target;
+
+	uint32_t count;
+	int *refs;
+
+	count = ts_query_capture_count(target);
+	refs = malloc(sizeof *refs * count);
+	for (uint32_t i = 0; i < count; i++) {
+		uint32_t len;
+		const char *name = ts_query_capture_name_for_id(target, i, &len);
+		lua_pushlstring(L, name, len);
+		refs[i] = luaL_ref(L, LUA_REGISTRYINDEX);
+	}
+	ud->capture_name_refs = refs;
+
+	count = ts_query_string_count(target);
+	refs = malloc(sizeof *refs * count);
+	for (uint32_t i = 0; i < ts_query_string_count(target); i++) {
+		uint32_t len;
+		const char *name = ts_query_string_value_for_id(target, i, &len);
+		lua_pushlstring(L, name, len);
+		refs[i] = luaL_ref(L, LUA_REGISTRYINDEX);
+	}
+	ud->string_value_refs = refs;
+
 	LTS_util_set_metatable(L, LTS_QUERY_METATABLE_NAME);
 }
 
-TSQuery **LTS_check_query(lua_State *L, int idx) {
+LTS_Query *LTS_check_lts_query(lua_State *L, int idx) {
 	return luaL_checkudata(L, idx, LTS_QUERY_METATABLE_NAME);
+}
+
+TSQuery **LTS_check_query(lua_State *L, int idx) {
+	return &LTS_check_lts_query(L, idx)->query;
 }
 
 #define QUERY_ERROR_CASE(type) \
@@ -53,9 +82,23 @@ static int LTS_query_new(lua_State *L) {
 #undef QUERY_ERROR_CASE
 
 static int LTS_query_delete(lua_State *L) {
-	TSQuery *self = *LTS_log_gc(LTS_check_query(L, 1), LTS_QUERY_METATABLE_NAME);
+	LTS_Query self = *LTS_log_gc(LTS_check_lts_query(L, 1), LTS_QUERY_METATABLE_NAME);
 
-	ts_query_delete(self);
+	uint32_t count;
+
+	count = ts_query_capture_count(self.query);
+	for (uint32_t i = 0; i < count; i++) {
+		luaL_unref(L, LUA_REGISTRYINDEX, self.capture_name_refs[i]);
+	}
+	free(self.capture_name_refs);
+
+	count = ts_query_string_count(self.query);
+	for (uint32_t i = 0; i < count; i++) {
+		luaL_unref(L, LUA_REGISTRYINDEX, self.string_value_refs[i]);
+	}
+	free(self.string_value_refs);
+
+	ts_query_delete(self.query);
 	return 0;
 }
 

@@ -23,7 +23,7 @@ void LTS_push_query_cursor(
 	LTS_QueryCursor *ud = lua_newuserdata(L, sizeof *ud);
 	ud->query_cursor = target;
 
-	ud->query = *(TSQuery **) lua_touserdata(L, query_idx);
+	ud->query = lua_touserdata(L, query_idx);
 	lua_pushvalue(L, query_idx);
 	ud->query_ref = luaL_ref(L, LUA_REGISTRYINDEX);
 

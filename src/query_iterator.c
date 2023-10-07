@@ -5,6 +5,7 @@
 
 #include <tree_sitter/api.h>
 
+#include "query.h"
 #include "query_capture.h"
 #include "query_cursor.h"
 #include "query_match.h"
@@ -57,14 +58,14 @@ static int LTS_query_iterator_delete(lua_State *L) {
 
 static bool run_predicates(
 	lua_State *L,
-	TSQuery *query,
+	LTS_Query query,
 	TSQueryMatch match,
 	int match_idx,
 	int predicates_idx
 ) {
 	uint32_t count;
 	const TSQueryPredicateStep *steps = ts_query_predicates_for_pattern(
-		query,
+		query.query,
 		match.pattern_index,
 		&count
 	);
@@ -73,7 +74,7 @@ static bool run_predicates(
 		uint16_t arg_count = 0;
 		uint32_t len;
 		const char *name =
-			ts_query_string_value_for_id(query, steps[i].value_id, &len);
+			ts_query_string_value_for_id(query.query, steps[i].value_id, &len);
 		i++;
 
 		if (lua_isnil(L, predicates_idx)) {
@@ -94,7 +95,7 @@ static bool run_predicates(
 			switch (step.type) {
 			case TSQueryPredicateStepTypeCapture:
 				switch (ts_query_capture_quantifier_for_id(
-					query,
+					query.query,
 					match.pattern_index,
 					step.value_id
 				)) {
@@ -127,10 +128,7 @@ static bool run_predicates(
 				break;
 
 			case TSQueryPredicateStepTypeString:;
-				uint32_t len;
-				const char *str =
-					ts_query_string_value_for_id(query, step.value_id, &len);
-				lua_pushlstring(L, str, len);
+				lua_rawgeti(L, LUA_REGISTRYINDEX, query.string_value_refs[step.value_id]);
 				break;
 
 			case TSQueryPredicateStepTypeDone:
@@ -180,7 +178,7 @@ static int next_match(lua_State *L) {
 		}
 
 		LTS_push_query_match(L, match, lua_upvalueindex(1));
-	} while (!run_predicates(L, cursor.query, match, 1, lua_upvalueindex(2)));
+	} while (!run_predicates(L, *cursor.query, match, 1, lua_upvalueindex(2)));
 
 	return 1;
 }

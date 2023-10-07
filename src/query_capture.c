@@ -71,14 +71,7 @@ static int LTS_query_capture_query(lua_State *L) {
 static int LTS_query_capture_name(lua_State *L) {
 	LTS_QueryCapture self = *LTS_check_lts_query_capture(L, 1);
 
-	uint32_t len;
-	const char *name = ts_query_capture_name_for_id(
-		self.match->cursor->query,
-		self.capture.index,
-		&len
-	);
-
-	lua_pushlstring(L, name, len);
+	lua_rawgeti(L, LUA_REGISTRYINDEX, self.match->cursor->query->capture_name_refs[self.capture.index]);
 	return 1;
 }
 

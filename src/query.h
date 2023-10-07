@@ -9,9 +9,16 @@
 #define LTS_QUERY_FUNCTABLE_NAME "Query"
 #define LTS_QUERY_METATABLE_NAME "tree_sitter.Query"
 
+typedef struct {
+	TSQuery *query;
+	int *capture_name_refs;
+	int *string_value_refs;
+} LTS_Query;
+
 void LTS_make_metatable_query(lua_State *L);
 void LTS_make_functable_query(lua_State *L);
 void LTS_push_query(lua_State *L, TSQuery *target);
 TSQuery **LTS_check_query(lua_State *L, int idx);
+LTS_Query *LTS_check_lts_query(lua_State *L, int idx);
 
 #endif

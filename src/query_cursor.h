@@ -7,13 +7,14 @@
 #include <tree_sitter/api.h>
 
 #include "node.h"
+#include "query.h"
 
 #define LTS_QUERY_CURSOR_FUNCTABLE_NAME "QueryCursor"
 #define LTS_QUERY_CURSOR_METATABLE_NAME "tree_sitter.QueryCursor"
 
 typedef struct {
 	TSQueryCursor *query_cursor;
-	TSQuery *query; int query_ref;
+	LTS_Query *query; int query_ref;
 	LTS_Node *node; int node_ref;
 } LTS_QueryCursor;
 
