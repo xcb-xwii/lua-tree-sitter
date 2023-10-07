@@ -116,10 +116,10 @@ static bool run_predicates(
 				case TSQuantifierZeroOrMore:
 				case TSQuantifierOneOrMore:
 					lua_createtable(L, 0, 0);
-					for (uint16_t j = 0; j < match.capture_count; j++) {
+					for (uint16_t size = 0, j = 0; j < match.capture_count; j++) {
 						if (match.captures[j].index == step.value_id) {
 							LTS_push_query_capture(L, match.captures[j], match_idx);
-							lua_rawseti(L, -2, i + 1);
+							lua_rawseti(L, -2, ++size);
 						}
 					}
 					break;
@@ -148,9 +148,11 @@ static bool run_predicates(
 					"error while executing predicate '#%s': %s",
 					name, lua_tostring(L, -1)
 				);
-
-				if (!lua_toboolean(L, -1)) return false;
 			}
+
+			bool ok = lua_toboolean(L, -1);
+			lua_pop(L, 1);
+			if (!ok) return false;
 		} else {
 			if (lua_pcall(L, arg_count, 0, 0) != 0) {
 				return luaL_error(L,
