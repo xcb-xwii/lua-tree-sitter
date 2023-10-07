@@ -41,8 +41,9 @@ static int LTS_query_capture_delete(lua_State *L) {
 static int LTS_query_capture_node(lua_State *L) {
 	LTS_QueryCapture self = *LTS_check_lts_query_capture(L, 1);
 
+	lua_settop(L, 1);
 	lua_rawgeti(L, LUA_REGISTRYINDEX, self.match->cursor->node->tree_ref);
-	LTS_push_node(L, self.capture.node, -1);
+	LTS_push_node(L, self.capture.node, 2);
 	return 1;
 }
 
