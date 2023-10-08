@@ -1,7 +1,7 @@
 ---
 -- A array of `Range`s.
 -- Used for efficient handling of such arrays.
--- @classmod Ranges
+-- @classmod RangeArray
 -- @pragma nostrip
 
 ---
@@ -11,22 +11,22 @@
 ---
 -- Create a new array.
 --
--- If you do not already have a Lua `table` of the ranges, consider using `pack`.
+-- If you do not already have a Lua `table` of the `Range`s, consider using `pack`.
 -- @tparam {Range} array
--- @treturn Ranges
-function Ranges.new(array) end
+-- @treturn RangeArray
+function RangeArray.new(array) end
 
 ---
 -- Create a new array from a variable number of arguments.
 -- @tparam Range ...
--- @treturn Ranges
-function Ranges.pack(...) end
+-- @treturn RangeArray
+function RangeArray.pack(...) end
 
 ---
 -- Alias for `new`.
 -- @tparam {Range} array
--- @treturn Ranges
-function Ranges.from_table(array) end
+-- @treturn RangeArray
+function RangeArray.from_table(array) end
 
 ---
 -- Methods
@@ -39,19 +39,19 @@ function Ranges.from_table(array) end
 -- @tparam[opt=1] integer i
 -- @tparam[opt=length of array] integer j last index to unpack (inclusive)
 -- @treturn Range...
-function Ranges:unpack(i, j) end
+function RangeArray:unpack(i, j) end
 
 ---
 -- Convert the array to a Lua `table`.
 --
 -- Inverse of `from_table`.
--- @treturn {Ranges}
-function Ranges:to_table() end
+-- @treturn {RangeArray}
+function RangeArray:to_table() end
 
 ---
 -- Create a copy of the array.
--- @treturn Ranges
-function Ranges:copy() end
+-- @treturn RangeArray
+function RangeArray:copy() end
 
 ---
 -- Get the `Range` at a given index.
@@ -59,7 +59,7 @@ function Ranges:copy() end
 -- @treturn Range
 -- @raise Indexing a non-positive index.  
 -- Indexing beyond last element.
-function Ranges:at(index) end
+function RangeArray:at(index) end
 
 ---
 -- Set the `Range` at a given index.
@@ -68,7 +68,7 @@ function Ranges:at(index) end
 -- @raise Indexing a non-positive index.  
 -- Indexing beyond last element.  
 -- Mutating an unmanaged array.
-function Ranges:set_at(index, value) end
+function RangeArray:set_at(index, value) end
 
 ---
 -- Metamethods
@@ -77,10 +77,10 @@ function Ranges:set_at(index, value) end
 ---
 -- Get the length of the array.
 -- @treturn integer
-function Ranges:__len() end
+function RangeArray:__len() end
 
 ---
 -- Check equality of two arrays.
--- @tparam Ranges other
+-- @tparam RangeArray other
 -- @treturn boolean
-function Ranges:__eq(other) end
+function RangeArray:__eq(other) end

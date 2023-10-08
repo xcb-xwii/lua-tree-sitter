@@ -42,7 +42,7 @@ build = {
 				'src/query_iterator.c',
 				'src/query_match.c',
 				'src/range.c',
-				'src/ranges.c',
+				'src/range_array.c',
 				'src/tree.c',
 				'src/util.c',
 			},

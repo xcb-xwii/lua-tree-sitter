@@ -14,7 +14,7 @@
 #include "query_iterator.h"
 #include "query_match.h"
 #include "range.h"
-#include "ranges.h"
+#include "range_array.h"
 #include "tree.h"
 #include "util.h"
 
@@ -29,7 +29,7 @@ int luaopen_tree_sitter(lua_State *L) {
 	LTS_make_metatable_query_iterator(L);
 	LTS_make_metatable_query_match(L);
 	LTS_make_metatable_range(L);
-	LTS_make_metatable_ranges(L);
+	LTS_make_metatable_range_array(L);
 	LTS_make_metatable_tree(L);
 
 	lua_createtable(L, 0, 0);
@@ -43,7 +43,7 @@ int luaopen_tree_sitter(lua_State *L) {
 	LTS_make_functable_query_iterator(L);
 	LTS_make_functable_query_match(L);
 	LTS_make_functable_range(L);
-	LTS_make_functable_ranges(L);
+	LTS_make_functable_range_array(L);
 	LTS_make_functable_tree(L);
 
 	return 1;

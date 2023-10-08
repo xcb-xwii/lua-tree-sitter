@@ -1,4 +1,4 @@
-#include "ranges.h"
+#include "range_array.h"
 
 #include <lua.h>
 #include <lauxlib.h>
@@ -10,24 +10,24 @@
 #include "range.h"
 #include "util.h"
 
-void LTS_push_ranges(lua_State *L, LTS_Ranges target) {
-	LTS_Ranges *ud = lua_newuserdata(L, sizeof *ud);
+void LTS_push_range_array(lua_State *L, LTS_RangeArray target) {
+	LTS_RangeArray *ud = lua_newuserdata(L, sizeof *ud);
 	*ud = target;
-	LTS_util_set_metatable(L, LTS_RANGES_METATABLE_NAME);
+	LTS_util_set_metatable(L, LTS_RANGE_ARRAY_METATABLE_NAME);
 }
 
-LTS_Ranges *LTS_check_ranges(lua_State *L, int idx) {
-	return luaL_checkudata(L, idx, LTS_RANGES_METATABLE_NAME);
+LTS_RangeArray *LTS_check_range_array(lua_State *L, int idx) {
+	return luaL_checkudata(L, idx, LTS_RANGE_ARRAY_METATABLE_NAME);
 }
 
-static int LTS_ranges_delete(lua_State *L) {
-	LTS_Ranges self = *LTS_log_gc(LTS_check_ranges(L, 1), LTS_RANGES_METATABLE_NAME);
+static int LTS_range_array_delete(lua_State *L) {
+	LTS_RangeArray self = *LTS_log_gc(LTS_check_range_array(L, 1), LTS_RANGE_ARRAY_METATABLE_NAME);
 
 	free(self.ptr);
 	return 0;
 }
 
-static int LTS_ranges_new(lua_State *L) {
+static int LTS_range_array_new(lua_State *L) {
 	lua_settop(L, 1);
 	luaL_checktype(L, 1, LUA_TTABLE);
 	size_t elem_count = lua_rawlen(L, 1);
@@ -48,7 +48,7 @@ static int LTS_ranges_new(lua_State *L) {
 		lua_pop(L, 2);
 	}
 
-	LTS_push_ranges(L, (LTS_Ranges) {
+	LTS_push_range_array(L, (LTS_RangeArray) {
 		.ptr = ptr,
 		.elem_count = elem_count
 	});
@@ -62,7 +62,7 @@ fail:
 	);
 }
 
-static int LTS_ranges_pack(lua_State *L) {
+static int LTS_range_array_pack(lua_State *L) {
 	size_t elem_count = lua_gettop(L);
 
 	TSRange *ptr = malloc(elem_count * sizeof *ptr);
@@ -72,7 +72,7 @@ static int LTS_ranges_pack(lua_State *L) {
 		ptr[i - 1] = *LTS_check_range(L, i);
 	}
 
-	LTS_push_ranges(L, (LTS_Ranges) {
+	LTS_push_range_array(L, (LTS_RangeArray) {
 		.ptr = ptr,
 		.elem_count = elem_count
 	});
@@ -83,16 +83,16 @@ static int LTS_ranges_pack(lua_State *L) {
 	luaL_argcheck((L), \
 		(idx) > 0, \
 		2, \
-		"attempt to index "LTS_RANGES_METATABLE_NAME" with non-positive index" \
+		"attempt to index "LTS_RANGE_ARRAY_METATABLE_NAME" with non-positive index" \
 	); \
 	luaL_argcheck((L), \
 		(idx) <= (max), \
 		2, \
-		"attempt to index "LTS_RANGES_METATABLE_NAME" beyond last element" \
+		"attempt to index "LTS_RANGE_ARRAY_METATABLE_NAME" beyond last element" \
 	)
 
-static int LTS_ranges_unpack(lua_State *L) {
-	LTS_Ranges self = *LTS_check_ranges(L, 1);
+static int LTS_range_array_unpack(lua_State *L) {
+	LTS_RangeArray self = *LTS_check_range_array(L, 1);
 	int start = luaL_optinteger(L, 2, 1);
 	int end = luaL_optinteger(L, 3, self.elem_count);
 
@@ -108,8 +108,8 @@ static int LTS_ranges_unpack(lua_State *L) {
 	return end - start + 1;
 }
 
-static int LTS_ranges_to_table(lua_State *L) {
-	LTS_Ranges self = *LTS_check_ranges(L, 1);
+static int LTS_range_array_to_table(lua_State *L) {
+	LTS_RangeArray self = *LTS_check_range_array(L, 1);
 	
 	lua_settop(L, 0);
 
@@ -121,21 +121,21 @@ static int LTS_ranges_to_table(lua_State *L) {
 	return 1;
 }
 
-static int LTS_ranges_copy(lua_State *L) {
-	LTS_Ranges self = *LTS_check_ranges(L, 1);
+static int LTS_range_array_copy(lua_State *L) {
+	LTS_RangeArray self = *LTS_check_range_array(L, 1);
 
 	TSRange *ptr = malloc(self.elem_count * sizeof *ptr);
 	memcpy(ptr, self.ptr, self.elem_count * sizeof *ptr);
 
-	LTS_push_ranges(L, (LTS_Ranges) {
+	LTS_push_range_array(L, (LTS_RangeArray) {
 		.ptr = ptr,
 		.elem_count = self.elem_count
 	});
 	return 1;
 }
 
-static int LTS_ranges_at(lua_State *L) {
-	LTS_Ranges self = *LTS_check_ranges(L, 1);
+static int LTS_range_array_at(lua_State *L) {
+	LTS_RangeArray self = *LTS_check_range_array(L, 1);
 	lua_Integer idx = luaL_checkinteger(L, 2);
 
 	check_index(L, idx, self.elem_count);
@@ -144,8 +144,8 @@ static int LTS_ranges_at(lua_State *L) {
 	return 1;
 }
 
-static int LTS_ranges_set_at(lua_State *L) {
-	LTS_Ranges self = *LTS_check_ranges(L, 1);
+static int LTS_range_array_set_at(lua_State *L) {
+	LTS_RangeArray self = *LTS_check_range_array(L, 1);
 	lua_Integer idx = luaL_checkinteger(L, 2);
 	TSRange range = *LTS_check_range(L, 3);
 
@@ -157,16 +157,16 @@ static int LTS_ranges_set_at(lua_State *L) {
 
 #undef check_index
 
-static int LTS_ranges_len(lua_State *L) {
-	LTS_Ranges self = *LTS_check_ranges(L, 1);
+static int LTS_range_array_len(lua_State *L) {
+	LTS_RangeArray self = *LTS_check_range_array(L, 1);
 
 	lua_pushinteger(L, self.elem_count);
 	return 1;
 }
 
-static int LTS_ranges_eq(lua_State *L) {
-	LTS_Ranges self = *LTS_check_ranges(L, 1);
-	LTS_Ranges other = *LTS_check_ranges(L, 2);
+static int LTS_range_array_eq(lua_State *L) {
+	LTS_RangeArray self = *LTS_check_range_array(L, 1);
+	LTS_RangeArray other = *LTS_check_range_array(L, 2);
 
 	if (self.elem_count == other.elem_count) {
 		int cmp = memcmp(self.ptr, other.ptr, self.elem_count * sizeof(TSRange));
@@ -178,32 +178,32 @@ static int LTS_ranges_eq(lua_State *L) {
 }
 
 static const luaL_Reg funcs[] = {
-	{ "new", LTS_ranges_new },
-	{ "pack", LTS_ranges_pack },
-	{ "from_table", LTS_ranges_new },
+	{ "new", LTS_range_array_new },
+	{ "pack", LTS_range_array_pack },
+	{ "from_table", LTS_range_array_new },
 	{ NULL, NULL }
 };
 
 static const luaL_Reg methods[] = {
-	{ "unpack", LTS_ranges_unpack },
-	{ "to_table", LTS_ranges_to_table },
-	{ "copy", LTS_ranges_copy },
-	{ "at", LTS_ranges_at },
-	{ "set_at", LTS_ranges_set_at },
+	{ "unpack", LTS_range_array_unpack },
+	{ "to_table", LTS_range_array_to_table },
+	{ "copy", LTS_range_array_copy },
+	{ "at", LTS_range_array_at },
+	{ "set_at", LTS_range_array_set_at },
 	{ NULL, NULL }
 };
 
 static const luaL_Reg metamethods[] = {
-	{ "__len", LTS_ranges_len },
-	{ "__eq", LTS_ranges_eq },
-	{ "__gc", LTS_ranges_delete },
+	{ "__len", LTS_range_array_len },
+	{ "__eq", LTS_range_array_eq },
+	{ "__gc", LTS_range_array_delete },
 	{ NULL, NULL }
 };
 
-void LTS_make_metatable_ranges(lua_State *L) {
-	LTS_util_make_metatable(L, LTS_RANGES_METATABLE_NAME, methods, metamethods);
+void LTS_make_metatable_range_array(lua_State *L) {
+	LTS_util_make_metatable(L, LTS_RANGE_ARRAY_METATABLE_NAME, methods, metamethods);
 }
 
-void LTS_make_functable_ranges(lua_State *L) {
-	LTS_util_make_functable(L, LTS_RANGES_FUNCTABLE_NAME, funcs);
+void LTS_make_functable_range_array(lua_State *L) {
+	LTS_util_make_functable(L, LTS_RANGE_ARRAY_FUNCTABLE_NAME, funcs);
 }

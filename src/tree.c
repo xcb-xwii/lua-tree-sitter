@@ -11,7 +11,7 @@
 #include "node.h"
 #include "point.h"
 #include "range.h"
-#include "ranges.h"
+#include "range_array.h"
 #include "util.h"
 
 void LTS_push_tree(lua_State *L, TSTree *target) {
@@ -57,7 +57,7 @@ static int LTS_tree_included_ranges(lua_State *L) {
 
 	uint32_t len;
 	TSRange *ranges = ts_tree_included_ranges(self, &len);
-	LTS_push_ranges(L, (LTS_Ranges) {
+	LTS_push_range_array(L, (LTS_RangeArray) {
 		.ptr = ranges,
 		.elem_count = len,
 	});
@@ -85,7 +85,7 @@ static int LTS_tree_get_changed_ranges(lua_State *L) {
 
 	uint32_t len;
 	TSRange *ranges = ts_tree_get_changed_ranges(old_tree, new_tree, &len);
-	LTS_push_ranges(L, (LTS_Ranges) {
+	LTS_push_range_array(L, (LTS_RangeArray) {
 		.ptr = ranges,
 		.elem_count = len,
 	});

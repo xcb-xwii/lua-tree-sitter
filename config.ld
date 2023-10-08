@@ -5,7 +5,7 @@ file = {
 	'ldoc/Parser.lua',
 	'ldoc/Point.lua',
 	'ldoc/Range.lua',
-	'ldoc/Ranges.lua',
+	'ldoc/RangeArray.lua',
 	'ldoc/Tree.lua',
 }
 project = 'lua-tree-sitter'
