@@ -7,6 +7,7 @@
 
 #include <stdint.h>
 
+#include "query.h"
 #include "query_cursor.h"
 #include "query_match.h"
 #include "node.h"
@@ -71,7 +72,7 @@ static int LTS_query_capture_query(lua_State *L) {
 static int LTS_query_capture_name(lua_State *L) {
 	LTS_QueryCapture self = *LTS_check_lts_query_capture(L, 1);
 
-	lua_rawgeti(L, LUA_REGISTRYINDEX, self.match->cursor->query->capture_name_refs[self.capture.index]);
+	LTS_push_query_capture_name_for_id(*self.match->cursor->query, self.capture.index);
 	return 1;
 }
 

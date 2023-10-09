@@ -127,8 +127,8 @@ static bool run_predicates(
 				}
 				break;
 
-			case TSQueryPredicateStepTypeString:;
-				lua_rawgeti(L, LUA_REGISTRYINDEX, query.string_value_refs[step.value_id]);
+			case TSQueryPredicateStepTypeString:
+				LTS_push_query_string_value_for_id(query, step.value_id);
 				break;
 
 			case TSQueryPredicateStepTypeDone:

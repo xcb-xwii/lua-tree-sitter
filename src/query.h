@@ -21,4 +21,9 @@ void LTS_push_query(lua_State *L, TSQuery *target);
 TSQuery **LTS_check_query(lua_State *L, int idx);
 LTS_Query *LTS_check_lts_query(lua_State *L, int idx);
 
+#define LTS_push_query_capture_name_for_id(query, id) \
+	(lua_rawgeti(L, LUA_REGISTRYINDEX, (query).capture_name_refs[id]))
+#define LTS_push_query_string_value_for_id(query, id) \
+	(lua_rawgeti(L, LUA_REGISTRYINDEX, (query).string_value_refs[id]))
+
 #endif
