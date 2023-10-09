@@ -194,11 +194,41 @@ static int LTS_query_iterator_matches(lua_State *L) {
 	return 1;
 }
 
-//static int LTS_query_iterator_iterate_captures(lua_State *L) {
-//}
+static int next_capture(lua_State *L) {
+	LTS_QueryCursor cursor = *(LTS_QueryCursor *) lua_touserdata(L, lua_upvalueindex(1));
+
+	TSQueryMatch match;
+	uint32_t index;
+	do {
+		lua_settop(L, 0);
+
+		bool ok = ts_query_cursor_next_capture(cursor.query_cursor, &match, &index);
+		if (!ok) {
+			lua_pushnil(L);
+			return 1;
+		}
+
+		LTS_push_query_match(L, match, lua_upvalueindex(1));
+	} while (!run_predicates(L, *cursor.query, match, 1, lua_upvalueindex(2)));
+
+	LTS_push_query_capture(L, match.captures[index], 1);
+	return 1;
+}
+
+static int LTS_query_iterator_captures(lua_State *L) {
+	LTS_QueryIterator self = *LTS_check_query_iterator(L, 1);
+	luaL_checkudata(L, 2, LTS_QUERY_CURSOR_METATABLE_NAME);
+
+	lua_settop(L, 2);
+	lua_rawgeti(L, LUA_REGISTRYINDEX, self.predicates_ref);
+
+	lua_pushcclosure(L, next_capture, 2);
+	return 1;
+}
 
 static const luaL_Reg methods[] = {
 	{ "matches", LTS_query_iterator_matches },
+	{ "captures", LTS_query_iterator_captures },
 	{ NULL, NULL }
 };
 
