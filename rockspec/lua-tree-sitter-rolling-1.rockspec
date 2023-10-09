@@ -38,6 +38,7 @@ build = {
 				'src/point.c',
 				'src/query.c',
 				'src/query_capture.c',
+				'src/query_capture_spec.c',
 				'src/query_cursor.c',
 				'src/query_iterator.c',
 				'src/query_match.c',

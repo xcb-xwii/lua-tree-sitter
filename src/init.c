@@ -10,6 +10,7 @@
 #include "point.h"
 #include "query.h"
 #include "query_capture.h"
+#include "query_capture_spec.h"
 #include "query_cursor.h"
 #include "query_iterator.h"
 #include "query_match.h"
@@ -25,6 +26,7 @@ int luaopen_tree_sitter(lua_State *L) {
 	LTS_make_metatable_point(L);
 	LTS_make_metatable_query(L);
 	LTS_make_metatable_query_capture(L);
+	LTS_make_metatable_query_capture_spec(L);
 	LTS_make_metatable_query_cursor(L);
 	LTS_make_metatable_query_iterator(L);
 	LTS_make_metatable_query_match(L);
@@ -39,6 +41,7 @@ int luaopen_tree_sitter(lua_State *L) {
 	LTS_make_functable_point(L);
 	LTS_make_functable_query(L);
 	LTS_make_functable_query_capture(L);
+	LTS_make_functable_query_capture_spec(L);
 	LTS_make_functable_query_cursor(L);
 	LTS_make_functable_query_iterator(L);
 	LTS_make_functable_query_match(L);

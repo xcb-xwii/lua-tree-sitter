@@ -7,6 +7,7 @@
 
 #include "query.h"
 #include "query_capture.h"
+#include "query_capture_spec.h"
 #include "query_cursor.h"
 #include "query_match.h"
 #include "node.h"
@@ -70,6 +71,9 @@ static bool run_predicates(
 		&count
 	);
 
+	//uint16_t returns_count = 0;
+	//lua_newtable(L);
+
 	for (uint32_t i = 0; i < count; i++) {
 		uint16_t arg_count = 0;
 		uint32_t len;
@@ -78,12 +82,14 @@ static bool run_predicates(
 		i++;
 
 		if (lua_isnil(L, predicates_idx)) {
+			luaL_error(L, "no predicate '%s'", name);
 			while (steps[i].value_id != TSQueryPredicateStepTypeDone) i++;
 			continue;
 		} else {
 			lua_pushlstring(L, name, len);
 			lua_rawget(L, predicates_idx);
 			if (lua_isnil(L, -1)) {
+				luaL_error(L, "no predicate '%s'", name);
 				while (steps[i].value_id != TSQueryPredicateStepTypeDone) i++;
 				lua_pop(L, 1);
 				continue;
@@ -94,37 +100,7 @@ static bool run_predicates(
 			TSQueryPredicateStep step = steps[i];
 			switch (step.type) {
 			case TSQueryPredicateStepTypeCapture:
-				switch (ts_query_capture_quantifier_for_id(
-					query.query,
-					match.pattern_index,
-					step.value_id
-				)) {
-				case TSQuantifierZero:
-					lua_pushnil(L);
-					break;
-
-				case TSQuantifierZeroOrOne:
-				case TSQuantifierOne:
-					for (uint16_t j = 0; j < match.capture_count; j++) {
-						if (match.captures[j].index == step.value_id) {
-							LTS_push_query_capture(L, match.captures[j], match_idx);
-							goto next_step;
-						}
-					}
-					lua_pushnil(L);
-					break;
-
-				case TSQuantifierZeroOrMore:
-				case TSQuantifierOneOrMore:
-					lua_createtable(L, 0, 0);
-					for (uint16_t size = 0, j = 0; j < match.capture_count; j++) {
-						if (match.captures[j].index == step.value_id) {
-							LTS_push_query_capture(L, match.captures[j], match_idx);
-							lua_rawseti(L, -2, ++size);
-						}
-					}
-					break;
-				}
+				LTS_push_query_capture_spec(L, step.value_id, match_idx);
 				break;
 
 			case TSQueryPredicateStepTypeString:
@@ -140,24 +116,20 @@ static bool run_predicates(
 		}
 
 	do_func:
-		if (name[len - 1] == '?') {
-			if (lua_pcall(L, arg_count, 1, 0) != 0) {
-				return luaL_error(L,
-					"error while executing predicate '#%s': %s",
-					name, lua_tostring(L, -1)
-				);
-			}
+		//printf("ac: %d\n", arg_count);
+		if (lua_pcall(L, arg_count, 1, 0) != 0) {
+			return luaL_error(L,
+				"error while executing predicate '#%s': %s",
+				name, lua_tostring(L, -1)
+			);
+		}
 
+		if (name[len - 1] == '?') {
 			bool ok = lua_toboolean(L, -1);
 			lua_pop(L, 1);
 			if (!ok) return false;
 		} else {
-			if (lua_pcall(L, arg_count, 0, 0) != 0) {
-				return luaL_error(L,
-					"error while executing predicate '#%s': %s",
-					name, lua_tostring(L, -1)
-				);
-			}
+			lua_pop(L, 1);
 		}
 	}
 
