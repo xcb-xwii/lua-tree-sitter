@@ -9,8 +9,7 @@
 #define LTS_PARSER_FUNCTABLE_NAME "Parser"
 #define LTS_PARSER_METATABLE_NAME "tree_sitter.Parser"
 
-void LTS_make_metatable_parser(lua_State *L);
-void LTS_make_functable_parser(lua_State *L);
+void LTS_setup_parser(lua_State *L);
 void LTS_push_parser(lua_State *L, TSParser *target);
 TSParser **LTS_check_parser(lua_State *L, int idx);
 

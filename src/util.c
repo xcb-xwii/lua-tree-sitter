@@ -38,6 +38,7 @@ void LTS_util_make_metatable(
 	
 	lua_pushstring(L, name);
 	lua_setfield(L, -2, "__name");
+	lua_pop(L, 1);
 }
 
 void LTS_util_set_metatable(lua_State *L, const char *name) {

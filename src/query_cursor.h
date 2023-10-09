@@ -18,8 +18,7 @@ typedef struct {
 	LTS_Node *node; int node_ref;
 } LTS_QueryCursor;
 
-void LTS_make_metatable_query_cursor(lua_State *L);
-void LTS_make_functable_query_cursor(lua_State *L);
+void LTS_setup_query_cursor(lua_State *L);
 void LTS_push_query_cursor(
 	lua_State *L,
 	TSQueryCursor *target,

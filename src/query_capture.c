@@ -92,10 +92,6 @@ static const luaL_Reg metamethods[] = {
 	{ NULL, NULL }
 };
 
-void LTS_make_metatable_query_capture(lua_State *L) {
+void LTS_setup_query_capture(lua_State *L) {
 	LTS_util_make_metatable(L, LTS_QUERY_CAPTURE_METATABLE_NAME, methods, metamethods);
-}
-
-void LTS_make_functable_query_capture(lua_State *L) {
-	LTS_util_make_functable(L, LTS_QUERY_CAPTURE_FUNCTABLE_NAME, NULL);
 }

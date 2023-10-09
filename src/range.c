@@ -90,10 +90,7 @@ static const luaL_Reg funcs[] = {
 	{ NULL, NULL }
 };
 
-void LTS_make_metatable_range(lua_State *L) {
+void LTS_setup_range(lua_State *L) {
 	LTS_util_make_metatable(L, LTS_RANGE_METATABLE_NAME, methods, metamethods);
-}
-
-void LTS_make_functable_range(lua_State *L) {
 	LTS_util_make_functable(L, LTS_RANGE_FUNCTABLE_NAME, funcs);
 }

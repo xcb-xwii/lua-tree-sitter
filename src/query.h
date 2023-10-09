@@ -15,8 +15,7 @@ typedef struct {
 	int *string_value_refs;
 } LTS_Query;
 
-void LTS_make_metatable_query(lua_State *L);
-void LTS_make_functable_query(lua_State *L);
+void LTS_setup_query(lua_State *L);
 void LTS_push_query(lua_State *L, TSQuery *target);
 TSQuery **LTS_check_query(lua_State *L, int idx);
 LTS_Query *LTS_check_lts_query(lua_State *L, int idx);

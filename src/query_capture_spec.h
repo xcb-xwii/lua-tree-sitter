@@ -17,8 +17,7 @@ typedef struct {
 	LTS_QueryMatch *match; int match_ref;
 } LTS_QueryCaptureSpec;
 
-void LTS_make_metatable_query_capture_spec(lua_State *L);
-void LTS_make_functable_query_capture_spec(lua_State *L);
+void LTS_setup_query_capture_spec(lua_State *L);
 void LTS_push_query_capture_spec(lua_State *L, int capture_id, int match_idx);
 LTS_QueryCaptureSpec *LTS_check_query_capture_spec(lua_State *L, int idx);
 

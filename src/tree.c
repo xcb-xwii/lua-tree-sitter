@@ -113,10 +113,7 @@ static const luaL_Reg funcs[] = {
 	{ NULL, NULL }
 };
 
-void LTS_make_metatable_tree(lua_State *L) {
+void LTS_setup_tree(lua_State *L) {
 	LTS_util_make_metatable(L, LTS_TREE_METATABLE_NAME, methods, metamethods);
-}
-
-void LTS_make_functable_tree(lua_State *L) {
 	LTS_util_make_functable(L, LTS_TREE_FUNCTABLE_NAME, funcs);
 }

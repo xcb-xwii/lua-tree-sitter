@@ -20,34 +20,20 @@
 #include "util.h"
 
 int luaopen_tree_sitter(lua_State *L) {
-	LTS_make_metatable_language(L);
-	LTS_make_metatable_node(L);
-	LTS_make_metatable_parser(L);
-	LTS_make_metatable_point(L);
-	LTS_make_metatable_query(L);
-	LTS_make_metatable_query_capture(L);
-	LTS_make_metatable_query_capture_spec(L);
-	LTS_make_metatable_query_cursor(L);
-	LTS_make_metatable_query_iterator(L);
-	LTS_make_metatable_query_match(L);
-	LTS_make_metatable_range(L);
-	LTS_make_metatable_range_array(L);
-	LTS_make_metatable_tree(L);
-
 	lua_createtable(L, 0, 0);
-	LTS_make_functable_language(L);
-	LTS_make_functable_node(L);
-	LTS_make_functable_parser(L);
-	LTS_make_functable_point(L);
-	LTS_make_functable_query(L);
-	LTS_make_functable_query_capture(L);
-	LTS_make_functable_query_capture_spec(L);
-	LTS_make_functable_query_cursor(L);
-	LTS_make_functable_query_iterator(L);
-	LTS_make_functable_query_match(L);
-	LTS_make_functable_range(L);
-	LTS_make_functable_range_array(L);
-	LTS_make_functable_tree(L);
+	LTS_setup_language(L);
+	LTS_setup_node(L);
+	LTS_setup_parser(L);
+	LTS_setup_point(L);
+	LTS_setup_query(L);
+	LTS_setup_query_capture(L);
+	LTS_setup_query_capture_spec(L);
+	LTS_setup_query_cursor(L);
+	LTS_setup_query_iterator(L);
+	LTS_setup_query_match(L);
+	LTS_setup_range(L);
+	LTS_setup_range_array(L);
+	LTS_setup_tree(L);
 
 	return 1;
 }

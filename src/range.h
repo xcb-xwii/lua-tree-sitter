@@ -9,8 +9,7 @@
 #define LTS_RANGE_FUNCTABLE_NAME "Range"
 #define LTS_RANGE_METATABLE_NAME "tree_sitter.Range"
 
-void LTS_make_metatable_range(lua_State *L);
-void LTS_make_functable_range(lua_State *L);
+void LTS_setup_range(lua_State *L);
 void LTS_push_range(lua_State *L, TSRange target);
 TSRange *LTS_check_range(lua_State *L, int idx);
 

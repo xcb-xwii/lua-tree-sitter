@@ -16,8 +16,7 @@ typedef struct {
 	bool error_on_invalid_predicate;
 } LTS_QueryIterator;
 
-void LTS_make_metatable_query_iterator(lua_State *L);
-void LTS_make_functable_query_iterator(lua_State *L);
+void LTS_setup_query_iterator(lua_State *L);
 void LTS_push_query_iterator(lua_State *L, LTS_QueryIterator target);
 LTS_QueryIterator *LTS_check_query_iterator(lua_State *L, int idx);
 

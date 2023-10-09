@@ -16,8 +16,7 @@ typedef struct {
 	uint32_t elem_count;
 } LTS_RangeArray;
 
-void LTS_make_metatable_range_array(lua_State *L);
-void LTS_make_functable_range_array(lua_State *L);
+void LTS_setup_range_array(lua_State *L);
 void LTS_push_range_array(lua_State *L, LTS_RangeArray target);
 LTS_RangeArray *LTS_check_range_array(lua_State *L, int idx);
 

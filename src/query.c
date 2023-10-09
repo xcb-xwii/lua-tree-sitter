@@ -112,10 +112,7 @@ static const luaL_Reg funcs[] = {
 	{ NULL, NULL }
 };
 
-void LTS_make_metatable_query(lua_State *L) {
+void LTS_setup_query(lua_State *L) {
 	LTS_util_make_metatable(L, LTS_QUERY_METATABLE_NAME, NULL, metamethods);
-}
-
-void LTS_make_functable_query(lua_State *L) {
 	LTS_util_make_functable(L, LTS_QUERY_FUNCTABLE_NAME, funcs);
 }

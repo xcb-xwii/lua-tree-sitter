@@ -67,14 +67,6 @@ static const luaL_Reg metamethods[] = {
 	{ NULL, NULL }
 };
 
-static const luaL_Reg funcs[] = {
-	{ NULL, NULL }
-};
-
-void LTS_make_metatable_node(lua_State *L) {
+void LTS_setup_node(lua_State *L) {
 	LTS_util_make_metatable(L, LTS_NODE_METATABLE_NAME, methods, metamethods);
-}
-
-void LTS_make_functable_node(lua_State *L) {
-	LTS_util_make_functable(L, LTS_NODE_FUNCTABLE_NAME, funcs);
 }

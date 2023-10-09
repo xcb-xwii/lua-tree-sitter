@@ -174,10 +174,7 @@ static const luaL_Reg funcs[] = {
 	{ NULL, NULL }
 };
 
-void LTS_make_metatable_parser(lua_State *L) {
+void LTS_setup_parser(lua_State *L) {
 	LTS_util_make_metatable(L, LTS_PARSER_METATABLE_NAME, methods, metamethods);
-}
-
-void LTS_make_functable_parser(lua_State *L) {
 	LTS_util_make_functable(L, LTS_PARSER_FUNCTABLE_NAME, funcs);
 }
