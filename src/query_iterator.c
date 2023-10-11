@@ -71,9 +71,6 @@ static bool run_predicates(
 		&count
 	);
 
-	//uint16_t returns_count = 0;
-	//lua_newtable(L);
-
 	for (uint32_t i = 0; i < count; i++) {
 		uint16_t arg_count = 0;
 		uint32_t len;
@@ -82,14 +79,12 @@ static bool run_predicates(
 		i++;
 
 		if (lua_isnil(L, predicates_idx)) {
-			luaL_error(L, "no predicate '%s'", name);
 			while (steps[i].value_id != TSQueryPredicateStepTypeDone) i++;
 			continue;
 		} else {
 			lua_pushlstring(L, name, len);
 			lua_rawget(L, predicates_idx);
 			if (lua_isnil(L, -1)) {
-				luaL_error(L, "no predicate '%s'", name);
 				while (steps[i].value_id != TSQueryPredicateStepTypeDone) i++;
 				lua_pop(L, 1);
 				continue;
@@ -111,12 +106,10 @@ static bool run_predicates(
 				goto do_func;
 			}
 
-		next_step:;
 			arg_count++;
 		}
 
 	do_func:
-		//printf("ac: %d\n", arg_count);
 		if (lua_pcall(L, arg_count, 1, 0) != 0) {
 			return luaL_error(L,
 				"error while executing predicate '#%s': %s",
