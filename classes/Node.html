@@ -68,6 +68,114 @@
 	<td class="name" nowrap><a href="#Node:tree">Node:tree ()</a></td>
 	<td class="summary">Get the <a href="../classes/Tree.html#">Tree</a> the node belongs to.</td>
 	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Node:type">Node:type ()</a></td>
+	<td class="summary">Get the type of the node.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Node:start_byte">Node:start_byte ()</a></td>
+	<td class="summary">Get the start byte of the node.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Node:start_point">Node:start_point ()</a></td>
+	<td class="summary">Get the start <a href="../classes/Point.html#">Point</a> of the node.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Node:end_byte">Node:end_byte ()</a></td>
+	<td class="summary">Get the end byte of the node.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Node:end_point">Node:end_point ()</a></td>
+	<td class="summary">Get the end <a href="../classes/Point.html#">Point</a> of the node.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Node:is_named">Node:is_named ()</a></td>
+	<td class="summary">Check if the node is named.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Node:is_missing">Node:is_missing ()</a></td>
+	<td class="summary">Check if the node is missing.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Node:is_extra">Node:is_extra ()</a></td>
+	<td class="summary">Check if the node is extra.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Node:has_changes">Node:has_changes ()</a></td>
+	<td class="summary">Check if the node has been edited.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Node:has_error">Node:has_error ()</a></td>
+	<td class="summary">Check if the node is a syntax error or contains any syntax errors.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Node:parent">Node:parent ()</a></td>
+	<td class="summary">Get the immediate parent of the node.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Node:child">Node:child (index)</a></td>
+	<td class="summary">Get the child of the node at a given index.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Node:field_name_for_child">Node:field_name_for_child (index)</a></td>
+	<td class="summary">Get the field name of the child of the node at a given index.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Node:child_count">Node:child_count ()</a></td>
+	<td class="summary">Get the number of children the node has.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Node:named_child">Node:named_child (index)</a></td>
+	<td class="summary">Get the named child of the node at a given index.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Node:named_child_count">Node:named_child_count ()</a></td>
+	<td class="summary">Get the number of named children the node has.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Node:child_by_field_id">Node:child_by_field_id (id)</a></td>
+	<td class="summary">Get the child of the node by a given field ID.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Node:next_sibling">Node:next_sibling ()</a></td>
+	<td class="summary">Get the next sibling of the node.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Node:prev_sibling">Node:prev_sibling ()</a></td>
+	<td class="summary">Get the previous sibling of the node.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Node:next_named_sibling">Node:next_named_sibling ()</a></td>
+	<td class="summary">Get the next named sibling of the node.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Node:prev_named_sibling">Node:prev_named_sibling ()</a></td>
+	<td class="summary">Get the previous named_sibling of the node.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Node:first_child_for_byte">Node:first_child_for_byte (byte)</a></td>
+	<td class="summary">Get the first child of the node that extends beyond the given byte offset.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Node:first_named_child_for_byte">Node:first_named_child_for_byte (byte)</a></td>
+	<td class="summary">Get the first named child of the node that extends beyond the given byte offset.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Node:descendant_for_byte_range">Node:descendant_for_byte_range (start_byte, end_byte)</a></td>
+	<td class="summary">Get the smallest node within the node that spans the given range of bytes.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Node:descendant_for_point_range">Node:descendant_for_point_range (start_point, end_point)</a></td>
+	<td class="summary">Get the smallest node within the node that spans the given range of <a href="../classes/Point.html#">Point</a>s.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Node:named_descendant_for_byte_range">Node:named_descendant_for_byte_range (start_byte, end_byte)</a></td>
+	<td class="summary">Get the smallest named node within the node that spans the given range of bytes.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Node:named_descendant_for_point_range">Node:named_descendant_for_point_range (start_point, end_point)</a></td>
+	<td class="summary">Get the smallest named node within the node that spans the given range of <a href="../classes/Point.html#">Point</a>s.</td>
+	</tr>
 </table>
 <h2><a href="#Metamethods">Metamethods </a></h2>
 <table class="function_list">
@@ -100,7 +208,745 @@
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="../classes/Node.html#">Node</a></span>
+           <span class="types"><a class="type" href="../classes/Tree.html#">Tree</a></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Node:type"></a>
+    <strong>Node:type ()</strong>
+    </dt>
+    <dd>
+    Get the type of the node.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.4/manual.html#6.4">string</a></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Node:start_byte"></a>
+    <strong>Node:start_byte ()</strong>
+    </dt>
+    <dd>
+    Get the start byte of the node.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">integer</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Node:start_point"></a>
+    <strong>Node:start_point ()</strong>
+    </dt>
+    <dd>
+    Get the start <a href="../classes/Point.html#">Point</a> of the node.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Point.html#">Point</a></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Node:end_byte"></a>
+    <strong>Node:end_byte ()</strong>
+    </dt>
+    <dd>
+    Get the end byte of the node.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">integer</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Node:end_point"></a>
+    <strong>Node:end_point ()</strong>
+    </dt>
+    <dd>
+    Get the end <a href="../classes/Point.html#">Point</a> of the node.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Point.html#">Point</a></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Node:is_named"></a>
+    <strong>Node:is_named ()</strong>
+    </dt>
+    <dd>
+    Check if the node is named.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Node:is_missing"></a>
+    <strong>Node:is_missing ()</strong>
+    </dt>
+    <dd>
+    Check if the node is missing.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Node:is_extra"></a>
+    <strong>Node:is_extra ()</strong>
+    </dt>
+    <dd>
+    Check if the node is extra.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Node:has_changes"></a>
+    <strong>Node:has_changes ()</strong>
+    </dt>
+    <dd>
+    Check if the node has been edited.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Node:has_error"></a>
+    <strong>Node:has_error ()</strong>
+    </dt>
+    <dd>
+    Check if the node is a syntax error or contains any syntax errors.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Node:parent"></a>
+    <strong>Node:parent ()</strong>
+    </dt>
+    <dd>
+    Get the immediate parent of the node. </p>
+
+<p> This method may return <code>nil</code> if no such node exists.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Node.html#">Node</a> or <span class="type">nil</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Node:child"></a>
+    <strong>Node:child (index)</strong>
+    </dt>
+    <dd>
+    Get the child of the node at a given index. </p>
+
+<p> This method may return <code>nil</code> if no such node exists.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">index</span>
+            <span class="types"><span class="type">integer</span></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Node.html#">Node</a> or <span class="type">nil</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Node:field_name_for_child"></a>
+    <strong>Node:field_name_for_child (index)</strong>
+    </dt>
+    <dd>
+    Get the field name of the child of the node at a given index. </p>
+
+<p> This method may return <code>nil</code> if the node has no field name.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">index</span>
+            <span class="types"><span class="type">integer</span></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.4/manual.html#6.4">string</a> or <span class="type">nil</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Node:child_count"></a>
+    <strong>Node:child_count ()</strong>
+    </dt>
+    <dd>
+    Get the number of children the node has.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">integer</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Node:named_child"></a>
+    <strong>Node:named_child (index)</strong>
+    </dt>
+    <dd>
+    Get the named child of the node at a given index. </p>
+
+<p> This method may return <code>nil</code> if no such node exists.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">index</span>
+            <span class="types"><span class="type">integer</span></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Node.html#">Node</a> or <span class="type">nil</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Node:named_child_count"></a>
+    <strong>Node:named_child_count ()</strong>
+    </dt>
+    <dd>
+    Get the number of named children the node has.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">integer</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Node:child_by_field_id"></a>
+    <strong>Node:child_by_field_id (id)</strong>
+    </dt>
+    <dd>
+    Get the child of the node by a given field ID. </p>
+
+<p> This method may return <code>nil</code> if no such node exists.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">id</span>
+            <span class="types"><span class="type">integer</span></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Node.html#">Node</a> or <span class="type">nil</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Node:next_sibling"></a>
+    <strong>Node:next_sibling ()</strong>
+    </dt>
+    <dd>
+    Get the next sibling of the node. </p>
+
+<p> This method may return <code>nil</code> if no such node exists.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Node.html#">Node</a> or <span class="type">nil</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Node:prev_sibling"></a>
+    <strong>Node:prev_sibling ()</strong>
+    </dt>
+    <dd>
+    Get the previous sibling of the node. </p>
+
+<p> This method may return <code>nil</code> if no such node exists.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Node.html#">Node</a> or <span class="type">nil</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Node:next_named_sibling"></a>
+    <strong>Node:next_named_sibling ()</strong>
+    </dt>
+    <dd>
+    Get the next named sibling of the node. </p>
+
+<p> This method may return <code>nil</code> if no such node exists.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Node.html#">Node</a> or <span class="type">nil</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Node:prev_named_sibling"></a>
+    <strong>Node:prev_named_sibling ()</strong>
+    </dt>
+    <dd>
+    Get the previous named_sibling of the node. </p>
+
+<p> This method may return <code>nil</code> if no such node exists.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Node.html#">Node</a> or <span class="type">nil</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Node:first_child_for_byte"></a>
+    <strong>Node:first_child_for_byte (byte)</strong>
+    </dt>
+    <dd>
+    Get the first child of the node that extends beyond the given byte offset. </p>
+
+<p> This method may return <code>nil</code> if no such node exists.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">byte</span>
+            <span class="types"><span class="type">integer</span></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Node.html#">Node</a> or <span class="type">nil</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Node:first_named_child_for_byte"></a>
+    <strong>Node:first_named_child_for_byte (byte)</strong>
+    </dt>
+    <dd>
+    Get the first named child of the node that extends beyond the given byte offset. </p>
+
+<p> This method may return <code>nil</code> if no such node exists.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">byte</span>
+            <span class="types"><span class="type">integer</span></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Node.html#">Node</a> or <span class="type">nil</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Node:descendant_for_byte_range"></a>
+    <strong>Node:descendant_for_byte_range (start_byte, end_byte)</strong>
+    </dt>
+    <dd>
+    Get the smallest node within the node that spans the given range of bytes. </p>
+
+<p> This method may return <code>nil</code> if no such node exists.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">start_byte</span>
+            <span class="types"><span class="type">integer</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">end_byte</span>
+            <span class="types"><span class="type">integer</span></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Node.html#">Node</a> or <span class="type">nil</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Node:descendant_for_point_range"></a>
+    <strong>Node:descendant_for_point_range (start_point, end_point)</strong>
+    </dt>
+    <dd>
+    Get the smallest node within the node that spans the given range of <a href="../classes/Point.html#">Point</a>s. </p>
+
+<p> This method may return <code>nil</code> if no such node exists.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">start_point</span>
+            <span class="types"><span class="type">integer</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">end_point</span>
+            <span class="types"><span class="type">integer</span></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Node.html#">Node</a> or <span class="type">nil</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Node:named_descendant_for_byte_range"></a>
+    <strong>Node:named_descendant_for_byte_range (start_byte, end_byte)</strong>
+    </dt>
+    <dd>
+    Get the smallest named node within the node that spans the given range of bytes. </p>
+
+<p> This method may return <code>nil</code> if no such node exists.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">start_byte</span>
+            <span class="types"><span class="type">integer</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">end_byte</span>
+            <span class="types"><span class="type">integer</span></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Node.html#">Node</a> or <span class="type">nil</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Node:named_descendant_for_point_range"></a>
+    <strong>Node:named_descendant_for_point_range (start_point, end_point)</strong>
+    </dt>
+    <dd>
+    Get the smallest named node within the node that spans the given range of <a href="../classes/Point.html#">Point</a>s. </p>
+
+<p> This method may return <code>nil</code> if no such node exists.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">start_point</span>
+            <span class="types"><span class="type">integer</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">end_point</span>
+            <span class="types"><span class="type">integer</span></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Node.html#">Node</a> or <span class="type">nil</span></span>
 
 
 
@@ -174,7 +1020,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/lunarmodules/LDoc">LDoc 1.5.0</a></i>
-<i style="float:right;">Last updated 2023-10-09 09:05:14 </i>
+<i style="float:right;">Last updated 2023-10-11 18:06:08 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
