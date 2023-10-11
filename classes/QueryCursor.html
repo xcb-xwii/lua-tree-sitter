@@ -1,0 +1,254 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>lua-tree-sitter Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>lua-tree-sitter</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions </a></li>
+<li><a href="#Methods">Methods </a></li>
+</ul>
+
+
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><a href="../classes/Language.html">Language</a></li>
+  <li><a href="../classes/Node.html">Node</a></li>
+  <li><a href="../classes/Parser.html">Parser</a></li>
+  <li><a href="../classes/Point.html">Point</a></li>
+  <li><a href="../classes/Query.html">Query</a></li>
+  <li><a href="../classes/QueryCapture.html">QueryCapture</a></li>
+  <li><strong>QueryCursor</strong></li>
+  <li><a href="../classes/QueryMatch.html">QueryMatch</a></li>
+  <li><a href="../classes/Range.html">Range</a></li>
+  <li><a href="../classes/RangeArray.html">RangeArray</a></li>
+  <li><a href="../classes/Tree.html">Tree</a></li>
+</ul>
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/tree_sitter.html">tree_sitter</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Class <code>QueryCursor</code></h1>
+<p>A cursor for executing a given <a href="../classes/Query.html#">Query</a>.</p>
+<p> Analogous to <code>TSQueryCursor</code>.</p>
+
+
+<h2><a href="#Functions">Functions </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#QueryCursor.new">QueryCursor.new (query, node)</a></td>
+	<td class="summary">Create a new cursor for executing a given <a href="../classes/Query.html#">Query</a> on a given <a href="../classes/Node.html#">Node</a>.</td>
+	</tr>
+</table>
+<h2><a href="#Methods">Methods </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#QueryCursor:query">QueryCursor:query ()</a></td>
+	<td class="summary">Get the <a href="../classes/Query.html#">Query</a> the cursor is executing.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#QueryCursor:set_point_range">QueryCursor:set_point_range (start_point, end_point)</a></td>
+	<td class="summary">Set the range of <a href="../classes/Point.html#">Point</a>s in which the <a href="../classes/Query.html#">Query</a> will be executed.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#QueryCursor:next_match">QueryCursor:next_match ()</a></td>
+	<td class="summary">Advance to and get the next match.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#QueryCursor:next_capture">QueryCursor:next_capture ()</a></td>
+	<td class="summary">Advance to and get the next capture.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "QueryCursor.new"></a>
+    <strong>QueryCursor.new (query, node)</strong>
+    </dt>
+    <dd>
+    Create a new cursor for executing a given <a href="../classes/Query.html#">Query</a> on a given <a href="../classes/Node.html#">Node</a>.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">query</span>
+            <span class="types"><a class="type" href="../classes/Query.html#">Query</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">node</span>
+            <span class="types"><a class="type" href="../classes/Node.html#">Node</a></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/QueryCursor.html#">QueryCursor</a></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Methods"></a>Methods </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "QueryCursor:query"></a>
+    <strong>QueryCursor:query ()</strong>
+    </dt>
+    <dd>
+    Get the <a href="../classes/Query.html#">Query</a> the cursor is executing.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Query.html#">Query</a></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "QueryCursor:set_point_range"></a>
+    <strong>QueryCursor:set_point_range (start_point, end_point)</strong>
+    </dt>
+    <dd>
+    Set the range of <a href="../classes/Point.html#">Point</a>s in which the <a href="../classes/Query.html#">Query</a> will be executed.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">start_point</span>
+            <span class="types"><a class="type" href="../classes/Point.html#">Point</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">end_point</span>
+            <span class="types"><a class="type" href="../classes/Point.html#">Point</a></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "QueryCursor:next_match"></a>
+    <strong>QueryCursor:next_match ()</strong>
+    </dt>
+    <dd>
+    Advance to and get the next match. </p>
+
+<p> This method may return <code>nil</code> if there are no more matches.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/QueryMatch.html#">QueryMatch</a> or <span class="type">nil</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "QueryCursor:next_capture"></a>
+    <strong>QueryCursor:next_capture ()</strong>
+    </dt>
+    <dd>
+    Advance to and get the next capture. </p>
+
+<p> This method may return <code>nil</code> if there are no more captures.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/QueryCapture.html#">QueryCapture</a> or <span class="type">nil</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/LDoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2023-10-11 18:58:57 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
