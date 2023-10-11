@@ -10,6 +10,7 @@
 #include "node.h"
 #include "point.h"
 #include "query.h"
+#include "query_capture.h"
 #include "query_match.h"
 #include "tree.h"
 #include "util.h"
@@ -101,12 +102,12 @@ static int LTS_query_cursor_next_capture(lua_State *L) {
 	bool ok = ts_query_cursor_next_capture(self, &match, &capture_index);
 
 	if (ok) {
+		lua_settop(L, 1);
 		LTS_push_query_match(L, match, 1);
-		lua_pushinteger(L, capture_index);
-		return 2;
+		LTS_push_query_capture(L, match.captures[capture_index], 2);
+	} else {
+		lua_pushnil(L);
 	}
-
-	lua_pushnil(L);
 	return 1;
 }
 
