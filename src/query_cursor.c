@@ -70,6 +70,44 @@ static int LTS_query_cursor_query(lua_State *L) {
 	return 1;
 }
 
+static int LTS_query_cursor_node(lua_State *L) {
+	LTS_QueryCursor self = *LTS_check_lts_query_cursor(L, 1);
+
+	lua_rawgeti(L, LUA_REGISTRYINDEX, self.node_ref);
+	return 1;
+}
+
+static int LTS_query_cursor_did_exceed_match_limit(lua_State *L) {
+	TSQueryCursor *self = *LTS_check_query_cursor(L, 1);
+
+	lua_pushboolean(L, ts_query_cursor_did_exceed_match_limit(self));
+	return 1;
+}
+
+static int LTS_query_cursor_match_limit(lua_State *L) {
+	TSQueryCursor *self = *LTS_check_query_cursor(L, 1);
+
+	lua_pushinteger(L, ts_query_cursor_match_limit(self));
+	return 1;
+}
+
+static int LTS_query_cursor_set_match_limit(lua_State *L) {
+	TSQueryCursor *self = *LTS_check_query_cursor(L, 1);
+	uint32_t limit = luaL_checkinteger(L, 2);
+
+	ts_query_cursor_set_match_limit(self, limit);
+	return 0;
+}
+
+static int LTS_query_cursor_set_byte_range(lua_State *L) {
+	TSQueryCursor *self = *LTS_check_query_cursor(L, 1);
+	uint32_t start = luaL_checkinteger(L, 2);
+	uint32_t end = luaL_checkinteger(L, 3);
+
+	ts_query_cursor_set_byte_range(self, start, end);
+	return 0;
+}
+
 static int LTS_query_cursor_set_point_range(lua_State *L) {
 	TSQueryCursor *self = *LTS_check_query_cursor(L, 1);
 	TSPoint start = *LTS_check_point(L, 2);
@@ -94,6 +132,14 @@ static int LTS_query_cursor_next_match(lua_State *L) {
 	return 1;
 }
 
+static int LTS_query_cursor_remove_match(lua_State *L) {
+	TSQueryCursor *self = *LTS_check_query_cursor(L, 1);
+	uint32_t index = luaL_checkinteger(L, 2);
+
+	ts_query_cursor_remove_match(self, index);
+	return 0;
+}
+
 static int LTS_query_cursor_next_capture(lua_State *L) {
 	TSQueryCursor *self = *LTS_check_query_cursor(L, 1);
 
@@ -113,15 +159,15 @@ static int LTS_query_cursor_next_capture(lua_State *L) {
 
 static const luaL_Reg methods[] = {
 	{ "query", LTS_query_cursor_query },
-	//{ "did_exceed_match_limit", LTS_query_cursor_did_exceed_match_limit },
-	//{ "match_limit", lts_query_cursor_match_limit },
-	//{ "set_match_limit", lts_query_cursor_set_match_limit },
-	//{ "set_byte_range", LTS_query_cursor_set_byte_range },
+	{ "node", LTS_query_cursor_node },
+	{ "did_exceed_match_limit", LTS_query_cursor_did_exceed_match_limit },
+	{ "match_limit", LTS_query_cursor_match_limit },
+	{ "set_match_limit", LTS_query_cursor_set_match_limit },
+	{ "set_byte_range", LTS_query_cursor_set_byte_range },
 	{ "set_point_range", LTS_query_cursor_set_point_range },
 	{ "next_match", LTS_query_cursor_next_match },
-	// { "remove_match", LTS_query_cursor_remove_match },
+	{ "remove_match", LTS_query_cursor_remove_match },
 	{ "next_capture", LTS_query_cursor_next_capture },
-	//{ "set_max_start_depth", LTS_query_cursor_set_max_start_depth },
 	{ NULL, NULL }
 };
 
