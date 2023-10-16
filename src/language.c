@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include <dlfcn.h>
 
@@ -22,31 +23,125 @@ TSLanguage **LTS_check_language(lua_State *L, int idx) {
 	return luaL_checkudata(L, idx, LTS_LANGUAGE_METATABLE_NAME);
 }
 
-static int LTS_language_new(lua_State *L) {
-	const char *path = luaL_checkstring(L, 1);
-	const char *lang_name = luaL_checkstring(L, 2);
+#define SYM_PREFIX "tree_sitter_"
+#define SYM_PREFIX_LEN (sizeof SYM_PREFIX - 1)
 
+static TSLanguage *load(
+	lua_State *L,
+	luaL_Buffer *err_buf,
+	const char *path,
+	const char *name,
+	size_t name_len
+) {
 	void *dl = dlopen(path, RTLD_NOW | RTLD_LOCAL);
 	if (!dl) {
-		return luaL_error(L, "could not load dynamic library: %s", dlerror());
+		lua_pushfstring(L, "\n\tcould not load dynamic library: %s", dlerror());
+		luaL_addvalue(err_buf);
+		return NULL;
 	}
 
-	size_t sym_len = snprintf(NULL, 0, "tree_sitter_%s", lang_name) + 1;
-	char *sym = malloc(sym_len);
-	snprintf(sym, sym_len, "tree_sitter_%s", lang_name);
+	size_t sym_len = SYM_PREFIX_LEN + name_len;
+	char *sym = malloc(sym_len + 1);
+	sym[sym_len] = '\0';
+
+	memcpy(sym, SYM_PREFIX, SYM_PREFIX_LEN);
+	memcpy(sym + SYM_PREFIX_LEN, name, name_len);
 
 	TSLanguage *(*lang_func)(void) = dlsym(dl, sym);
 	free(sym);
 	if (!lang_func) {
 		dlclose(dl);
-		return luaL_error(L,
-			"could not load symbol for tree_sitter_%s: %s",
-			lang_name, dlerror()
-		);
+		lua_pushfstring(L, "\n\tcould not load symbol from dynamic library: %s", dlerror());
+		luaL_addvalue(err_buf);
+		return NULL;
 	}
 
-	LTS_push_language(L, lang_func());	
-	return 1;
+	return lang_func();
+}
+
+#undef SYM_PREFIX
+#undef SYM_PREFIX_LEN
+
+static int LTS_language_load(lua_State *L) {
+	const char *path = luaL_checkstring(L, 1);
+	size_t name_len;
+	const char *name = luaL_checklstring(L, 2, &name_len);
+
+	luaL_Buffer err_buf;
+	luaL_buffinit(L, &err_buf);
+	lua_pushfstring(L, 
+		"could not require language '%s' from '%s'\nreason:",
+		name, path
+	);
+	luaL_addvalue(&err_buf);
+
+	TSLanguage *lang = load(L, &err_buf, path, name, name_len);
+	if (lang) {
+		LTS_push_language(L, lang);
+		return 1;
+	}
+
+	luaL_pushresult(&err_buf);
+	return lua_error(L);
+}
+
+static int LTS_language_require(lua_State *L) {
+	size_t name_len;
+	const char *name = luaL_checklstring(L, 1, &name_len);
+	size_t cpath_len;
+	const char *cpath = luaL_optlstring(L, 2, NULL, &cpath_len);
+
+	if (!cpath) {
+		lua_settop(L, 1);
+		lua_getglobal(L, "package");
+		lua_getfield(L, 2, "cpath");
+		cpath = luaL_checklstring(L, 3, &cpath_len);
+	}
+
+	luaL_Buffer err_buf;
+	luaL_buffinit(L, &err_buf);
+	lua_pushfstring(L, "could not require language '%s'\nreason:", name);
+	luaL_addvalue(&err_buf);
+
+	size_t start = 0;
+	for (size_t i = 0; i <= cpath_len; i++) {
+		if (cpath[i] == ';' || i == cpath_len) {
+			if (start == i) goto next;
+
+			size_t q_count = 0;
+			for (size_t j = start; j < i; j++) {
+				if (cpath[j] == '?') q_count++;
+			}
+
+			size_t path_len = i - start + name_len * q_count - q_count;
+			char *path = malloc((path_len + 1) * sizeof *path);
+			path[path_len] = '\0';
+
+			size_t written = 0;
+			for (size_t j = start; j < i; j++) {
+				if (cpath[j] == '?') {
+					memcpy(path + written, name, name_len);
+					written += name_len;
+				} else {
+					path[written] = cpath[j];
+					written++;
+				}
+			}
+
+			TSLanguage *lang = load(L, &err_buf, path, name, name_len);
+			free(path);
+			if (lang) {
+				LTS_push_language(L, lang);
+				return 1;
+			}
+
+		next:
+			start = i + 1;
+		}
+	}
+
+	luaL_pushresult(&err_buf);
+	return lua_error(L);
 }
 
 static int LTS_language_version(lua_State *L) {
@@ -75,7 +170,8 @@ static const luaL_Reg metamethods[] = {
 };
 
 static const luaL_Reg funcs[] = {
-	{ "new", LTS_language_new },
+	{ "load", LTS_language_load },
+	{ "require", LTS_language_require },
 	{ NULL, NULL }
 };
 

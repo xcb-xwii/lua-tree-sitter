@@ -13,7 +13,20 @@
 -- @tparam string path path to the dynamic library
 -- @tparam string name name of the language
 -- @treturn Language language definition
-function Language.new(path, name) end
+function Language.load(path, name) end
+
+---
+-- Require a language from a dynamic library.
+--
+-- Searches `cpath` for a parser that matches `name`.
+-- If `cpath` is not provided, `package.cpath` is used.
+--
+-- '`?`'s in the paths are replaced by `name` when searching for the dynamic
+-- library.
+-- @tparam string name name of the language
+-- @tparam ?string cpath paths to search for the library
+-- @treturn Language language definition
+function Language.require(name, cpath) end
 
 ---
 -- Methods
