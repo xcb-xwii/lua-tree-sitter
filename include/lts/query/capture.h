@@ -6,10 +6,10 @@
 
 #include <tree_sitter/api.h>
 
-#include "query_match.h"
+#include <lts/query/match.h>
 
-#define LTS_QUERY_CAPTURE_FUNCTABLE_NAME "QueryCapture"
-#define LTS_QUERY_CAPTURE_METATABLE_NAME "tree_sitter.QueryCapture"
+#define LTS_QUERY_CAPTURE_FUNCTABLE_NAME "Capture"
+#define LTS_QUERY_CAPTURE_METATABLE_NAME "tree_sitter.Query.Capture"
 
 typedef struct {
 	TSQueryCapture capture;

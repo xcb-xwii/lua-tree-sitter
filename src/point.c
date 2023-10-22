@@ -1,11 +1,11 @@
-#include "point.h"
+#include <lts/point.h>
 
 #include <lua.h>
 #include <lauxlib.h>
 
 #include <tree_sitter/api.h>
 
-#include "util.h"
+#include <lts/util.h>
 
 void LTS_push_point(lua_State *L, TSPoint target) {
 	TSPoint *ud = lua_newuserdata(L, sizeof *ud);

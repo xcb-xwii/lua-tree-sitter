@@ -6,10 +6,10 @@
 
 #include <tree_sitter/api.h>
 
-#include "query_cursor.h"
+#include <lts/query/cursor.h>
 
-#define LTS_QUERY_MATCH_FUNCTABLE_NAME "QueryMatch"
-#define LTS_QUERY_MATCH_METATABLE_NAME "tree_sitter.QueryMatch"
+#define LTS_QUERY_MATCH_FUNCTABLE_NAME "Match"
+#define LTS_QUERY_MATCH_METATABLE_NAME "tree_sitter.Match"
 
 typedef struct {
 	TSQueryMatch match;

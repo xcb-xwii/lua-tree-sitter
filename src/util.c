@@ -1,4 +1,4 @@
-#include "util.h"
+#include <lts/util.h>
 
 #include <lua.h>
 #include <lauxlib.h>
@@ -16,7 +16,11 @@ void LTS_util_make_functable(
 	const char *name,
 	const luaL_Reg reg[]
 ) {
-	lua_newtable(L);
+	lua_getfield(L, -1, name);
+	if (lua_isnil(L, -1)) {
+		lua_pop(L, 1);
+		lua_newtable(L);
+	}
 	LTS_util_set_funcs(L, reg);
 	lua_setfield(L, -2, name);
 }

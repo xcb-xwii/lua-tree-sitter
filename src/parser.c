@@ -1,14 +1,14 @@
-#include "parser.h"
+#include <lts/parser.h>
 
 #include <lua.h>
 #include <lauxlib.h>
 
 #include <tree_sitter/api.h>
 
-#include "language.h"
-#include "point.h"
-#include "tree.h"
-#include "util.h"
+#include <lts/language.h>
+#include <lts/point.h>
+#include <lts/tree.h>
+#include <lts/util.h>
 
 void LTS_push_parser(lua_State *L, TSParser *target) {
 	TSParser **ud = lua_newuserdata(L, sizeof *ud);

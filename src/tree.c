@@ -1,4 +1,4 @@
-#include "tree.h"
+#include <lts/tree.h>
 
 #include <lua.h>
 #include <lauxlib.h>
@@ -7,12 +7,12 @@
 
 #include <stdint.h>
 
-#include "language.h"
-#include "node.h"
-#include "point.h"
-#include "range.h"
-#include "range_array.h"
-#include "util.h"
+#include <lts/language.h>
+#include <lts/node.h>
+#include <lts/point.h>
+#include <lts/range.h>
+#include <lts/range_array.h>
+#include <lts/util.h>
 
 void LTS_push_tree(lua_State *L, TSTree *target) {
 	TSTree **ud = lua_newuserdata(L, sizeof *ud);

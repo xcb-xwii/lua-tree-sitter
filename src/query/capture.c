@@ -1,4 +1,4 @@
-#include "query_capture.h"
+#include <lts/query/capture.h>
 
 #include <lua.h>
 #include <lauxlib.h>
@@ -7,11 +7,11 @@
 
 #include <stdint.h>
 
-#include "query.h"
-#include "query_cursor.h"
-#include "query_match.h"
-#include "node.h"
-#include "util.h"
+#include <lts/query/init.h>
+#include <lts/query/cursor.h>
+#include <lts/query/match.h>
+#include <lts/node.h>
+#include <lts/util.h>
 
 void LTS_push_query_capture(lua_State *L, TSQueryCapture target, int match_idx) {
 	LTS_QueryCapture *ud = lua_newuserdata(L, sizeof *ud);

@@ -28,7 +28,7 @@ build = {
 	modules = {
 		['tree_sitter'] = {
 			libdirs = { '$(TREE_SITTER_LIBDIR)' },
-			incdirs = { '$(TREE_SITTER_INCDIR)' },
+			incdirs = { '$(TREE_SITTER_INCDIR)', 'include' },
 			libraries = { 'tree-sitter' },
 			sources = {
 				'src/init.c',
@@ -36,12 +36,12 @@ build = {
 				'src/node.c',
 				'src/parser.c',
 				'src/point.c',
-				'src/query.c',
-				'src/query_capture.c',
-				'src/query_capture_spec.c',
-				'src/query_cursor.c',
-				'src/query_iterator.c',
-				'src/query_match.c',
+				'src/query/init.c',
+				'src/query/capture.c',
+				'src/query/capture_spec.c',
+				'src/query/cursor.c',
+				'src/query/iterator.c',
+				'src/query/match.c',
 				'src/range.c',
 				'src/range_array.c',
 				'src/tree.c',

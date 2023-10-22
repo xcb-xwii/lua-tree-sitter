@@ -1,4 +1,4 @@
-#include "range_array.h"
+#include <lts/range_array.h>
 
 #include <lua.h>
 #include <lauxlib.h>
@@ -7,8 +7,8 @@
 
 #include <string.h>
 
-#include "range.h"
-#include "util.h"
+#include <lts/range.h>
+#include <lts/util.h>
 
 void LTS_push_range_array(lua_State *L, LTS_RangeArray target) {
 	LTS_RangeArray *ud = lua_newuserdata(L, sizeof *ud);

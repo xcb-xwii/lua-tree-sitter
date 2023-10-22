@@ -1,4 +1,4 @@
-#include "query_capture_spec.h"
+#include <lts/query/capture_spec.h>
 
 #include <lua.h>
 #include <lauxlib.h>
@@ -7,9 +7,9 @@
 
 #include <stdint.h>
 
-#include "query_capture.h"
-#include "query_match.h"
-#include "util.h"
+#include <lts/query/capture.h>
+#include <lts/query/match.h>
+#include <lts/util.h>
 
 void LTS_push_query_capture_spec(lua_State *L, int capture_id, int match_idx) {
 	LTS_QueryCaptureSpec *ud = lua_newuserdata(L, sizeof *ud);

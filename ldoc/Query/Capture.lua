@@ -1,7 +1,7 @@
 ---
 -- A capture of a `Query`.
 -- Analogous to `TSQueryCapture`.
--- @classmod QueryCapture
+-- @classmod Query.Capture
 -- @pragma nostrip
 
 ---
@@ -11,24 +11,24 @@
 ---
 -- Get the `Node` of the capture.
 -- @treturn Node
-function QueryCapture:node() end
+function Capture:node() end
 
 ---
 -- Get the index of the capture.
 -- @treturn integer
-function QueryCapture:index() end
+function Capture:index() end
 
 ---
 -- Get the `QueryMatch` the capture belongs to.
--- @treturn QueryMatch
-function QueryCapture:match() end
+-- @treturn Match
+function Capture:match() end
 
 ---
 -- Get the `Query` the capture belongs to.
 -- @treturn Query
-function QueryCapture:query() end
+function Capture:query() end
 
 ---
 -- Get the name of the capture.
 -- @treturn Node
-function QueryCapture:name() end
+function Capture:name() end

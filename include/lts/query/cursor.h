@@ -6,11 +6,11 @@
 
 #include <tree_sitter/api.h>
 
-#include "node.h"
-#include "query.h"
+#include <lts/node.h>
+#include <lts/query/init.h>
 
-#define LTS_QUERY_CURSOR_FUNCTABLE_NAME "QueryCursor"
-#define LTS_QUERY_CURSOR_METATABLE_NAME "tree_sitter.QueryCursor"
+#define LTS_QUERY_CURSOR_FUNCTABLE_NAME "Cursor"
+#define LTS_QUERY_CURSOR_METATABLE_NAME "tree_sitter.Query.Cursor"
 
 typedef struct {
 	TSQueryCursor *query_cursor;

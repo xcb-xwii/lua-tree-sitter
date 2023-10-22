@@ -1,12 +1,12 @@
-#include "range.h"
+#include <lts/range.h>
 
 #include <lua.h>
 #include <lauxlib.h>
 
 #include <tree_sitter/api.h>
 
-#include "point.h"
-#include "util.h"
+#include <lts/point.h>
+#include <lts/util.h>
 
 void LTS_push_range(lua_State *L, TSRange target) {
 	TSRange *ud = lua_newuserdata(L, sizeof *ud);

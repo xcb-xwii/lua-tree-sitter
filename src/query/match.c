@@ -1,12 +1,13 @@
-#include "query_match.h"
+#include <lts/query/match.h>
 
 #include <lua.h>
 #include <lauxlib.h>
 
 #include <tree_sitter/api.h>
 
-#include "query_capture.h"
-#include "util.h"
+#include <lts/query/init.h>
+#include <lts/query/capture.h>
+#include <lts/util.h>
 
 void LTS_push_query_match(lua_State *L, TSQueryMatch target, int cursor_idx) {
 	LTS_QueryMatch *ud = lua_newuserdata(L, sizeof *ud);

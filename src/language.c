@@ -1,4 +1,4 @@
-#include "language.h"
+#include <lts/language.h>
 
 #include <lua.h>
 #include <lauxlib.h>
@@ -11,7 +11,7 @@
 
 #include <dlfcn.h>
 
-#include "util.h"
+#include <lts/util.h>
 
 void LTS_push_language(lua_State *L, TSLanguage *target) {
 	TSLanguage **ud = lua_newuserdata(L, sizeof *ud);

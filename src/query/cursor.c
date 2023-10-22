@@ -1,4 +1,4 @@
-#include "query_cursor.h"
+#include <lts/query/cursor.h>
 
 #include <lua.h>
 #include <lauxlib.h>
@@ -7,13 +7,13 @@
 
 #include <stdint.h>
 
-#include "node.h"
-#include "point.h"
-#include "query.h"
-#include "query_capture.h"
-#include "query_match.h"
-#include "tree.h"
-#include "util.h"
+#include <lts/node.h>
+#include <lts/point.h>
+#include <lts/query/init.h>
+#include <lts/query/capture.h>
+#include <lts/query/match.h>
+#include <lts/tree.h>
+#include <lts/util.h>
 
 void LTS_push_query_cursor(
 	lua_State *L,

@@ -1,17 +1,17 @@
-#include "query_iterator.h"
+#include <lts/query/iterator.h>
 
 #include <lua.h>
 #include <lauxlib.h>
 
 #include <tree_sitter/api.h>
 
-#include "query.h"
-#include "query_capture.h"
-#include "query_capture_spec.h"
-#include "query_cursor.h"
-#include "query_match.h"
-#include "node.h"
-#include "util.h"
+#include <lts/query/init.h>
+#include <lts/query/capture.h>
+#include <lts/query/capture_spec.h>
+#include <lts/query/cursor.h>
+#include <lts/query/match.h>
+#include <lts/node.h>
+#include <lts/util.h>
 
 void LTS_push_query_iterator(lua_State *L, LTS_QueryIterator target) {
 	LTS_QueryIterator *ud = lua_newuserdata(L, sizeof *ud);

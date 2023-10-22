@@ -4,20 +4,20 @@
 
 #include <tree_sitter/api.h>
 
-#include "language.h"
-#include "node.h"
-#include "parser.h"
-#include "point.h"
-#include "query.h"
-#include "query_capture.h"
-#include "query_capture_spec.h"
-#include "query_cursor.h"
-#include "query_iterator.h"
-#include "query_match.h"
-#include "range.h"
-#include "range_array.h"
-#include "tree.h"
-#include "util.h"
+#include <lts/language.h>
+#include <lts/node.h>
+#include <lts/parser.h>
+#include <lts/point.h>
+#include <lts/query/init.h>
+#include <lts/query/capture.h>
+#include <lts/query/capture_spec.h>
+#include <lts/query/cursor.h>
+#include <lts/query/iterator.h>
+#include <lts/query/match.h>
+#include <lts/range.h>
+#include <lts/range_array.h>
+#include <lts/tree.h>
+#include <lts/util.h>
 
 int luaopen_tree_sitter(lua_State *L) {
 	lua_createtable(L, 0, 0);
@@ -26,11 +26,13 @@ int luaopen_tree_sitter(lua_State *L) {
 	LTS_setup_parser(L);
 	LTS_setup_point(L);
 	LTS_setup_query(L);
+	lua_getfield(L, -1, "Query");
 	LTS_setup_query_capture(L);
 	LTS_setup_query_capture_spec(L);
 	LTS_setup_query_cursor(L);
 	LTS_setup_query_iterator(L);
 	LTS_setup_query_match(L);
+	lua_pop(L, 1);
 	LTS_setup_range(L);
 	LTS_setup_range_array(L);
 	LTS_setup_tree(L);

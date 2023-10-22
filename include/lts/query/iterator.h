@@ -6,10 +6,10 @@
 
 #include <tree_sitter/api.h>
 
-#include "query_match.h"
+#include <lts/query/match.h>
 
-#define LTS_QUERY_ITERATOR_FUNCTABLE_NAME "QueryIterator"
-#define LTS_QUERY_ITERATOR_METATABLE_NAME "tree_sitter.QueryIterator"
+#define LTS_QUERY_ITERATOR_FUNCTABLE_NAME "Iterator"
+#define LTS_QUERY_ITERATOR_METATABLE_NAME "tree_sitter.Iterator"
 
 typedef struct {
 	int predicates_ref;

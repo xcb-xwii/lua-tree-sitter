@@ -1,4 +1,4 @@
-#include "node.h"
+#include <lts/node.h>
 
 #include <lua.h>
 #include <lauxlib.h>
@@ -7,9 +7,9 @@
 
 #include <stdint.h>
 
-#include "point.h"
-#include "tree.h"
-#include "util.h"
+#include <lts/point.h>
+#include <lts/tree.h>
+#include <lts/util.h>
 
 void LTS_push_node(lua_State *L, TSNode target, int tree_idx) {
 	if (ts_node_is_null(target)) {

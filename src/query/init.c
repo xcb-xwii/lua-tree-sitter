@@ -1,4 +1,4 @@
-#include "query.h"
+#include <lts/query/init.h>
 
 #include <lua.h>
 #include <lauxlib.h>
@@ -7,9 +7,8 @@
 
 #include <stdint.h>
 
-#include "language.h"
-#include "query.h"
-#include "util.h"
+#include <lts/language.h>
+#include <lts/util.h>
 
 void LTS_push_query(lua_State *L, TSQuery *target) {
 	LTS_Query *ud = lua_newuserdata(L, sizeof *ud);
