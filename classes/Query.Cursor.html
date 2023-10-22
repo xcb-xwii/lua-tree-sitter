@@ -69,46 +69,46 @@
 <h2><a href="#Functions">Functions </a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#QueryCursor.new">QueryCursor.new (query, node)</a></td>
+	<td class="name" nowrap><a href="#Cursor.new">Cursor.new (query, node)</a></td>
 	<td class="summary">Create a new cursor for executing a given <a href="../classes/Query.html#">Query</a> on a given <a href="../classes/Node.html#">Node</a>.</td>
 	</tr>
 </table>
 <h2><a href="#Methods">Methods </a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#QueryCursor:query">QueryCursor:query ()</a></td>
+	<td class="name" nowrap><a href="#Cursor:query">Cursor:query ()</a></td>
 	<td class="summary">Get the <a href="../classes/Query.html#">Query</a> the cursor is executing.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#QueryCursor:node">QueryCursor:node ()</a></td>
+	<td class="name" nowrap><a href="#Cursor:node">Cursor:node ()</a></td>
 	<td class="summary">Get the <a href="../classes/Node.html#">Node</a> the cursor is executing on.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#QueryCursor:did_exceed_match_limit">QueryCursor:did_exceed_match_limit ()</a></td>
+	<td class="name" nowrap><a href="#Cursor:did_exceed_match_limit">Cursor:did_exceed_match_limit ()</a></td>
 	<td class="summary">Check whether the match limit of the cursor has been exceeded.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#QueryCursor:match_limit">QueryCursor:match_limit ()</a></td>
+	<td class="name" nowrap><a href="#Cursor:match_limit">Cursor:match_limit ()</a></td>
 	<td class="summary">Get the maximum number of in-progress matches of a cursor.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#QueryCursor:set_match_limit">QueryCursor:set_match_limit (limit)</a></td>
+	<td class="name" nowrap><a href="#Cursor:set_match_limit">Cursor:set_match_limit (limit)</a></td>
 	<td class="summary">Set the maximum number of in-progress matches of a cursor.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#QueryCursor:set_byte_range">QueryCursor:set_byte_range (start_byte, end_byte)</a></td>
+	<td class="name" nowrap><a href="#Cursor:set_byte_range">Cursor:set_byte_range (start_byte, end_byte)</a></td>
 	<td class="summary">Set the range of bytes in which the <a href="../classes/Query.html#">Query</a> will be executed.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#QueryCursor:set_point_range">QueryCursor:set_point_range (start_point, end_point)</a></td>
+	<td class="name" nowrap><a href="#Cursor:set_point_range">Cursor:set_point_range (start_point, end_point)</a></td>
 	<td class="summary">Set the range of <a href="../classes/Point.html#">Point</a>s in which the <a href="../classes/Query.html#">Query</a> will be executed.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#QueryCursor:next_match">QueryCursor:next_match ()</a></td>
+	<td class="name" nowrap><a href="#Cursor:next_match">Cursor:next_match ()</a></td>
 	<td class="summary">Advance to and get the next match.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#QueryCursor:next_capture">QueryCursor:next_capture ()</a></td>
+	<td class="name" nowrap><a href="#Cursor:next_capture">Cursor:next_capture ()</a></td>
 	<td class="summary">Advance to and get the next capture.</td>
 	</tr>
 </table>
@@ -121,8 +121,8 @@
 
     <dl class="function">
     <dt>
-    <a name = "QueryCursor.new"></a>
-    <strong>QueryCursor.new (query, node)</strong>
+    <a name = "Cursor.new"></a>
+    <strong>Cursor.new (query, node)</strong>
     </dt>
     <dd>
     Create a new cursor for executing a given <a href="../classes/Query.html#">Query</a> on a given <a href="../classes/Node.html#">Node</a>.
@@ -162,8 +162,8 @@
 
     <dl class="function">
     <dt>
-    <a name = "QueryCursor:query"></a>
-    <strong>QueryCursor:query ()</strong>
+    <a name = "Cursor:query"></a>
+    <strong>Cursor:query ()</strong>
     </dt>
     <dd>
     Get the <a href="../classes/Query.html#">Query</a> the cursor is executing.
@@ -184,8 +184,8 @@
 
 </dd>
     <dt>
-    <a name = "QueryCursor:node"></a>
-    <strong>QueryCursor:node ()</strong>
+    <a name = "Cursor:node"></a>
+    <strong>Cursor:node ()</strong>
     </dt>
     <dd>
     Get the <a href="../classes/Node.html#">Node</a> the cursor is executing on.
@@ -206,8 +206,8 @@
 
 </dd>
     <dt>
-    <a name = "QueryCursor:did_exceed_match_limit"></a>
-    <strong>QueryCursor:did_exceed_match_limit ()</strong>
+    <a name = "Cursor:did_exceed_match_limit"></a>
+    <strong>Cursor:did_exceed_match_limit ()</strong>
     </dt>
     <dd>
     Check whether the match limit of the cursor has been exceeded.
@@ -228,8 +228,8 @@
 
 </dd>
     <dt>
-    <a name = "QueryCursor:match_limit"></a>
-    <strong>QueryCursor:match_limit ()</strong>
+    <a name = "Cursor:match_limit"></a>
+    <strong>Cursor:match_limit ()</strong>
     </dt>
     <dd>
     Get the maximum number of in-progress matches of a cursor. </p>
@@ -254,8 +254,8 @@
 
 </dd>
     <dt>
-    <a name = "QueryCursor:set_match_limit"></a>
-    <strong>QueryCursor:set_match_limit (limit)</strong>
+    <a name = "Cursor:set_match_limit"></a>
+    <strong>Cursor:set_match_limit (limit)</strong>
     </dt>
     <dd>
     Set the maximum number of in-progress matches of a cursor.
@@ -277,8 +277,8 @@
 
 </dd>
     <dt>
-    <a name = "QueryCursor:set_byte_range"></a>
-    <strong>QueryCursor:set_byte_range (start_byte, end_byte)</strong>
+    <a name = "Cursor:set_byte_range"></a>
+    <strong>Cursor:set_byte_range (start_byte, end_byte)</strong>
     </dt>
     <dd>
     Set the range of bytes in which the <a href="../classes/Query.html#">Query</a> will be executed.
@@ -306,8 +306,8 @@
 
 </dd>
     <dt>
-    <a name = "QueryCursor:set_point_range"></a>
-    <strong>QueryCursor:set_point_range (start_point, end_point)</strong>
+    <a name = "Cursor:set_point_range"></a>
+    <strong>Cursor:set_point_range (start_point, end_point)</strong>
     </dt>
     <dd>
     Set the range of <a href="../classes/Point.html#">Point</a>s in which the <a href="../classes/Query.html#">Query</a> will be executed.
@@ -335,8 +335,8 @@
 
 </dd>
     <dt>
-    <a name = "QueryCursor:next_match"></a>
-    <strong>QueryCursor:next_match ()</strong>
+    <a name = "Cursor:next_match"></a>
+    <strong>Cursor:next_match ()</strong>
     </dt>
     <dd>
     Advance to and get the next match. </p>
@@ -359,8 +359,8 @@
 
 </dd>
     <dt>
-    <a name = "QueryCursor:next_capture"></a>
-    <strong>QueryCursor:next_capture ()</strong>
+    <a name = "Cursor:next_capture"></a>
+    <strong>Cursor:next_capture ()</strong>
     </dt>
     <dd>
     Advance to and get the next capture. </p>
@@ -389,7 +389,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/lunarmodules/LDoc">LDoc 1.5.0</a></i>
-<i style="float:right;">Last updated 2023-10-22 09:38:13 </i>
+<i style="float:right;">Last updated 2023-10-22 09:40:01 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
