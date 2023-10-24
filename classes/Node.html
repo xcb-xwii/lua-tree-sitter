@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <head>
     <title>lua-tree-sitter Reference</title>
-    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+    <link rel="stylesheet" href="../ldoc_new.css" type="text/css" />
 </head>
 <body>
 
@@ -51,12 +51,12 @@
   <li><a href="../classes/Query.Match.html">Query.Match</a></li>
   <li><a href="../classes/Query.Runner.html">Query.Runner</a></li>
   <li><a href="../classes/Range.html">Range</a></li>
-  <li><a href="../classes/RangeArray.html">RangeArray</a></li>
+  <li><a href="../classes/Range.Array.html">Range.Array</a></li>
   <li><a href="../classes/Tree.html">Tree</a></li>
 </ul>
-<h2>Modules</h2>
+<h2>Manuals</h2>
 <ul class="nowrap">
-  <li><a href="../modules/tree_sitter.html">tree_sitter</a></li>
+  <li><a href="../manuals/README.md.html">README</a></li>
 </ul>
 
 </div>
@@ -71,126 +71,126 @@
 <h2><a href="#Methods">Methods </a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#Node:tree">Node:tree ()</a></td>
+	<td class="name" ><a href="#Node:tree">Node:tree ()</a></td>
 	<td class="summary">Get the <a href="../classes/Tree.html#">Tree</a> the node belongs to.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Node:type">Node:type ()</a></td>
+	<td class="name" ><a href="#Node:type">Node:type ()</a></td>
 	<td class="summary">Get the type of the node.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Node:start_byte">Node:start_byte ()</a></td>
+	<td class="name" ><a href="#Node:start_byte">Node:start_byte ()</a></td>
 	<td class="summary">Get the start byte of the node.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Node:start_point">Node:start_point ()</a></td>
+	<td class="name" ><a href="#Node:start_point">Node:start_point ()</a></td>
 	<td class="summary">Get the start <a href="../classes/Point.html#">Point</a> of the node.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Node:end_byte">Node:end_byte ()</a></td>
+	<td class="name" ><a href="#Node:end_byte">Node:end_byte ()</a></td>
 	<td class="summary">Get the end byte of the node.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Node:end_point">Node:end_point ()</a></td>
+	<td class="name" ><a href="#Node:end_point">Node:end_point ()</a></td>
 	<td class="summary">Get the end <a href="../classes/Point.html#">Point</a> of the node.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Node:is_named">Node:is_named ()</a></td>
+	<td class="name" ><a href="#Node:is_named">Node:is_named ()</a></td>
 	<td class="summary">Check if the node is named.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Node:is_missing">Node:is_missing ()</a></td>
+	<td class="name" ><a href="#Node:is_missing">Node:is_missing ()</a></td>
 	<td class="summary">Check if the node is missing.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Node:is_extra">Node:is_extra ()</a></td>
+	<td class="name" ><a href="#Node:is_extra">Node:is_extra ()</a></td>
 	<td class="summary">Check if the node is extra.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Node:has_changes">Node:has_changes ()</a></td>
+	<td class="name" ><a href="#Node:has_changes">Node:has_changes ()</a></td>
 	<td class="summary">Check if the node has been edited.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Node:has_error">Node:has_error ()</a></td>
+	<td class="name" ><a href="#Node:has_error">Node:has_error ()</a></td>
 	<td class="summary">Check if the node is a syntax error or contains any syntax errors.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Node:parent">Node:parent ()</a></td>
+	<td class="name" ><a href="#Node:parent">Node:parent ()</a></td>
 	<td class="summary">Get the immediate parent of the node.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Node:child">Node:child (index)</a></td>
+	<td class="name" ><a href="#Node:child">Node:child (index)</a></td>
 	<td class="summary">Get the child of the node at a given index.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Node:field_name_for_child">Node:field_name_for_child (index)</a></td>
+	<td class="name" ><a href="#Node:field_name_for_child">Node:field_name_for_child (index)</a></td>
 	<td class="summary">Get the field name of the child of the node at a given index.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Node:child_count">Node:child_count ()</a></td>
+	<td class="name" ><a href="#Node:child_count">Node:child_count ()</a></td>
 	<td class="summary">Get the number of children the node has.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Node:named_child">Node:named_child (index)</a></td>
+	<td class="name" ><a href="#Node:named_child">Node:named_child (index)</a></td>
 	<td class="summary">Get the named child of the node at a given index.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Node:named_child_count">Node:named_child_count ()</a></td>
+	<td class="name" ><a href="#Node:named_child_count">Node:named_child_count ()</a></td>
 	<td class="summary">Get the number of named children the node has.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Node:child_by_field_id">Node:child_by_field_id (id)</a></td>
+	<td class="name" ><a href="#Node:child_by_field_id">Node:child_by_field_id (id)</a></td>
 	<td class="summary">Get the child of the node by a given field ID.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Node:next_sibling">Node:next_sibling ()</a></td>
+	<td class="name" ><a href="#Node:next_sibling">Node:next_sibling ()</a></td>
 	<td class="summary">Get the next sibling of the node.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Node:prev_sibling">Node:prev_sibling ()</a></td>
+	<td class="name" ><a href="#Node:prev_sibling">Node:prev_sibling ()</a></td>
 	<td class="summary">Get the previous sibling of the node.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Node:next_named_sibling">Node:next_named_sibling ()</a></td>
+	<td class="name" ><a href="#Node:next_named_sibling">Node:next_named_sibling ()</a></td>
 	<td class="summary">Get the next named sibling of the node.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Node:prev_named_sibling">Node:prev_named_sibling ()</a></td>
+	<td class="name" ><a href="#Node:prev_named_sibling">Node:prev_named_sibling ()</a></td>
 	<td class="summary">Get the previous named_sibling of the node.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Node:first_child_for_byte">Node:first_child_for_byte (byte)</a></td>
+	<td class="name" ><a href="#Node:first_child_for_byte">Node:first_child_for_byte (byte)</a></td>
 	<td class="summary">Get the first child of the node that extends beyond the given byte offset.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Node:first_named_child_for_byte">Node:first_named_child_for_byte (byte)</a></td>
+	<td class="name" ><a href="#Node:first_named_child_for_byte">Node:first_named_child_for_byte (byte)</a></td>
 	<td class="summary">Get the first named child of the node that extends beyond the given byte offset.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Node:descendant_for_byte_range">Node:descendant_for_byte_range (start_byte, end_byte)</a></td>
+	<td class="name" ><a href="#Node:descendant_for_byte_range">Node:descendant_for_byte_range (start_byte, end_byte)</a></td>
 	<td class="summary">Get the smallest node within the node that spans the given range of bytes.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Node:descendant_for_point_range">Node:descendant_for_point_range (start_point, end_point)</a></td>
+	<td class="name" ><a href="#Node:descendant_for_point_range">Node:descendant_for_point_range (start_point, end_point)</a></td>
 	<td class="summary">Get the smallest node within the node that spans the given range of <a href="../classes/Point.html#">Point</a>s.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Node:named_descendant_for_byte_range">Node:named_descendant_for_byte_range (start_byte, end_byte)</a></td>
+	<td class="name" ><a href="#Node:named_descendant_for_byte_range">Node:named_descendant_for_byte_range (start_byte, end_byte)</a></td>
 	<td class="summary">Get the smallest named node within the node that spans the given range of bytes.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Node:named_descendant_for_point_range">Node:named_descendant_for_point_range (start_point, end_point)</a></td>
+	<td class="name" ><a href="#Node:named_descendant_for_point_range">Node:named_descendant_for_point_range (start_point, end_point)</a></td>
 	<td class="summary">Get the smallest named node within the node that spans the given range of <a href="../classes/Point.html#">Point</a>s.</td>
 	</tr>
 </table>
 <h2><a href="#Metamethods">Metamethods </a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#Node:__eq">Node:__eq (other)</a></td>
+	<td class="name" ><a href="#Node:__eq">Node:__eq (other)</a></td>
 	<td class="summary">Check equality of two nodes by value.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Node:__tostring">Node:__tostring ()</a></td>
+	<td class="name" ><a href="#Node:__tostring">Node:__tostring ()</a></td>
 	<td class="summary">Convert the node to a S-expression.</td>
 	</tr>
 </table>
@@ -1026,7 +1026,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/lunarmodules/LDoc">LDoc 1.5.0</a></i>
-<i style="float:right;">Last updated 2023-10-24 13:05:58 </i>
+<i style="float:right;">Last updated 2023-10-24 14:38:56 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

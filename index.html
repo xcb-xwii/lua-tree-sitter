@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <head>
     <title>lua-tree-sitter Reference</title>
-    <link rel="stylesheet" href="ldoc.css" type="text/css" />
+    <link rel="stylesheet" href="ldoc_new.css" type="text/css" />
 </head>
 <body>
 
@@ -30,10 +30,6 @@
 
 
 
-<h2>Modules</h2>
-<ul class="nowrap">
-  <li><a href="modules/tree_sitter.html">tree_sitter</a></li>
-</ul>
 <h2>Classes</h2>
 <ul class="nowrap">
   <li><a href="classes/Language.html">Language</a></li>
@@ -47,8 +43,12 @@
   <li><a href="classes/Query.Match.html">Query.Match</a></li>
   <li><a href="classes/Query.Runner.html">Query.Runner</a></li>
   <li><a href="classes/Range.html">Range</a></li>
-  <li><a href="classes/RangeArray.html">RangeArray</a></li>
+  <li><a href="classes/Range.Array.html">Range.Array</a></li>
   <li><a href="classes/Tree.html">Tree</a></li>
+</ul>
+<h2>Manuals</h2>
+<ul class="nowrap">
+  <li><a href="manuals/README.md.html">README</a></li>
 </ul>
 
 </div>
@@ -58,66 +58,66 @@
 
   <h2>Lua bindings for Tree-sitter</h2>
 
-<h2>Modules</h2>
-<table class="module_list">
-	<tr>
-		<td class="name"  nowrap><a href="modules/tree_sitter.html">tree_sitter</a></td>
-		<td class="summary">Require only this module, as all classes reside as fields within this module</td>
-	</tr>
-</table>
 <h2>Classes</h2>
 <table class="module_list">
 	<tr>
-		<td class="name"  nowrap><a href="classes/Language.html">Language</a></td>
+		<td class="name"  ><a href="classes/Language.html">Language</a></td>
 		<td class="summary">A language definition used by a <a href="classes/Parser.html#">Parser</a> to parse a document.</td>
 	</tr>
 	<tr>
-		<td class="name"  nowrap><a href="classes/Node.html">Node</a></td>
+		<td class="name"  ><a href="classes/Node.html">Node</a></td>
 		<td class="summary">A node within a <a href="classes/Tree.html#">Tree</a>.</td>
 	</tr>
 	<tr>
-		<td class="name"  nowrap><a href="classes/Parser.html">Parser</a></td>
+		<td class="name"  ><a href="classes/Parser.html">Parser</a></td>
 		<td class="summary">Parses a document based on a <a href="classes/Language.html#">Language</a> to produce a <a href="classes/Tree.html#">Tree</a>.</td>
 	</tr>
 	<tr>
-		<td class="name"  nowrap><a href="classes/Point.html">Point</a></td>
+		<td class="name"  ><a href="classes/Point.html">Point</a></td>
 		<td class="summary">A point on a document.</td>
 	</tr>
 	<tr>
-		<td class="name"  nowrap><a href="classes/Query.html">Query</a></td>
+		<td class="name"  ><a href="classes/Query.html">Query</a></td>
 		<td class="summary">A query that can be ran on <a href="classes/Node.html#">Node</a>s of a given <a href="classes/Language.html#">Language</a>.</td>
 	</tr>
 	<tr>
-		<td class="name"  nowrap><a href="classes/Query.Capture.html">Query.Capture</a></td>
+		<td class="name"  ><a href="classes/Query.Capture.html">Query.Capture</a></td>
 		<td class="summary">A capture of a <a href="classes/Query.html#">Query</a>.</td>
 	</tr>
 	<tr>
-		<td class="name"  nowrap><a href="classes/Query.CaptureSet.html">Query.CaptureSet</a></td>
-		<td class="summary">A set of <code>Capture</code>s provided to predicates.</td>
+		<td class="name"  ><a href="classes/Query.CaptureSet.html">Query.CaptureSet</a></td>
+		<td class="summary">A set of <a href="classes/Query.Capture.html#">Query.Capture</a>s provided to predicates.</td>
 	</tr>
 	<tr>
-		<td class="name"  nowrap><a href="classes/Query.Cursor.html">Query.Cursor</a></td>
+		<td class="name"  ><a href="classes/Query.Cursor.html">Query.Cursor</a></td>
 		<td class="summary">A cursor for executing a given <a href="classes/Query.html#">Query</a>.</td>
 	</tr>
 	<tr>
-		<td class="name"  nowrap><a href="classes/Query.Match.html">Query.Match</a></td>
+		<td class="name"  ><a href="classes/Query.Match.html">Query.Match</a></td>
 		<td class="summary">A match of a <a href="classes/Query.html#">Query</a>.</td>
 	</tr>
 	<tr>
-		<td class="name"  nowrap><a href="classes/Query.Runner.html">Query.Runner</a></td>
+		<td class="name"  ><a href="classes/Query.Runner.html">Query.Runner</a></td>
 		<td class="summary">Runs <a href="classes/Query.html#">Query</a>s with support for predicates.</td>
 	</tr>
 	<tr>
-		<td class="name"  nowrap><a href="classes/Range.html">Range</a></td>
+		<td class="name"  ><a href="classes/Range.html">Range</a></td>
 		<td class="summary">A range within a document.</td>
 	</tr>
 	<tr>
-		<td class="name"  nowrap><a href="classes/RangeArray.html">RangeArray</a></td>
+		<td class="name"  ><a href="classes/Range.Array.html">Range.Array</a></td>
 		<td class="summary">A array of <a href="classes/Range.html#">Range</a>s.</td>
 	</tr>
 	<tr>
-		<td class="name"  nowrap><a href="classes/Tree.html">Tree</a></td>
+		<td class="name"  ><a href="classes/Tree.html">Tree</a></td>
 		<td class="summary">A syntax tree.</td>
+	</tr>
+</table>
+<h2>Manuals</h2>
+<table class="module_list">
+	<tr>
+		<td class="name"  ><a href="manuals/README.md.html">README.md</a></td>
+		<td class="summary"></td>
 	</tr>
 </table>
 
@@ -125,7 +125,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/lunarmodules/LDoc">LDoc 1.5.0</a></i>
-<i style="float:right;">Last updated 2023-10-24 13:05:58 </i>
+<i style="float:right;">Last updated 2023-10-24 14:38:56 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

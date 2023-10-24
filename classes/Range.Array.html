@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <head>
     <title>lua-tree-sitter Reference</title>
-    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+    <link rel="stylesheet" href="../ldoc_new.css" type="text/css" />
 </head>
 <body>
 
@@ -52,19 +52,19 @@
   <li><a href="../classes/Query.Match.html">Query.Match</a></li>
   <li><a href="../classes/Query.Runner.html">Query.Runner</a></li>
   <li><a href="../classes/Range.html">Range</a></li>
-  <li><strong>RangeArray</strong></li>
+  <li><strong>Range.Array</strong></li>
   <li><a href="../classes/Tree.html">Tree</a></li>
 </ul>
-<h2>Modules</h2>
+<h2>Manuals</h2>
 <ul class="nowrap">
-  <li><a href="../modules/tree_sitter.html">tree_sitter</a></li>
+  <li><a href="../manuals/README.md.html">README</a></li>
 </ul>
 
 </div>
 
 <div id="content">
 
-<h1>Class <code>RangeArray</code></h1>
+<h1>Class <code>Range.Array</code></h1>
 <p>A array of <a href="../classes/Range.html#">Range</a>s.</p>
 <p> Used for efficient handling of such arrays.</p>
 
@@ -72,49 +72,49 @@
 <h2><a href="#Functions">Functions </a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#RangeArray.new">RangeArray.new (array)</a></td>
+	<td class="name" ><a href="#Array.new">Array.new (array)</a></td>
 	<td class="summary">Create a new array.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#RangeArray.pack">RangeArray.pack (...)</a></td>
+	<td class="name" ><a href="#Array.pack">Array.pack (...)</a></td>
 	<td class="summary">Create a new array from a variable number of arguments.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#RangeArray.from_table">RangeArray.from_table (array)</a></td>
-	<td class="summary">Alias for <a href="../classes/RangeArray.html#RangeArray.new">new</a>.</td>
+	<td class="name" ><a href="#Array.from_table">Array.from_table (array)</a></td>
+	<td class="summary">Alias for <a href="../classes/Range.Array.html#Array.new">new</a>.</td>
 	</tr>
 </table>
 <h2><a href="#Methods">Methods </a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#RangeArray:unpack">RangeArray:unpack ([i=1[, j=length of array]])</a></td>
+	<td class="name" ><a href="#Array:unpack">Array:unpack ([i=1[, j=length of array]])</a></td>
 	<td class="summary">Unpack the array.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#RangeArray:to_table">RangeArray:to_table ()</a></td>
+	<td class="name" ><a href="#Array:to_table">Array:to_table ()</a></td>
 	<td class="summary">Convert the array to a Lua <a href="https://www.lua.org/manual/5.4/manual.html#6.6">table</a>.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#RangeArray:copy">RangeArray:copy ()</a></td>
+	<td class="name" ><a href="#Array:copy">Array:copy ()</a></td>
 	<td class="summary">Create a copy of the array.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#RangeArray:at">RangeArray:at (index)</a></td>
+	<td class="name" ><a href="#Array:at">Array:at (index)</a></td>
 	<td class="summary">Get the <a href="../classes/Range.html#">Range</a> at a given index.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#RangeArray:set_at">RangeArray:set_at (index, value)</a></td>
+	<td class="name" ><a href="#Array:set_at">Array:set_at (index, value)</a></td>
 	<td class="summary">Set the <a href="../classes/Range.html#">Range</a> at a given index.</td>
 	</tr>
 </table>
 <h2><a href="#Metamethods">Metamethods </a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#RangeArray:__len">RangeArray:__len ()</a></td>
+	<td class="name" ><a href="#Array:__len">Array:__len ()</a></td>
 	<td class="summary">Get the length of the array.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#RangeArray:__eq">RangeArray:__eq (other)</a></td>
+	<td class="name" ><a href="#Array:__eq">Array:__eq (other)</a></td>
 	<td class="summary">Check equality of two arrays.</td>
 	</tr>
 </table>
@@ -127,13 +127,13 @@
 
     <dl class="function">
     <dt>
-    <a name = "RangeArray.new"></a>
-    <strong>RangeArray.new (array)</strong>
+    <a name = "Array.new"></a>
+    <strong>Array.new (array)</strong>
     </dt>
     <dd>
     Create a new array. </p>
 
-<p> If you do not already have a Lua <a href="https://www.lua.org/manual/5.4/manual.html#6.6">table</a> of the <a href="../classes/Range.html#">Range</a>s, consider using <a href="../classes/RangeArray.html#RangeArray.pack">pack</a>.
+<p> If you do not already have a Lua <a href="https://www.lua.org/manual/5.4/manual.html#6.6">table</a> of the <a href="../classes/Range.html#">Range</a>s, consider using <a href="../classes/Range.Array.html#Array.pack">pack</a>.
 
 
     <h3>Parameters:</h3>
@@ -149,7 +149,7 @@
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="../classes/RangeArray.html#">RangeArray</a></span>
+           <span class="types"><a class="type" href="../classes/Range.Array.html">Array</a></span>
 
 
 
@@ -160,8 +160,8 @@
 
 </dd>
     <dt>
-    <a name = "RangeArray.pack"></a>
-    <strong>RangeArray.pack (...)</strong>
+    <a name = "Array.pack"></a>
+    <strong>Array.pack (...)</strong>
     </dt>
     <dd>
     Create a new array from a variable number of arguments.
@@ -180,7 +180,7 @@
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="../classes/RangeArray.html#">RangeArray</a></span>
+           <span class="types"><a class="type" href="../classes/Range.Array.html">Array</a></span>
 
 
 
@@ -191,11 +191,11 @@
 
 </dd>
     <dt>
-    <a name = "RangeArray.from_table"></a>
-    <strong>RangeArray.from_table (array)</strong>
+    <a name = "Array.from_table"></a>
+    <strong>Array.from_table (array)</strong>
     </dt>
     <dd>
-    Alias for <a href="../classes/RangeArray.html#RangeArray.new">new</a>.
+    Alias for <a href="../classes/Range.Array.html#Array.new">new</a>.
 
 
     <h3>Parameters:</h3>
@@ -211,7 +211,7 @@
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="../classes/RangeArray.html#">RangeArray</a></span>
+           <span class="types"><a class="type" href="../classes/Range.Array.html">Array</a></span>
 
 
 
@@ -226,13 +226,13 @@
 
     <dl class="function">
     <dt>
-    <a name = "RangeArray:unpack"></a>
-    <strong>RangeArray:unpack ([i=1[, j=length of array]])</strong>
+    <a name = "Array:unpack"></a>
+    <strong>Array:unpack ([i=1[, j=length of array]])</strong>
     </dt>
     <dd>
     Unpack the array. </p>
 
-<p> Inverse of <a href="../classes/RangeArray.html#RangeArray.pack">pack</a> if <code>i</code> and <code>j</code> are omitted.
+<p> Inverse of <a href="../classes/Range.Array.html#Array.pack">pack</a> if <code>i</code> and <code>j</code> are omitted.
 
 
     <h3>Parameters:</h3>
@@ -265,20 +265,20 @@
 
 </dd>
     <dt>
-    <a name = "RangeArray:to_table"></a>
-    <strong>RangeArray:to_table ()</strong>
+    <a name = "Array:to_table"></a>
+    <strong>Array:to_table ()</strong>
     </dt>
     <dd>
     Convert the array to a Lua <a href="https://www.lua.org/manual/5.4/manual.html#6.6">table</a>. </p>
 
-<p> Inverse of <a href="../classes/RangeArray.html#RangeArray.from_table">from_table</a>.
+<p> Inverse of <a href="../classes/Range.Array.html#Array.from_table">from_table</a>.
 
 
 
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="../classes/RangeArray.html#">{RangeArray}</a></span>
+           <span class="types"><a class="type" href="../classes/Range.Array.html">{Array}</a></span>
 
 
 
@@ -289,8 +289,8 @@
 
 </dd>
     <dt>
-    <a name = "RangeArray:copy"></a>
-    <strong>RangeArray:copy ()</strong>
+    <a name = "Array:copy"></a>
+    <strong>Array:copy ()</strong>
     </dt>
     <dd>
     Create a copy of the array.
@@ -300,7 +300,7 @@
     <h3>Returns:</h3>
     <ol>
 
-           <span class="types"><a class="type" href="../classes/RangeArray.html#">RangeArray</a></span>
+           <span class="types"><a class="type" href="../classes/Range.Array.html">Array</a></span>
 
 
 
@@ -311,8 +311,8 @@
 
 </dd>
     <dt>
-    <a name = "RangeArray:at"></a>
-    <strong>RangeArray:at (index)</strong>
+    <a name = "Array:at"></a>
+    <strong>Array:at (index)</strong>
     </dt>
     <dd>
     Get the <a href="../classes/Range.html#">Range</a> at a given index.
@@ -345,8 +345,8 @@
 
 </dd>
     <dt>
-    <a name = "RangeArray:set_at"></a>
-    <strong>RangeArray:set_at (index, value)</strong>
+    <a name = "Array:set_at"></a>
+    <strong>Array:set_at (index, value)</strong>
     </dt>
     <dd>
     Set the <a href="../classes/Range.html#">Range</a> at a given index.
@@ -382,8 +382,8 @@
 
     <dl class="function">
     <dt>
-    <a name = "RangeArray:__len"></a>
-    <strong>RangeArray:__len ()</strong>
+    <a name = "Array:__len"></a>
+    <strong>Array:__len ()</strong>
     </dt>
     <dd>
     Get the length of the array.
@@ -404,8 +404,8 @@
 
 </dd>
     <dt>
-    <a name = "RangeArray:__eq"></a>
-    <strong>RangeArray:__eq (other)</strong>
+    <a name = "Array:__eq"></a>
+    <strong>Array:__eq (other)</strong>
     </dt>
     <dd>
     Check equality of two arrays.
@@ -414,7 +414,7 @@
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">other</span>
-            <span class="types"><a class="type" href="../classes/RangeArray.html#">RangeArray</a></span>
+            <span class="types"><a class="type" href="../classes/Range.Array.html">Array</a></span>
 
 
 
@@ -441,7 +441,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/lunarmodules/LDoc">LDoc 1.5.0</a></i>
-<i style="float:right;">Last updated 2023-10-24 13:05:58 </i>
+<i style="float:right;">Last updated 2023-10-24 14:38:56 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
