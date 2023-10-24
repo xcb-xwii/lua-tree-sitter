@@ -1,4 +1,4 @@
-#include <lts/query/iterator.h>
+#include <lts/query/runner.h>
 
 #include <lua.h>
 #include <lauxlib.h>
@@ -7,51 +7,58 @@
 
 #include <lts/query/init.h>
 #include <lts/query/capture.h>
-#include <lts/query/capture_spec.h>
+#include <lts/query/capture_set.h>
 #include <lts/query/cursor.h>
 #include <lts/query/match.h>
 #include <lts/node.h>
 #include <lts/util.h>
 
-void LTS_push_query_iterator(lua_State *L, LTS_QueryIterator target) {
-	LTS_QueryIterator *ud = lua_newuserdata(L, sizeof *ud);
+void LTS_push_query_runner(lua_State *L, LTS_QueryRunner target) {
+	LTS_QueryRunner *ud = lua_newuserdata(L, sizeof *ud);
 	*ud = target;
-	LTS_util_set_metatable(L, LTS_QUERY_ITERATOR_METATABLE_NAME);
+	LTS_util_set_metatable(L, LTS_QUERY_RUNNER_METATABLE_NAME);
 }
 
-LTS_QueryIterator *LTS_check_query_iterator(lua_State *L, int idx) {
-	return luaL_checkudata(L, idx, LTS_QUERY_ITERATOR_METATABLE_NAME);
+LTS_QueryRunner *LTS_check_query_runner(lua_State *L, int idx) {
+	return luaL_checkudata(L, idx, LTS_QUERY_RUNNER_METATABLE_NAME);
 }
 
-static int LTS_query_iterator_new(lua_State *L) {
-	LTS_QueryIterator self = {};
-	
-	switch (lua_type(L, 1)) {
-	case LUA_TNONE:
-		self.predicates_ref = LUA_REFNIL;
-		self.error_on_invalid_predicate = false;
-		break;
+static int LTS_query_runner_new(lua_State *L) {
+	lua_settop(L, 2);
+	LTS_QueryRunner self = {};
 
-	case LUA_TNIL:
-	case LUA_TTABLE:
-		self.error_on_invalid_predicate = lua_toboolean(L, 2);
-		lua_settop(L, 1);
-		self.predicates_ref = luaL_ref(L, LUA_REGISTRYINDEX);
-		break;
-
-	default:
+	if (lua_type(L, 1) != LUA_TTABLE) {
 		return luaL_error(L,
-			"bad argument #1 (table or nil expected, got %s)",
+			"bad argument #1 (table expected, got %s)",
 			lua_typename(L, lua_type(L, 1))
 		);
 	}
 
-	LTS_push_query_iterator(L, self);
+	switch (lua_type(L, 2)) {
+	case LUA_TNONE:
+		lua_pushnil(L);
+		break;
+
+	case LUA_TNIL:
+	case LUA_TFUNCTION:
+		break;
+
+	default:
+		return luaL_error(L,
+			"bad argument #2 (function expected, got %s)",
+			lua_typename(L, lua_type(L, 2))
+		);
+	}
+
+	self.setup_ref = luaL_ref(L, LUA_REGISTRYINDEX);
+	self.predicates_ref = luaL_ref(L, LUA_REGISTRYINDEX);
+
+	LTS_push_query_runner(L, self);
 	return 1;
 }
 
-static int LTS_query_iterator_delete(lua_State *L) {
-	LTS_QueryIterator self = *LTS_log_gc(LTS_check_query_iterator(L, 1), LTS_QUERY_ITERATOR_METATABLE_NAME);
+static int LTS_query_runner_delete(lua_State *L) {
+	LTS_QueryRunner self = *LTS_log_gc(LTS_check_query_runner(L, 1), LTS_QUERY_RUNNER_METATABLE_NAME);
 	
 	luaL_unref(L, LUA_REGISTRYINDEX, self.predicates_ref);
 	return 0;
@@ -62,7 +69,8 @@ static bool run_predicates(
 	LTS_Query query,
 	TSQueryMatch match,
 	int match_idx,
-	int predicates_idx
+	int predicates_idx,
+	int setup_idx
 ) {
 	uint32_t count;
 	const TSQueryPredicateStep *steps = ts_query_predicates_for_pattern(
@@ -70,6 +78,14 @@ static bool run_predicates(
 		match.pattern_index,
 		&count
 	);
+	if (count == 0) return true;
+
+	lua_pushvalue(L, setup_idx);
+	if (lua_isnil(L, -1)) {
+		lua_pop(L, 1);
+	} else {
+		lua_call(L, 0, 0);
+	}
 
 	for (uint32_t i = 0; i < count; i++) {
 		uint16_t arg_count = 0;
@@ -78,24 +94,14 @@ static bool run_predicates(
 			ts_query_string_value_for_id(query.query, steps[i].value_id, &len);
 		i++;
 
-		if (lua_isnil(L, predicates_idx)) {
-			while (steps[i].value_id != TSQueryPredicateStepTypeDone) i++;
-			continue;
-		} else {
-			lua_pushlstring(L, name, len);
-			lua_rawget(L, predicates_idx);
-			if (lua_isnil(L, -1)) {
-				while (steps[i].value_id != TSQueryPredicateStepTypeDone) i++;
-				lua_pop(L, 1);
-				continue;
-			}
-		}
+		lua_pushlstring(L, name, len);
+		lua_rawget(L, predicates_idx);
 
 		for (; i < count; i++) {
 			TSQueryPredicateStep step = steps[i];
 			switch (step.type) {
 			case TSQueryPredicateStepTypeCapture:
-				LTS_push_query_capture_spec(L, step.value_id, match_idx);
+				LTS_push_query_capture_set(L, step.value_id, match_idx);
 				break;
 
 			case TSQueryPredicateStepTypeString:
@@ -143,19 +149,23 @@ static int next_match(lua_State *L) {
 		}
 
 		LTS_push_query_match(L, match, lua_upvalueindex(1));
-	} while (!run_predicates(L, *cursor.query, match, 1, lua_upvalueindex(2)));
+	} while (!run_predicates(L,
+		*cursor.query, match,
+		1, lua_upvalueindex(2), lua_upvalueindex(3)
+	));
 
 	return 1;
 }
 
-static int LTS_query_iterator_matches(lua_State *L) {
-	LTS_QueryIterator self = *LTS_check_query_iterator(L, 1);
+static int LTS_query_runner_matches(lua_State *L) {
+	LTS_QueryRunner self = *LTS_check_query_runner(L, 1);
 	luaL_checkudata(L, 2, LTS_QUERY_CURSOR_METATABLE_NAME);
 
 	lua_settop(L, 2);
 	lua_rawgeti(L, LUA_REGISTRYINDEX, self.predicates_ref);
+	lua_rawgeti(L, LUA_REGISTRYINDEX, self.setup_ref);
 
-	lua_pushcclosure(L, next_match, 2);
+	lua_pushcclosure(L, next_match, 3);
 	return 1;
 }
 
@@ -174,40 +184,44 @@ static int next_capture(lua_State *L) {
 		}
 
 		LTS_push_query_match(L, match, lua_upvalueindex(1));
-	} while (!run_predicates(L, *cursor.query, match, 1, lua_upvalueindex(2)));
+	} while (!run_predicates(L,
+		*cursor.query, match,
+		1, lua_upvalueindex(2), lua_upvalueindex(3)
+	));
 
 	LTS_push_query_capture(L, match.captures[index], 1);
 	return 1;
 }
 
-static int LTS_query_iterator_captures(lua_State *L) {
-	LTS_QueryIterator self = *LTS_check_query_iterator(L, 1);
+static int LTS_query_runner_captures(lua_State *L) {
+	LTS_QueryRunner self = *LTS_check_query_runner(L, 1);
 	luaL_checkudata(L, 2, LTS_QUERY_CURSOR_METATABLE_NAME);
 
 	lua_settop(L, 2);
 	lua_rawgeti(L, LUA_REGISTRYINDEX, self.predicates_ref);
+	lua_rawgeti(L, LUA_REGISTRYINDEX, self.setup_ref);
 
-	lua_pushcclosure(L, next_capture, 2);
+	lua_pushcclosure(L, next_capture, 3);
 	return 1;
 }
 
 static const luaL_Reg methods[] = {
-	{ "matches", LTS_query_iterator_matches },
-	{ "captures", LTS_query_iterator_captures },
+	{ "matches", LTS_query_runner_matches },
+	{ "captures", LTS_query_runner_captures },
 	{ NULL, NULL }
 };
 
 static const luaL_Reg metamethods[] = {
-	{ "__gc", LTS_query_iterator_delete },
+	{ "__gc", LTS_query_runner_delete },
 	{ NULL, NULL }
 };
 
 static const luaL_Reg funcs[] = {
-	{ "new", LTS_query_iterator_new },
+	{ "new", LTS_query_runner_new },
 	{ NULL, NULL }
 };
 
-void LTS_setup_query_iterator(lua_State *L) {
-	LTS_util_make_metatable(L, LTS_QUERY_ITERATOR_METATABLE_NAME, methods, metamethods);
-	LTS_util_make_functable(L, LTS_QUERY_ITERATOR_FUNCTABLE_NAME, funcs);
+void LTS_setup_query_runner(lua_State *L) {
+	LTS_util_make_metatable(L, LTS_QUERY_RUNNER_METATABLE_NAME, methods, metamethods);
+	LTS_util_make_functable(L, LTS_QUERY_RUNNER_FUNCTABLE_NAME, funcs);
 }

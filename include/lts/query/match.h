@@ -9,7 +9,7 @@
 #include <lts/query/cursor.h>
 
 #define LTS_QUERY_MATCH_FUNCTABLE_NAME "Match"
-#define LTS_QUERY_MATCH_METATABLE_NAME "tree_sitter.Match"
+#define LTS_QUERY_MATCH_METATABLE_NAME "tree_sitter.Query.Match"
 
 typedef struct {
 	TSQueryMatch match;
