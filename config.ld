@@ -1,5 +1,4 @@
 file = {
-	'ldoc/init.lua',
 	'ldoc/Language.lua',
 	'ldoc/Node.lua',
 	'ldoc/Parser.lua',
@@ -19,3 +18,13 @@ description = 'Lua bindings for Tree-sitter'
 title = 'lua-tree-sitter Reference'
 dir = 'doc'
 format = 'markdown'
+style = '!new'
+topics = {
+	'README.md'
+}
+kind_names = {
+	topic = "Manuals",
+}
+wrap = true
+
+-- vim: ft=lua

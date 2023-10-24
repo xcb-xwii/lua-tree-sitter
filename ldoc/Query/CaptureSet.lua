@@ -1,5 +1,5 @@
 ---
--- A set of `Capture`s provided to predicates.
+-- A set of `Query.Capture`s provided to predicates.
 -- @classmod Query.CaptureSet
 -- @pragma nostrip
 
