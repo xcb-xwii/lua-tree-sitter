@@ -9,8 +9,8 @@ file = {
 	'ldoc/Query/Cursor.lua',
 	'ldoc/Query/Match.lua',
 	'ldoc/Query/Runner.lua',
-	'ldoc/Range.lua',
-	'ldoc/RangeArray.lua',
+	'ldoc/Range/init.lua',
+	'ldoc/Range/Array.lua',
 	'ldoc/Tree.lua',
 }
 project = 'lua-tree-sitter'

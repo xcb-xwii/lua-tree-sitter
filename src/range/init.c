@@ -1,4 +1,4 @@
-#include <lts/range.h>
+#include <lts/range/init.h>
 
 #include <lua.h>
 #include <lauxlib.h>

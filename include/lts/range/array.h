@@ -8,8 +8,8 @@
 
 #include <stdint.h>
 
-#define LTS_RANGE_ARRAY_FUNCTABLE_NAME "RangeArray"
-#define LTS_RANGE_ARRAY_METATABLE_NAME "tree_sitter.RangeArray"
+#define LTS_RANGE_ARRAY_FUNCTABLE_NAME "Array"
+#define LTS_RANGE_ARRAY_METATABLE_NAME "tree_sitter.Range.Array"
 
 typedef struct {
 	TSRange *ptr;

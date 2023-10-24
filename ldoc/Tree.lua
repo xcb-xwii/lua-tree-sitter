@@ -29,7 +29,7 @@ function Tree:language() end
 
 ---
 -- Get the array of included ranges that was used to parse the syntax tree.
--- @treturn RangeArray
+-- @treturn Range.Array
 -- @see Parser:set_included_ranges
 function Tree:included_ranges() end
 

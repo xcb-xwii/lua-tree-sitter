@@ -10,8 +10,8 @@
 #include <lts/language.h>
 #include <lts/node.h>
 #include <lts/point.h>
-#include <lts/range.h>
-#include <lts/range_array.h>
+#include <lts/range/init.h>
+#include <lts/range/array.h>
 #include <lts/util.h>
 
 void LTS_push_tree(lua_State *L, TSTree *target) {

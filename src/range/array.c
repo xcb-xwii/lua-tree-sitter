@@ -1,4 +1,4 @@
-#include <lts/range_array.h>
+#include <lts/range/array.h>
 
 #include <lua.h>
 #include <lauxlib.h>
@@ -7,7 +7,7 @@
 
 #include <string.h>
 
-#include <lts/range.h>
+#include <lts/range/init.h>
 #include <lts/util.h>
 
 void LTS_push_range_array(lua_State *L, LTS_RangeArray target) {

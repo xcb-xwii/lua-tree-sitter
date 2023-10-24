@@ -29,7 +29,7 @@ function Parser:set_language(lang) end
 
 ---
 -- Get the parser's included ranges.
--- @treturn RangeArray
+-- @treturn Range.Array
 function Parser:included_ranges() end
 
 ---
@@ -38,7 +38,7 @@ function Parser:included_ranges() end
 -- Passing `nil` or an empty table makes the parser include the entire document.
 --
 -- The given ranges must be sorted in ascending order, and be non-overlapping.
--- @tparam RangeArray ranges
+-- @tparam Range.Array ranges
 -- @raise Ranges are not in ascending order and non-overlapping.
 function Parser:set_included_ranges(ranges) end
 

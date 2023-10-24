@@ -10,7 +10,7 @@
 
 #include <lts/language.h>
 #include <lts/point.h>
-#include <lts/range_array.h>
+#include <lts/range/array.h>
 #include <lts/tree.h>
 #include <lts/util.h>
 
