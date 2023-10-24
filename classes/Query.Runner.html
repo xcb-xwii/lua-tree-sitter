@@ -1,0 +1,224 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>lua-tree-sitter Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>lua-tree-sitter</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions </a></li>
+<li><a href="#Methods">Methods </a></li>
+</ul>
+
+
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><a href="../classes/Language.html">Language</a></li>
+  <li><a href="../classes/Node.html">Node</a></li>
+  <li><a href="../classes/Parser.html">Parser</a></li>
+  <li><a href="../classes/Point.html">Point</a></li>
+  <li><a href="../classes/Query.html">Query</a></li>
+  <li><a href="../classes/Query.Capture.html">Query.Capture</a></li>
+  <li><a href="../classes/Query.CaptureSet.html">Query.CaptureSet</a></li>
+  <li><a href="../classes/Query.Cursor.html">Query.Cursor</a></li>
+  <li><a href="../classes/Query.Match.html">Query.Match</a></li>
+  <li><strong>Query.Runner</strong></li>
+  <li><a href="../classes/Range.html">Range</a></li>
+  <li><a href="../classes/RangeArray.html">RangeArray</a></li>
+  <li><a href="../classes/Tree.html">Tree</a></li>
+</ul>
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/tree_sitter.html">tree_sitter</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Class <code>Query.Runner</code></h1>
+<p>Runs <a href="../classes/Query.html#">Query</a>s with support for predicates.</p>
+<p>
+
+</p>
+
+
+<h2><a href="#Functions">Functions </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Runner.new">Runner.new (predicates, setup)</a></td>
+	<td class="summary">Create a new runner with a given set of predicates.</td>
+	</tr>
+</table>
+<h2><a href="#Methods">Methods </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Runner:matches">Runner:matches (cursor)</a></td>
+	<td class="summary">Iterate over the <a href="../classes/Query.Match.html">Match</a>es of a cursor, executing predicates.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Runner:captures">Runner:captures (cursor)</a></td>
+	<td class="summary">Uterate over the <a href="../classes/Query.Capture.html">Capture</a>s of a cursor, executing predicates.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Runner.new"></a>
+    <strong>Runner.new (predicates, setup)</strong>
+    </dt>
+    <dd>
+    Create a new runner with a given set of predicates. </p>
+
+<p> Predicates are functions that take a variable number of parameters of type
+ <a href="../classes/Query.CaptureSet.html">CaptureSet</a> or <a href="https://www.lua.org/manual/5.4/manual.html#6.4">string</a>.</p>
+
+<p> Currently, predicates' return values are ignored and discarded, unless the
+ name of the predicate ends with '<code>?</code>'. In this case, falsey values
+ short-circuit the execution of further predicates and causes the
+ corresponding <a href="../classes/Query.Match.html">Match</a> or <a href="../classes/Query.Capture.html">Capture</a> to be skipped.</p>
+
+<p> If results of predicates need to be saved, it is recommended to use closures
+ with side-effects for these predicates.</p>
+
+<p> The <code>setup</code> function is ran before executing the predicates of a <a href="../classes/Query.Match.html">Match</a> or
+ <a href="../classes/Query.Capture.html">Capture</a>. This may be useful to ensure side-effects of skipped items are
+ erased. It is not ran if there are no predicates.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">predicates</span>
+            <span class="types"><span class="type">{string:function(...)}</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">setup</span>
+            <span class="types">optional <span class="type">function()</span></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Query.Runner.html">Runner</a></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Methods"></a>Methods </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Runner:matches"></a>
+    <strong>Runner:matches (cursor)</strong>
+    </dt>
+    <dd>
+    Iterate over the <a href="../classes/Query.Match.html">Match</a>es of a cursor, executing predicates.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">cursor</span>
+            <span class="types"><a class="type" href="../classes/Query.Cursor.html">Cursor</a></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">function():Match</span></span>
+        iterator
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Runner:captures"></a>
+    <strong>Runner:captures (cursor)</strong>
+    </dt>
+    <dd>
+    Uterate over the <a href="../classes/Query.Capture.html">Capture</a>s of a cursor, executing predicates.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">cursor</span>
+            <span class="types"><span class="type">cursor</span></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">function():Capture</span></span>
+        iterator
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/LDoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2023-10-24 08:21:47 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

@@ -1,0 +1,324 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>lua-tree-sitter Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>lua-tree-sitter</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Methods">Methods </a></li>
+</ul>
+
+
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><a href="../classes/Language.html">Language</a></li>
+  <li><a href="../classes/Node.html">Node</a></li>
+  <li><a href="../classes/Parser.html">Parser</a></li>
+  <li><a href="../classes/Point.html">Point</a></li>
+  <li><a href="../classes/Query.html">Query</a></li>
+  <li><a href="../classes/Query.Capture.html">Query.Capture</a></li>
+  <li><strong>Query.CaptureSet</strong></li>
+  <li><a href="../classes/Query.Cursor.html">Query.Cursor</a></li>
+  <li><a href="../classes/Query.Match.html">Query.Match</a></li>
+  <li><a href="../classes/Query.Runner.html">Query.Runner</a></li>
+  <li><a href="../classes/Range.html">Range</a></li>
+  <li><a href="../classes/RangeArray.html">RangeArray</a></li>
+  <li><a href="../classes/Tree.html">Tree</a></li>
+</ul>
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/tree_sitter.html">tree_sitter</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Class <code>Query.CaptureSet</code></h1>
+<p>A set of <a href="../classes/Query.Capture.html">Capture</a>s provided to predicates.</p>
+<p>
+
+</p>
+
+
+<h2><a href="#Methods">Methods </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#CaptureSet:index">CaptureSet:index ()</a></td>
+	<td class="summary">Get the index of the captures.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CaptureSet:match">CaptureSet:match ()</a></td>
+	<td class="summary">Get the <code>QueryMatch</code> the captures belongs to.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CaptureSet:name">CaptureSet:name ()</a></td>
+	<td class="summary">Get the name of the captures.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CaptureSet:quantifier">CaptureSet:quantifier ()</a></td>
+	<td class="summary">Get the quantifier of the captures.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CaptureSet:one_capture">CaptureSet:one_capture ()</a></td>
+	<td class="summary">Get one capture.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CaptureSet:one_node">CaptureSet:one_node ()</a></td>
+	<td class="summary">Get one node.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CaptureSet:captures_to_table">CaptureSet:captures_to_table ()</a></td>
+	<td class="summary">Get all the captures in the set in a table.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CaptureSet:nodes_to_table">CaptureSet:nodes_to_table ()</a></td>
+	<td class="summary">Get all the nodes in the set in a table.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Methods"></a>Methods </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "CaptureSet:index"></a>
+    <strong>CaptureSet:index ()</strong>
+    </dt>
+    <dd>
+    Get the index of the captures.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">integer</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CaptureSet:match"></a>
+    <strong>CaptureSet:match ()</strong>
+    </dt>
+    <dd>
+    Get the <code>QueryMatch</code> the captures belongs to.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Query.Match.html">Match</a></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CaptureSet:name"></a>
+    <strong>CaptureSet:name ()</strong>
+    </dt>
+    <dd>
+    Get the name of the captures.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.4/manual.html#6.4">string</a></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CaptureSet:quantifier"></a>
+    <strong>CaptureSet:quantifier ()</strong>
+    </dt>
+    <dd>
+
+<p>Get the quantifier of the captures. </p>
+
+<p> The quantifier can be one of 5 values:</p>
+
+<ol>
+    <li><p>"Zero"</p></li>
+    <li><p>"ZeroOrOne"</p></li>
+    <li><p>"One"</p></li>
+    <li><p>"ZeroOrMore"</p></li>
+    <li><p>"OneOrMore"</p></li>
+</ol>
+
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.4/manual.html#6.4">string</a></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CaptureSet:one_capture"></a>
+    <strong>CaptureSet:one_capture ()</strong>
+    </dt>
+    <dd>
+    Get one capture. </p>
+
+<p> This is useful when there are only 0 or 1 captures in the set.</p>
+
+<p> If you only need the node, which is the usual use-case, use <a href="../classes/Query.CaptureSet.html#CaptureSet:one_node">one_node</a>
+ instead.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Query.Capture.html">Capture</a> or <span class="type">nil</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CaptureSet:one_node"></a>
+    <strong>CaptureSet:one_node ()</strong>
+    </dt>
+    <dd>
+    Get one node. </p>
+
+<p> This is useful when there are only 0 or 1 captures in the set.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Node.html#">Node</a> or <span class="type">nil</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CaptureSet:captures_to_table"></a>
+    <strong>CaptureSet:captures_to_table ()</strong>
+    </dt>
+    <dd>
+    Get all the captures in the set in a table. </p>
+
+<p> If you only need the nodes, which is the usual use-case, use
+ <a href="../classes/Query.CaptureSet.html#CaptureSet:nodes_to_table">nodes_to_table</a> instead.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Query.Capture.html">{Capture}</a></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CaptureSet:nodes_to_table"></a>
+    <strong>CaptureSet:nodes_to_table ()</strong>
+    </dt>
+    <dd>
+    Get all the nodes in the set in a table.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Node.html#">{Node}</a></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/LDoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2023-10-24 08:21:47 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
