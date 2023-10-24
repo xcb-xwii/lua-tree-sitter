@@ -28,6 +28,21 @@ function Parser:language() end
 function Parser:set_language(lang) end
 
 ---
+-- Get the parser's included ranges.
+-- @treturn RangeArray
+function Parser:included_ranges() end
+
+---
+-- Set the parser's included ranges.
+--
+-- Passing `nil` or an empty table makes the parser include the entire document.
+--
+-- The given ranges must be sorted in ascending order, and be non-overlapping.
+-- @tparam RangeArray ranges
+-- @raise Ranges are not in ascending order and non-overlapping.
+function Parser:set_included_ranges(ranges) end
+
+---
 -- Use the parser to parse some source code and create a syntax tree.
 --
 -- If you are parsing this document for the first time, pass `nil` for the
@@ -37,14 +52,17 @@ function Parser:set_language(lang) end
 -- For this to work correctly, you must have already edited the old syntax tree
 -- using `Tree:edit` so that it matches the source code changes.
 --
--- The reader function takes a byte offset and a `Point`,
--- and returns a a chunk of text that starts at the point given.
--- Return an empty `string` or `nil` to signal end of the document.
+-- The reader function takes a byte offset and a `Point`, and returns a `string`
+-- containing the text inside the document at the position specified.
 --
--- If your reader function has to take the substring of a larger string,
--- consider using `parse_`.
+-- An optional `integer` offset can be returned, such that
+-- `return text:sub(n)` is equivalent to `return text, n`. The latter is faster.
+-- The implementation handles negative indices the same way as `string:sub`.
+--
+-- Return an empty `string` or `nil` to signal end of the document. Note that
+-- if `n > #text`, it is counted as an empty `string`.
 -- @tparam Tree old_tree edited syntax tree
--- @tparam function(integer,Point):string read reader function
+-- @tparam function(integer,Point):string,integer read reader function
 -- @treturn Tree
 function Parser:parse(old_tree, read) end
 

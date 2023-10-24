@@ -5,8 +5,12 @@
 
 #include <tree_sitter/api.h>
 
+#include <stdint.h>
+#include <string.h>
+
 #include <lts/language.h>
 #include <lts/point.h>
+#include <lts/range_array.h>
 #include <lts/tree.h>
 #include <lts/util.h>
 
@@ -49,10 +53,40 @@ static int LTS_parser_set_language(lua_State *L) {
 	return 1;
 }
 
+static int LTS_parser_included_ranges(lua_State *L) {
+	TSParser *self = *LTS_check_parser(L, 1);
+
+	uint32_t len;
+	const TSRange *ranges_unowned = ts_parser_included_ranges(self, &len);
+	TSRange *ranges = malloc(len * sizeof(TSRange));
+	memcpy(ranges, ranges_unowned, len * sizeof(TSRange));
+
+	LTS_push_range_array(L, (LTS_RangeArray) {
+		.ptr = ranges,
+		.elem_count = len,
+	});
+	return 1;
+}
+
+static int LTS_parser_set_included_ranges(lua_State *L) {
+	TSParser *self = *LTS_check_parser(L, 1);
+	LTS_RangeArray ranges;
+	if (lua_gettop(L) < 2 || lua_isnil(L, 2)) {
+		ranges = (LTS_RangeArray) { .ptr = NULL, .elem_count = 0 };
+	} else {
+		ranges = *LTS_check_range_array(L, 2);
+	}
+
+	bool ok = ts_parser_set_included_ranges(self, ranges.ptr, ranges.elem_count);
+	if (!ok) luaL_error(L, "ranges are not in ascending order and non-overlapping");
+	return 0;
+}
+
 typedef enum {
 	LTS_INPUT_OK,
 	LTS_INPUT_RTERROR,
-	LTS_INPUT_RETTYPE,
+	LTS_INPUT_RETTYPE_1,
+	LTS_INPUT_RETTYPE_2
 } InputStatus;
 
 typedef struct {
@@ -72,27 +106,48 @@ static const char *read(
 	lua_pushvalue(L, -1);
 	lua_pushinteger(L, byte_index);
 	LTS_push_point(L, position);
-	if (lua_pcall(L, 2, 1, 0) != 0) {
+	if (lua_pcall(L, 2, 2, 0) != 0) {
 		ctx->status = LTS_INPUT_RTERROR;
 		goto fail;
 	}
 
-	if (lua_isnil(L, -1)) {
-		lua_pop(L, 1);
+	switch (lua_type(L, -2)) {
+	case LUA_TNIL:
+		goto fail;
+	
+	case LUA_TSTRING:
+		break;
+
+	default:
+		ctx->status = LTS_INPUT_RETTYPE_1;
 		goto fail;
 	}
 
-	if (lua_type(L, -1) != LUA_TSTRING) {
-		ctx->status = LTS_INPUT_RETTYPE;
+	size_t offset;
+	switch (lua_type(L, -1)) {
+	case LUA_TNIL:
+		offset = 1;
+		break;
+	
+	case LUA_TNUMBER:
+		offset = lua_tointeger(L, -1);
+		break;
+	
+	default:
+		ctx->status = LTS_INPUT_RETTYPE_2;
 		goto fail;
 	}
 
 	size_t len;
-	const char *str = lua_tolstring(L, -1, &len);
-	*bytes_read = len;
-	lua_pop(L, 1);
+	const char *str = lua_tolstring(L, -2, &len);
+	lua_pop(L, 2);
 
-	return str;
+	if (offset > len) goto fail;
+	if (offset < 1) offset += len + 1;
+	if (offset < 1) offset = 1;
+
+	*bytes_read = len - offset + 1;
+	return str + offset - 1;
 
 fail:
 	*bytes_read = 0;
@@ -125,10 +180,17 @@ static int LTS_parser_parse(lua_State *L) {
 			lua_tostring(L, -1)
 		);
 
-	case LTS_INPUT_RETTYPE:
+	case LTS_INPUT_RETTYPE_1:
 		ts_tree_delete(tree);
 		return luaL_error(L,
-			"bad return value from read function (string expected, got %s)",
+			"bad return value #1 from read function (string expected, got %s)",
+			lua_typename(L, lua_type(L, -2))
+		);
+
+	case LTS_INPUT_RETTYPE_2:
+		ts_tree_delete(tree);
+		return luaL_error(L,
+			"bad return value #2 from read function (integer expected, got %s)",
 			lua_typename(L, lua_type(L, -1))
 		);
 
@@ -158,8 +220,8 @@ static int LTS_parser_parse_string(lua_State *L) {
 static const luaL_Reg methods[] = {
 	{ "language", LTS_parser_language },
 	{ "set_language", LTS_parser_set_language },
-	//{ "included_ranges", LTS_parser_included_ranges },
-	//{ "set_included_ranges", LTS_parser_set_included_ranges },
+	{ "included_ranges", LTS_parser_included_ranges },
+	{ "set_included_ranges", LTS_parser_set_included_ranges },
 	{ "parse", LTS_parser_parse },
 	{ "parse_string", LTS_parser_parse_string },
 };
