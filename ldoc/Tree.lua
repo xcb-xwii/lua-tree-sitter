@@ -22,6 +22,14 @@ function Tree:copy() end
 function Tree:root_node() end
 
 ---
+-- Get the root node of the syntax tree, with its position shifted forward
+-- by the given offset.
+-- @tparam integer byte_offset
+-- @tparam Point point_offset
+-- @treturn Node
+function Tree:root_node() end
+
+---
 -- Get the language that was used to parse the syntax tree.
 -- @treturn Language
 -- @see Parser:set_language

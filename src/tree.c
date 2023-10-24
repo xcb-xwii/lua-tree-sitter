@@ -45,6 +45,15 @@ static int LTS_tree_root_node(lua_State *L) {
 	return 1;
 }
 
+static int LTS_tree_root_node_with_offset(lua_State *L) {
+	TSTree *self = *LTS_check_tree(L, 1);
+	uint32_t byte_offest = luaL_checkinteger(L, 2);
+	TSPoint point_offset = *LTS_check_point(L, 3);
+
+	LTS_push_node(L, ts_tree_root_node_with_offset(self, byte_offest, point_offset), 1);
+	return 1;
+}
+
 static int LTS_tree_language(lua_State *L) {
 	TSTree *self = *LTS_check_tree(L, 1);
 
@@ -95,11 +104,10 @@ static int LTS_tree_get_changed_ranges(lua_State *L) {
 static const luaL_Reg methods[] = {
 	{ "copy", LTS_tree_copy },
 	{ "root_node", LTS_tree_root_node },
-	//{ "root_node_with_offset", LTS_tree_root_node_with_offset },
+	{ "root_node_with_offset", LTS_tree_root_node_with_offset },
 	{ "language", LTS_tree_language },
 	{ "included_ranges", LTS_tree_included_ranges },
 	{ "edit", LTS_tree_edit },
-	//{ "print_dot_graph", LTS_tree_print_dot_graph },
 	{ NULL, NULL }
 };
 

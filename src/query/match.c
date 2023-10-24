@@ -75,13 +75,24 @@ static int LTS_query_match_query(lua_State *L) {
 	return 1;
 }
 
+static int LTS_query_match_captures_to_table(lua_State *L) {
+	LTS_QueryMatch self = *LTS_check_lts_query_match(L, 1);
+
+	TSQueryMatch match = self.match;
+	lua_settop(L, 1);
+	lua_createtable(L, self.match.capture_count, 0);
+	for (uint16_t i = 0; i < self.match.capture_count; i++) {
+		LTS_push_query_capture(L, match.captures[i], 1);
+		lua_rawseti(L, -2, i + 1);
+	}
+	return 1;
+}
+
 static const luaL_Reg methods[] = {
-	//{ "unpack", LTS_query_match_unpack },
-	//{ "to_table", LTS_query_match_to_table },
 	{ "pattern_index", LTS_query_match_pattern_index },
 	{ "capture_count", LTS_query_match_capture_count },
 	{ "capture_at", LTS_query_match_capture_at },
-	//{ "captures_to_table", LTS_query_match_captures_to_table },
+	{ "captures_to_table", LTS_query_match_captures_to_table },
 	{ "query", LTS_query_match_query },
 	{ NULL, NULL }
 };
