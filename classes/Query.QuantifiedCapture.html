@@ -45,9 +45,9 @@
   <li><a href="../classes/Point.html">Point</a></li>
   <li><a href="../classes/Query.html">Query</a></li>
   <li><a href="../classes/Query.Capture.html">Query.Capture</a></li>
-  <li><strong>Query.CaptureSet</strong></li>
   <li><a href="../classes/Query.Cursor.html">Query.Cursor</a></li>
   <li><a href="../classes/Query.Match.html">Query.Match</a></li>
+  <li><strong>Query.QuantifiedCapture</strong></li>
   <li><a href="../classes/Query.Runner.html">Query.Runner</a></li>
   <li><a href="../classes/Range.html">Range</a></li>
   <li><a href="../classes/Range.Array.html">Range.Array</a></li>
@@ -62,8 +62,8 @@
 
 <div id="content">
 
-<h1>Class <code>Query.CaptureSet</code></h1>
-<p>A set of <a href="../classes/Query.Capture.html#">Query.Capture</a>s provided to predicates.</p>
+<h1>Class <code>Query.QuantifiedCapture</code></h1>
+<p>A quantified set of <a href="../classes/Query.Capture.html#">Query.Capture</a>s provided to predicates.</p>
 <p>
 
 </p>
@@ -72,35 +72,35 @@
 <h2><a href="#Methods">Methods </a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" ><a href="#CaptureSet:index">CaptureSet:index ()</a></td>
+	<td class="name" ><a href="#QuantifiedCapture:index">QuantifiedCapture:index ()</a></td>
 	<td class="summary">Get the index of the captures.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#CaptureSet:match">CaptureSet:match ()</a></td>
+	<td class="name" ><a href="#QuantifiedCapture:match">QuantifiedCapture:match ()</a></td>
 	<td class="summary">Get the <code>QueryMatch</code> the captures belongs to.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#CaptureSet:name">CaptureSet:name ()</a></td>
+	<td class="name" ><a href="#QuantifiedCapture:name">QuantifiedCapture:name ()</a></td>
 	<td class="summary">Get the name of the captures.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#CaptureSet:quantifier">CaptureSet:quantifier ()</a></td>
+	<td class="name" ><a href="#QuantifiedCapture:quantifier">QuantifiedCapture:quantifier ()</a></td>
 	<td class="summary">Get the quantifier of the captures.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#CaptureSet:one_capture">CaptureSet:one_capture ()</a></td>
+	<td class="name" ><a href="#QuantifiedCapture:one_capture">QuantifiedCapture:one_capture ()</a></td>
 	<td class="summary">Get one capture.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#CaptureSet:one_node">CaptureSet:one_node ()</a></td>
+	<td class="name" ><a href="#QuantifiedCapture:one_node">QuantifiedCapture:one_node ()</a></td>
 	<td class="summary">Get one node.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#CaptureSet:captures_to_table">CaptureSet:captures_to_table ()</a></td>
+	<td class="name" ><a href="#QuantifiedCapture:captures">QuantifiedCapture:captures ()</a></td>
 	<td class="summary">Get all the captures in the set in a table.</td>
 	</tr>
 	<tr>
-	<td class="name" ><a href="#CaptureSet:nodes_to_table">CaptureSet:nodes_to_table ()</a></td>
+	<td class="name" ><a href="#QuantifiedCapture:nodes">QuantifiedCapture:nodes ()</a></td>
 	<td class="summary">Get all the nodes in the set in a table.</td>
 	</tr>
 </table>
@@ -113,8 +113,8 @@
 
     <dl class="function">
     <dt>
-    <a name = "CaptureSet:index"></a>
-    <strong>CaptureSet:index ()</strong>
+    <a name = "QuantifiedCapture:index"></a>
+    <strong>QuantifiedCapture:index ()</strong>
     </dt>
     <dd>
     Get the index of the captures.
@@ -135,8 +135,8 @@
 
 </dd>
     <dt>
-    <a name = "CaptureSet:match"></a>
-    <strong>CaptureSet:match ()</strong>
+    <a name = "QuantifiedCapture:match"></a>
+    <strong>QuantifiedCapture:match ()</strong>
     </dt>
     <dd>
     Get the <code>QueryMatch</code> the captures belongs to.
@@ -157,8 +157,8 @@
 
 </dd>
     <dt>
-    <a name = "CaptureSet:name"></a>
-    <strong>CaptureSet:name ()</strong>
+    <a name = "QuantifiedCapture:name"></a>
+    <strong>QuantifiedCapture:name ()</strong>
     </dt>
     <dd>
     Get the name of the captures.
@@ -179,8 +179,8 @@
 
 </dd>
     <dt>
-    <a name = "CaptureSet:quantifier"></a>
-    <strong>CaptureSet:quantifier ()</strong>
+    <a name = "QuantifiedCapture:quantifier"></a>
+    <strong>QuantifiedCapture:quantifier ()</strong>
     </dt>
     <dd>
 
@@ -213,15 +213,15 @@
 
 </dd>
     <dt>
-    <a name = "CaptureSet:one_capture"></a>
-    <strong>CaptureSet:one_capture ()</strong>
+    <a name = "QuantifiedCapture:one_capture"></a>
+    <strong>QuantifiedCapture:one_capture ()</strong>
     </dt>
     <dd>
     Get one capture. </p>
 
 <p> This is useful when there are only 0 or 1 captures in the set.</p>
 
-<p> If you only need the node, which is the usual use-case, use <a href="../classes/Query.CaptureSet.html#CaptureSet:one_node">one_node</a>
+<p> If you only need the node, which is the usual use-case, use <a href="../classes/Query.QuantifiedCapture.html#QuantifiedCapture:one_node">one_node</a>
  instead.
 
 
@@ -240,8 +240,8 @@
 
 </dd>
     <dt>
-    <a name = "CaptureSet:one_node"></a>
-    <strong>CaptureSet:one_node ()</strong>
+    <a name = "QuantifiedCapture:one_node"></a>
+    <strong>QuantifiedCapture:one_node ()</strong>
     </dt>
     <dd>
     Get one node. </p>
@@ -264,14 +264,14 @@
 
 </dd>
     <dt>
-    <a name = "CaptureSet:captures_to_table"></a>
-    <strong>CaptureSet:captures_to_table ()</strong>
+    <a name = "QuantifiedCapture:captures"></a>
+    <strong>QuantifiedCapture:captures ()</strong>
     </dt>
     <dd>
     Get all the captures in the set in a table. </p>
 
 <p> If you only need the nodes, which is the usual use-case, use
- <a href="../classes/Query.CaptureSet.html#CaptureSet:nodes_to_table">nodes_to_table</a> instead.
+ <a href="../classes/Query.QuantifiedCapture.html#QuantifiedCapture:nodes">nodes</a> instead.
 
 
 
@@ -289,8 +289,8 @@
 
 </dd>
     <dt>
-    <a name = "CaptureSet:nodes_to_table"></a>
-    <strong>CaptureSet:nodes_to_table ()</strong>
+    <a name = "QuantifiedCapture:nodes"></a>
+    <strong>QuantifiedCapture:nodes ()</strong>
     </dt>
     <dd>
     Get all the nodes in the set in a table.
@@ -317,7 +317,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/lunarmodules/LDoc">LDoc 1.5.0</a></i>
-<i style="float:right;">Last updated 2023-10-24 14:38:56 </i>
+<i style="float:right;">Last updated 2023-10-26 18:37:19 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
