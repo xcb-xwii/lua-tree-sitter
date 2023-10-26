@@ -1,6 +1,6 @@
 ---
--- A set of `Query.Capture`s provided to predicates.
--- @classmod Query.CaptureSet
+-- A quantified set of `Query.Capture`s provided to predicates.
+-- @classmod Query.QuantifiedCapture
 -- @pragma nostrip
 
 ---
@@ -10,17 +10,17 @@
 ---
 -- Get the index of the captures.
 -- @treturn integer
-function CaptureSet:index() end
+function QuantifiedCapture:index() end
 
 ---
 -- Get the `QueryMatch` the captures belongs to.
 -- @treturn Match
-function CaptureSet:match() end
+function QuantifiedCapture:match() end
 
 ---
 -- Get the name of the captures.
 -- @treturn string
-function CaptureSet:name() end
+function QuantifiedCapture:name() end
 
 ---
 -- Get the quantifier of the captures.
@@ -37,7 +37,7 @@ function CaptureSet:name() end
 --
 -- 5. "OneOrMore"
 -- @treturn string
-function CaptureSet:quantifier() end
+function QuantifiedCapture:quantifier() end
 
 ---
 -- Get one capture.
@@ -47,24 +47,24 @@ function CaptureSet:quantifier() end
 -- If you only need the node, which is the usual use-case, use `one_node`
 -- instead.
 -- @treturn Capture|nil
-function CaptureSet:one_capture() end
+function QuantifiedCapture:one_capture() end
 
 ---
 -- Get one node.
 --
 -- This is useful when there are only 0 or 1 captures in the set.
 -- @treturn Node|nil
-function CaptureSet:one_node() end
+function QuantifiedCapture:one_node() end
 
 ---
 -- Get all the captures in the set in a table.
 --
 -- If you only need the nodes, which is the usual use-case, use
--- `nodes_to_table` instead.
+-- `nodes` instead.
 -- @treturn {Capture}
-function CaptureSet:captures_to_table() end
+function QuantifiedCapture:captures() end
 
 ---
 -- Get all the nodes in the set in a table.
 -- @treturn {Node}
-function CaptureSet:nodes_to_table() end
+function QuantifiedCapture:nodes() end

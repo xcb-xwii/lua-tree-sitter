@@ -7,7 +7,7 @@
 
 #include <lts/query/init.h>
 #include <lts/query/capture.h>
-#include <lts/query/capture_set.h>
+#include <lts/query/quantified_capture.h>
 #include <lts/query/cursor.h>
 #include <lts/query/match.h>
 #include <lts/node.h>
@@ -101,7 +101,7 @@ static bool run_predicates(
 			TSQueryPredicateStep step = steps[i];
 			switch (step.type) {
 			case TSQueryPredicateStepTypeCapture:
-				LTS_push_query_capture_set(L, step.value_id, match_idx);
+				LTS_push_query_quantified_capture(L, step.value_id, match_idx);
 				break;
 
 			case TSQueryPredicateStepTypeString:
@@ -157,7 +157,7 @@ static int next_match(lua_State *L) {
 	return 1;
 }
 
-static int LTS_query_runner_matches(lua_State *L) {
+static int LTS_query_runner_iter_matches(lua_State *L) {
 	LTS_QueryRunner self = *LTS_check_query_runner(L, 1);
 	luaL_checkudata(L, 2, LTS_QUERY_CURSOR_METATABLE_NAME);
 
@@ -193,7 +193,7 @@ static int next_capture(lua_State *L) {
 	return 1;
 }
 
-static int LTS_query_runner_captures(lua_State *L) {
+static int LTS_query_runner_iter_captures(lua_State *L) {
 	LTS_QueryRunner self = *LTS_check_query_runner(L, 1);
 	luaL_checkudata(L, 2, LTS_QUERY_CURSOR_METATABLE_NAME);
 
@@ -206,8 +206,8 @@ static int LTS_query_runner_captures(lua_State *L) {
 }
 
 static const luaL_Reg methods[] = {
-	{ "matches", LTS_query_runner_matches },
-	{ "captures", LTS_query_runner_captures },
+	{ "iter_matches", LTS_query_runner_iter_matches },
+	{ "iter_captures", LTS_query_runner_iter_captures },
 	{ NULL, NULL }
 };
 

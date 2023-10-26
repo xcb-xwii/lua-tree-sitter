@@ -1,4 +1,4 @@
-#include <lts/query/capture_set.h>
+#include <lts/query/quantified_capture.h>
 
 #include <lua.h>
 #include <lauxlib.h>
@@ -12,8 +12,8 @@
 #include <lts/query/match.h>
 #include <lts/util.h>
 
-void LTS_push_query_capture_set(lua_State *L, int capture_id, int match_idx) {
-	LTS_QueryCaptureSet *ud = lua_newuserdata(L, sizeof *ud);
+void LTS_push_query_quantified_capture(lua_State *L, int capture_id, int match_idx) {
+	LTS_QueryQuantifiedCapture *ud = lua_newuserdata(L, sizeof *ud);
 	ud->capture_id = capture_id;
 
 	LTS_QueryMatch *match = lua_touserdata(L, match_idx);
@@ -27,43 +27,43 @@ void LTS_push_query_capture_set(lua_State *L, int capture_id, int match_idx) {
 		capture_id
 	);
 
-	LTS_util_set_metatable(L, LTS_QUERY_CAPTURE_SET_METATABLE_NAME);
+	LTS_util_set_metatable(L, LTS_QUERY_QUANTIFIED_CAPTURE_METATABLE_NAME);
 }
 
-LTS_QueryCaptureSet *LTS_check_query_capture_set(lua_State *L, int idx) {
-	return luaL_checkudata(L, idx, LTS_QUERY_CAPTURE_SET_METATABLE_NAME);
+LTS_QueryQuantifiedCapture *LTS_check_query_quantified_capture(lua_State *L, int idx) {
+	return luaL_checkudata(L, idx, LTS_QUERY_QUANTIFIED_CAPTURE_METATABLE_NAME);
 }
 
-static int LTS_query_capture_set_delete(lua_State *L) {
-	LTS_QueryCaptureSet self = *LTS_log_gc(LTS_check_query_capture_set(L, 1), LTS_QUERY_CAPTURE_SET_METATABLE_NAME);
+static int LTS_query_quantified_capture_delete(lua_State *L) {
+	LTS_QueryQuantifiedCapture self = *LTS_log_gc(LTS_check_query_quantified_capture(L, 1), LTS_QUERY_QUANTIFIED_CAPTURE_METATABLE_NAME);
 	
 	luaL_unref(L, LUA_REGISTRYINDEX, self.match_ref);
 	return 0;
 }
 
-static int LTS_query_capture_set_index(lua_State *L) {
-	LTS_QueryCaptureSet self = *LTS_check_query_capture_set(L, 1);
+static int LTS_query_quantified_capture_index(lua_State *L) {
+	LTS_QueryQuantifiedCapture self = *LTS_check_query_quantified_capture(L, 1);
 	
 	lua_pushinteger(L, self.capture_id);
 	return 1;
 }
 
-static int LTS_query_capture_set_match(lua_State *L) {
-	LTS_QueryCaptureSet self = *LTS_check_query_capture_set(L, 1);
+static int LTS_query_quantified_capture_match(lua_State *L) {
+	LTS_QueryQuantifiedCapture self = *LTS_check_query_quantified_capture(L, 1);
 
 	lua_rawgeti(L, LUA_REGISTRYINDEX, self.match_ref);
 	return 1;
 }
 
-static int LTS_query_capture_set_name(lua_State *L) {
-	LTS_QueryCaptureSet self = *LTS_check_query_capture_set(L, 1);
+static int LTS_query_quantified_capture_name(lua_State *L) {
+	LTS_QueryQuantifiedCapture self = *LTS_check_query_quantified_capture(L, 1);
 
 	LTS_push_query_capture_name_for_id(*self.match->cursor->query, self.capture_id);
 	return 1;
 }
 
-static int LTS_query_capture_set_quantifier(lua_State *L) {
-	LTS_QueryCaptureSet self = *LTS_check_query_capture_set(L, 1);
+static int LTS_query_quantified_capture_quantifier(lua_State *L) {
+	LTS_QueryQuantifiedCapture self = *LTS_check_query_quantified_capture(L, 1);
 
 	switch (self.quantifier) {
 	case TSQuantifierZero:
@@ -85,8 +85,8 @@ static int LTS_query_capture_set_quantifier(lua_State *L) {
 	return 1;
 }
 
-static int LTS_query_capture_set_one_capture(lua_State *L) {
-	LTS_QueryCaptureSet self = *LTS_check_query_capture_set(L, 1);
+static int LTS_query_quantified_capture_one_capture(lua_State *L) {
+	LTS_QueryQuantifiedCapture self = *LTS_check_query_quantified_capture(L, 1);
 
 	if (self.quantifier == TSQuantifierZero) {
 		lua_pushnil(L);
@@ -106,8 +106,8 @@ static int LTS_query_capture_set_one_capture(lua_State *L) {
 	return 1;
 }
 
-static int LTS_query_capture_set_one_node(lua_State *L) {
-	LTS_QueryCaptureSet self = *LTS_check_query_capture_set(L, 1);
+static int LTS_query_quantified_capture_one_node(lua_State *L) {
+	LTS_QueryQuantifiedCapture self = *LTS_check_query_quantified_capture(L, 1);
 
 	if (self.quantifier == TSQuantifierZero) {
 		lua_pushnil(L);
@@ -127,8 +127,8 @@ static int LTS_query_capture_set_one_node(lua_State *L) {
 	return 1;
 }
 
-static int LTS_query_capture_set_captures_to_table(lua_State *L) {
-	LTS_QueryCaptureSet self = *LTS_check_query_capture_set(L, 1);
+static int LTS_query_quantified_capture_captures(lua_State *L) {
+	LTS_QueryQuantifiedCapture self = *LTS_check_query_quantified_capture(L, 1);
 
 	TSQueryMatch match = self.match->match;
 	uint16_t count = 0;
@@ -148,8 +148,8 @@ static int LTS_query_capture_set_captures_to_table(lua_State *L) {
 	return 1;
 }
 
-static int LTS_query_capture_set_nodes_to_table(lua_State *L) {
-	LTS_QueryCaptureSet self = *LTS_check_query_capture_set(L, 1);
+static int LTS_query_quantified_capture_nodes(lua_State *L) {
+	LTS_QueryQuantifiedCapture self = *LTS_check_query_quantified_capture(L, 1);
 
 	TSQueryMatch match = self.match->match;
 	uint16_t count = 0;
@@ -170,22 +170,22 @@ static int LTS_query_capture_set_nodes_to_table(lua_State *L) {
 }
 
 static const luaL_Reg methods[] = {
-	{ "index", LTS_query_capture_set_index },
-	{ "match", LTS_query_capture_set_match },
-	{ "name", LTS_query_capture_set_name },
-	{ "quantifier", LTS_query_capture_set_quantifier },
-	{ "one_capture", LTS_query_capture_set_one_capture },
-	{ "one_node", LTS_query_capture_set_one_node },
-	{ "captures_to_table", LTS_query_capture_set_captures_to_table },
-	{ "nodes_to_table", LTS_query_capture_set_nodes_to_table },
+	{ "index", LTS_query_quantified_capture_index },
+	{ "match", LTS_query_quantified_capture_match },
+	{ "name", LTS_query_quantified_capture_name },
+	{ "quantifier", LTS_query_quantified_capture_quantifier },
+	{ "one_capture", LTS_query_quantified_capture_one_capture },
+	{ "one_node", LTS_query_quantified_capture_one_node },
+	{ "captures", LTS_query_quantified_capture_captures },
+	{ "nodes", LTS_query_quantified_capture_nodes },
 	{ NULL, NULL }
 };
 
 static const luaL_Reg metamethods[] = {
-	{ "__gc", LTS_query_capture_set_delete },
+	{ "__gc", LTS_query_quantified_capture_delete },
 	{ NULL, NULL }
 };
 
-void LTS_setup_query_capture_set(lua_State *L) {
-	LTS_util_make_metatable(L, LTS_QUERY_CAPTURE_SET_METATABLE_NAME, methods, metamethods);
+void LTS_setup_query_quantified_capture(lua_State *L) {
+	LTS_util_make_metatable(L, LTS_QUERY_QUANTIFIED_CAPTURE_METATABLE_NAME, methods, metamethods);
 }

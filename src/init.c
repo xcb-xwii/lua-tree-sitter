@@ -10,7 +10,7 @@
 #include <lts/point.h>
 #include <lts/query/init.h>
 #include <lts/query/capture.h>
-#include <lts/query/capture_set.h>
+#include <lts/query/quantified_capture.h>
 #include <lts/query/cursor.h>
 #include <lts/query/match.h>
 #include <lts/query/runner.h>
@@ -30,7 +30,7 @@ int luaopen_tree_sitter(lua_State *L) {
 
 	lua_getfield(L, -1, "Query");
 	LTS_setup_query_capture(L);
-	LTS_setup_query_capture_set(L);
+	LTS_setup_query_quantified_capture(L);
 	LTS_setup_query_cursor(L);
 	LTS_setup_query_match(L);
 	LTS_setup_query_runner(L);

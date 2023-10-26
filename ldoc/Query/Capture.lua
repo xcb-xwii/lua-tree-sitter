@@ -1,5 +1,5 @@
 ---
--- A capture of a `Query`.
+-- A single capture of a `Query`.
 -- Analogous to `TSQueryCapture`.
 -- @classmod Query.Capture
 -- @pragma nostrip

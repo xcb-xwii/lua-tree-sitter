@@ -11,7 +11,7 @@
 -- Create a new runner with a given set of predicates.
 --
 -- Predicates are functions that take a variable number of parameters of type
--- `CaptureSet` or `string`.
+-- `QuantifiedCapture` or `string`.
 --
 -- Currently, predicates' return values are ignored and discarded, unless the
 -- name of the predicate ends with '`?`'. In this case, falsey values
@@ -38,11 +38,11 @@ function Runner.new(predicates, setup) end
 --
 -- @tparam Cursor cursor
 -- @treturn function():Match iterator
-function Runner:matches(cursor) end
+function Runner:iter_matches(cursor) end
 
 ---
 -- Uterate over the `Capture`s of a cursor, executing predicates.
 --
 -- @tparam cursor cursor
 -- @treturn function():Capture iterator
-function Runner:captures(cursor) end
+function Runner:iter_captures(cursor) end
