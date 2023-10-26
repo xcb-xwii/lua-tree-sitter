@@ -150,6 +150,7 @@ static const char *read(
 	return str + offset - 1;
 
 fail:
+	lua_pop(L, 2);
 	*bytes_read = 0;
 	return NULL;
 }
