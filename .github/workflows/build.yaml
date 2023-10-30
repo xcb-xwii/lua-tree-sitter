@@ -1,0 +1,53 @@
+name: Build
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  windows-x86_64:
+    name: Build for Windows x86_64
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: msys2 {0}
+    strategy:
+      matrix:
+        lua_version: [lua, lua51]
+    steps:
+      - uses: msys2/setup-msys2@v2
+        with:
+          update: true
+          install: >-
+            base-devel
+            git
+            mingw-w64-x86_64-gcc
+            mingw-w64-x86_64-${{ matrix.lua_version }}
+      - name: Checkout sources
+        uses: actions/checkout@v4
+      - name: Build lua-tree-sitter
+        run: make lua_tree_sitter.dll
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: lua-tree-sitter-windows-x86_64-${{ matrix.lua_version }}
+          path: lua_tree_sitter.dll
+
+  linux-x86_64:
+    name: Build for Linux x86_64
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        lua_version: [lua, lua51]
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v4
+      - name: 'Build'
+        uses: docker://archlinux:latest
+        with:
+          args: sh -c "pacman -Sy --noconfirm make gcc ${{ matrix.lua_version }} && make lua_tree_sitter.so"
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: lua-tree-sitter-linux-x86_64-${{ matrix.lua_version }}
+          path: lua_tree_sitter.so
