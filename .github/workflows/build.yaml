@@ -13,7 +13,11 @@ jobs:
         shell: msys2 {0}
     strategy:
       matrix:
-        lua_version: [lua, lua51]
+        lua:
+          - ver: lua
+            make_opts:
+          - ver: lua51
+            make_opts: LUA_INC=-I/mingw64/include/lua5.1 LIBS=-llua5.1
     steps:
       - uses: msys2/setup-msys2@v2
         with:
@@ -22,15 +26,17 @@ jobs:
             base-devel
             git
             mingw-w64-x86_64-gcc
-            mingw-w64-x86_64-${{ matrix.lua_version }}
+            mingw-w64-x86_64-${{ matrix.lua.ver }}
       - name: Checkout sources
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
       - name: Build lua-tree-sitter
-        run: make lua_tree_sitter.dll
+        run: make lua_tree_sitter.dll ${{ matrix.lua.make_opts }}
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: lua-tree-sitter-windows-x86_64-${{ matrix.lua_version }}
+          name: lua-tree-sitter-windows-x86_64-${{ matrix.lua.ver }}
           path: lua_tree_sitter.dll
 
   linux-x86_64:
@@ -38,16 +44,26 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        lua_version: [lua, lua51]
+        lua:
+          - ver: lua
+            make_opts:
+          - ver: lua51
+            make_opts: LUA_INC=-I/usr/include/lua5.1 LIBS=-llua5.1
     steps:
       - name: Checkout sources
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
       - name: 'Build'
         uses: docker://archlinux:latest
         with:
-          args: sh -c "pacman -Sy --noconfirm make gcc ${{ matrix.lua_version }} && make lua_tree_sitter.so"
+          args: >-
+            sh -c "
+              pacman -Sy --noconfirm make gcc ${{ matrix.lua.ver }} &&
+              make lua_tree_sitter.so ${{ matrix.lua.make_opts }}
+            "
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: lua-tree-sitter-linux-x86_64-${{ matrix.lua_version }}
+          name: lua-tree-sitter-linux-x86_64-${{ matrix.lua.ver }}
           path: lua_tree_sitter.so

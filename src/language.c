@@ -63,7 +63,8 @@ static TSLanguage *load(
 	memcpy(sym + SYM_PREFIX_LEN, name, name_len);
 
 #ifdef _WIN32
-	TSLanguage *(*lang_func)(void) = GetProcAddress(dl, sym);
+	TSLanguage *(*lang_func)(void) =
+		(TSLanguage *(*)(void)) (void (*)(void)) GetProcAddress(dl, sym);
 #else
 	TSLanguage *(*lang_func)(void);
 	*((void **) &lang_func) = dlsym(dl, sym);

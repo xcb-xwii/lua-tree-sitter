@@ -6,10 +6,10 @@ INC := -Iinclude -Itree-sitter/lib/include
 LUA_INC :=
 TS_INC := -Itree-sitter/lib/include -Itree-sitter/lib/src
 
-CFLAGS := -O2 -Wall -Wextra -Werror -std=c99 -pedantic -fPIC
-TS_CFLAGS := -O2 -Wall -Wextra -Werror -std=gnu99 -fPIC
+CFLAGS := -O3 -Wall -Wextra -Werror -std=c99 -pedantic -fPIC
+TS_CFLAGS := -O3 -Wall -Wextra -Werror -std=gnu99 -fPIC
 
-LIBS :=
+LIBS := -llua
 POSIX_LIBS := -ldl
 
 lua_tree_sitter.so: $(OBJ)
