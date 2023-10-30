@@ -61,7 +61,7 @@ static int LTS_query_new(lua_State *L) {
 	size_t src_len;
 	const char *src = luaL_checklstring(L, 2, &src_len);
 
-	uint32_t err_offset;
+	uint32_t err_offset = 0;
 	TSQueryError err_type;
 	TSQuery *self = ts_query_new(lang, src, src_len, &err_offset, &err_type);
 	switch (err_type) {

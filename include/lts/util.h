@@ -7,6 +7,12 @@
 
 #include <stdio.h>
 
+#ifdef _WIN32
+	#define LTS_EXPORT __declspec (dllexport)
+#else
+	#define LTS_EXPORT __attribute ((visibility("default")))
+#endif
+
 #if LUA_VERSION_NUM < 502
 	#define lua_rawlen lua_objlen
 #endif

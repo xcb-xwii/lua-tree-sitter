@@ -19,12 +19,7 @@
 #include <lts/tree.h>
 #include <lts/util.h>
 
-#ifdef _WIN32
-	__declspec (dllexport)
-#else
-	__attribute ((visibility("default")))
-#endif
-int luaopen_lua_tree_sitter(lua_State *L) {
+LTS_EXPORT int luaopen_lua_tree_sitter(lua_State *L) {
 	lua_createtable(L, 0, 0);
 
 	LTS_setup_language(L);
