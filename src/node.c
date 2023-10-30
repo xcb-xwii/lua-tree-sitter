@@ -290,6 +290,7 @@ static const luaL_Reg methods[] = {
 	{ "next_named_sibling", LTS_node_next_named_sibling },
 	{ "prev_named_sibling", LTS_node_prev_named_sibling },
 	{ "first_child_for_byte", LTS_node_first_child_for_byte },
+	{ "first_named_child_for_byte", LTS_node_first_named_child_for_byte },
 	{ "descendant_for_byte_range", LTS_node_descendant_for_byte_range },
 	{ "descendant_for_point_range", LTS_node_descendant_for_point_range },
 	{ "named_descendant_for_byte_range", LTS_node_named_descendant_for_byte_range },

@@ -6,13 +6,15 @@
 
 #include <tree_sitter/api.h>
 
+#include <stdint.h>
+
 #include <lts/query/match.h>
 
 #define LTS_QUERY_QUANTIFIED_CAPTURE_FUNCTABLE_NAME "QuantifiedCapture"
 #define LTS_QUERY_QUANTIFIED_CAPTURE_METATABLE_NAME "tree_sitter.Query.QuantifiedCapture"
 
 typedef struct {
-	int capture_id;
+	uint32_t capture_id;
 	TSQuantifier quantifier;
 	LTS_QueryMatch *match; int match_ref;
 } LTS_QueryQuantifiedCapture;

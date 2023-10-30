@@ -13,12 +13,6 @@ description = {
 	-- labels = '',
 }
 
-external_dependencies = {
-	TREE_SITTER = {
-		header = 'tree_sitter/api.h',
-	},
-}
-
 source = {
 	url = 'git+https://github.com/xcb-xwii/lua-tree-sitter'
 }
@@ -26,10 +20,8 @@ source = {
 build = {
 	type = 'builtin',
 	modules = {
-		['tree_sitter'] = {
-			libdirs = { '$(TREE_SITTER_LIBDIR)' },
-			incdirs = { '$(TREE_SITTER_INCDIR)', 'include' },
-			libraries = { 'tree-sitter' },
+		['lua_tree_sitter'] = {
+			incdirs = { 'tree-sitter/lib/include', 'include' },
 			sources = {
 				'src/init.c',
 				'src/language.c',
@@ -46,6 +38,7 @@ build = {
 				'src/range/array.c',
 				'src/tree.c',
 				'src/util.c',
+				'tree-sitter/lib/src/lib.c',
 			},
 		},
 	},

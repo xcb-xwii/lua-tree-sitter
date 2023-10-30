@@ -19,7 +19,7 @@
 #include <lts/tree.h>
 #include <lts/util.h>
 
-int luaopen_tree_sitter(lua_State *L) {
+int luaopen_lua_tree_sitter(lua_State *L) {
 	lua_createtable(L, 0, 0);
 
 	LTS_setup_language(L);

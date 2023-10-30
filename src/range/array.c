@@ -93,8 +93,8 @@ static int LTS_range_array_pack(lua_State *L) {
 
 static int LTS_range_array_unpack(lua_State *L) {
 	LTS_RangeArray self = *LTS_check_range_array(L, 1);
-	int start = luaL_optinteger(L, 2, 1);
-	int end = luaL_optinteger(L, 3, self.elem_count);
+	lua_Integer start = luaL_optinteger(L, 2, 1);
+	lua_Integer end = luaL_optinteger(L, 3, self.elem_count);
 
 	check_index(L, start, self.elem_count);
 	check_index(L, end, self.elem_count);
@@ -102,7 +102,7 @@ static int LTS_range_array_unpack(lua_State *L) {
 	lua_settop(L, 0);
 	lua_checkstack(L, self.elem_count);
 	
-	for (size_t i = start - 1; i < end; i++) {
+	for (size_t i = start - 1; i < (size_t) end; i++) {
 		LTS_push_range(L, self.ptr[i]);
 	}
 	return end - start + 1;

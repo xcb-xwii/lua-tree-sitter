@@ -9,7 +9,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <dlfcn.h>
+#ifdef _WIN32
+	#include <windows.h>
+#else
+	#include <dlfcn.h>
+#endif
 
 #include <lts/util.h>
 
@@ -33,9 +37,20 @@ static TSLanguage *load(
 	const char *name,
 	size_t name_len
 ) {
+#ifdef _WIN32
+	HMODULE dl = LoadLibrary(path);
+#else
 	void *dl = dlopen(path, RTLD_NOW | RTLD_LOCAL);
+#endif
 	if (!dl) {
+#ifdef _WIN32
+		lua_pushfstring(L,
+			"\n\tcould not load dynamic library: error code %d",
+			GetLastError()
+		);
+#else
 		lua_pushfstring(L, "\n\tcould not load dynamic library: %s", dlerror());
+#endif
 		luaL_addvalue(err_buf);
 		return NULL;
 	}
@@ -47,11 +62,24 @@ static TSLanguage *load(
 	memcpy(sym, SYM_PREFIX, SYM_PREFIX_LEN);
 	memcpy(sym + SYM_PREFIX_LEN, name, name_len);
 
-	TSLanguage *(*lang_func)(void) = dlsym(dl, sym);
+#ifdef _WIN32
+	TSLanguage *(*lang_func)(void) = GetProcAddress(dl, sym);
+#else
+	TSLanguage *(*lang_func)(void);
+	*((void **) &lang_func) = dlsym(dl, sym);
+#endif
 	free(sym);
 	if (!lang_func) {
+#ifdef _WIN32
+		FreeLibrary(dl);
+		lua_pushfstring(L,
+			"\n\tcould not load symbol from dynamic library: error code %d",
+			GetLastError()
+		);
+#else
 		dlclose(dl);
 		lua_pushfstring(L, "\n\tcould not load symbol from dynamic library: %s", dlerror());
+#endif
 		luaL_addvalue(err_buf);
 		return NULL;
 	}

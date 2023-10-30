@@ -25,7 +25,7 @@ LTS_QueryRunner *LTS_check_query_runner(lua_State *L, int idx) {
 
 static int LTS_query_runner_new(lua_State *L) {
 	lua_settop(L, 2);
-	LTS_QueryRunner self = {};
+	LTS_QueryRunner self;
 
 	if (lua_type(L, 1) != LUA_TTABLE) {
 		return luaL_error(L,
