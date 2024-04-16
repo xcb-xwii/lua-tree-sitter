@@ -2,25 +2,25 @@ SRC := $(wildcard src/*.c) $(wildcard src/query/*.c) $(wildcard src/range/*.c)
 SRC += tree-sitter/lib/src/lib.c
 OBJ := $(SRC:.c=.o)
 
-INC := -Iinclude -Itree-sitter/lib/include
-LUA_INC :=
+INC :=
+LTS_INC := -Iinclude -Itree-sitter/lib/include
 TS_INC := -Itree-sitter/lib/include -Itree-sitter/lib/src
 
-CFLAGS := -O3 -Wall -Wextra -Werror -fPIC -fvisibility=hidden -flto=auto
-LTS_CFLAGS := -std=c99 -pedantic
-TS_CFLAGS := -std=gnu99
+CFLAGS := -O3 -fPIC -flto=auto
+LTS_CFLAGS := -std=c99 -pedantic -Wall -Wextra -Werror -fvisibility=hidden
+TS_CFLAGS := -std=gnu99 -fvisibility=hidden
 
-LIBS := -llua
-POSIX_LIBS := -ldl
+LDFLAGS :=
+POSIX_LDFLAGS := -shared -ldl
 
 lua_tree_sitter.so: $(OBJ)
-	$(CC) -shared -o $@ $^ $(CFLAGS) $(LIBS) $(POSIX_LIBS)
+	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS) $(POSIX_LDFLAGS)
 
 lua_tree_sitter.dll: $(OBJ)
-	$(CC) -shared -o $@ $^ $(CFLAGS) $(LIBS)
+	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS)
 
 %.o: %.c
-	$(CC) -c -o $@ $(CFLAGS) $(LTS_CFLAGS) $(LUA_INC) $(INC) $<
+	$(CC) -c -o $@ $(CFLAGS) $(LTS_CFLAGS) $(INC) $(LTS_INC) $<
 
 tree-sitter/%.o: tree-sitter/%.c
 	$(CC) -c -o $@ $(CFLAGS) $(TS_CFLAGS) $(TS_INC) $<
