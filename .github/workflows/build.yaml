@@ -17,7 +17,7 @@ jobs:
           - ver: lua
             make_opts:
           - ver: lua51
-            make_opts: LUA_INC=-I/mingw64/include/lua5.1 LIBS=-llua5.1
+            make_opts: LUA_INC=-I/mingw64/include/lua5.1 LUA_LDFLAGS=-llua5.1
     steps:
       - uses: msys2/setup-msys2@v2
         with:
@@ -48,7 +48,7 @@ jobs:
           - ver: lua
             make_opts:
           - ver: lua51
-            make_opts: LUA_INC=-I/usr/include/lua5.1 LIBS=-llua5.1
+            make_opts: LUA_INC=-I/usr/include/lua5.1 LUA_LDFLAGS=-llua5.1
     steps:
       - name: Checkout sources
         uses: actions/checkout@v4
