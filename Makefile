@@ -6,9 +6,9 @@ LUA_INC :=
 LTS_INC := -Iinclude -Itree-sitter/lib/include
 TS_INC := -Itree-sitter/lib/include -Itree-sitter/lib/src
 
-CFLAGS := -O3 -fPIC -flto=auto
-LTS_CFLAGS := -std=c99 -pedantic -Wall -Wextra -Werror -fvisibility=hidden
-TS_CFLAGS := -std=gnu99 -fvisibility=hidden
+CFLAGS := -O3 -fvisibility=hidden -fPIC -flto=auto
+LTS_CFLAGS := -std=c11 -pedantic -Wall -Wextra -Werror
+TS_CFLAGS := -std=c11 -DTREE_SITTER_HIDE_SYMBOLS -DTREE_SITTER_HIDDEN_SYMBOLS
 
 LDFLAGS := -shared
 LUA_LDFLAGS = -llua
