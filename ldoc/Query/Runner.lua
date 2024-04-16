@@ -23,7 +23,7 @@
 --
 -- The `setup` function is ran before executing the predicates of a `Match` or
 -- `Capture`. This may be useful to ensure side-effects of skipped items are
--- erased. It is not ran if there are no predicates.
+-- erased.
 -- @tparam {string:function(...)} predicates
 -- @tparam ?function() setup
 -- @treturn Runner

@@ -78,7 +78,6 @@ static bool run_predicates(
 		match.pattern_index,
 		&count
 	);
-	if (count == 0) return true;
 
 	lua_pushvalue(L, setup_idx);
 	if (lua_isnil(L, -1)) {
