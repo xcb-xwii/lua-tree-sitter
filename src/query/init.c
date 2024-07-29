@@ -101,6 +101,21 @@ static int LTS_query_delete(lua_State *L) {
 	return 0;
 }
 
+static int LTS_query_disable_capture(lua_State *L) {
+	TSQuery *query = *LTS_check_query(L, 1);
+	size_t len;
+	const char *name = luaL_checklstring(L, 2, &len);
+
+	ts_query_disable_capture(query, name, len);
+
+	return 0;
+}
+
+static const luaL_Reg methods[] = {
+	{ "disable_capture", LTS_query_disable_capture },
+	{ NULL, NULL }
+};
+
 static const luaL_Reg metamethods[] = {
 	{ "__gc", LTS_query_delete },
 	{ NULL, NULL }
@@ -112,6 +127,6 @@ static const luaL_Reg funcs[] = {
 };
 
 void LTS_setup_query(lua_State *L) {
-	LTS_util_make_metatable(L, LTS_QUERY_METATABLE_NAME, NULL, metamethods);
+	LTS_util_make_metatable(L, LTS_QUERY_METATABLE_NAME, methods, metamethods);
 	LTS_util_make_functable(L, LTS_QUERY_FUNCTABLE_NAME, funcs);
 }
