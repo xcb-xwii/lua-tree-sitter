@@ -218,6 +218,30 @@ static int LTS_parser_parse_string(lua_State *L) {
 	return 1;
 }
 
+static int LTS_parser_reset(lua_State *L) {
+	TSParser *self = *LTS_check_parser(L, 1);
+
+	ts_parser_reset(self);
+
+	return 0;
+}
+
+static int LTS_parser_timeout_micros(lua_State *L) {
+	TSParser *self = *LTS_check_parser(L, 1);
+
+	lua_pushinteger(L, ts_parser_timeout_micros(self));
+	return 1;
+}
+
+static int LTS_parser_set_timeout_micros(lua_State *L) {
+	TSParser *self = *LTS_check_parser(L, 1);
+	uint64_t timeout = luaL_checkinteger(L, 2);
+
+	ts_parser_set_timeout_micros(self, timeout);
+
+	return 0;
+}
+
 static const luaL_Reg methods[] = {
 	{ "language", LTS_parser_language },
 	{ "set_language", LTS_parser_set_language },
@@ -225,6 +249,10 @@ static const luaL_Reg methods[] = {
 	{ "set_included_ranges", LTS_parser_set_included_ranges },
 	{ "parse", LTS_parser_parse },
 	{ "parse_string", LTS_parser_parse_string },
+	{ "reset", LTS_parser_reset },
+	{ "timeout_micros", LTS_parser_timeout_micros },
+	{ "set_timeout_micros", LTS_parser_set_timeout_micros },
+	{ NULL, NULL }
 };
 
 static const luaL_Reg metamethods[] = {
