@@ -108,19 +108,19 @@ static const char *read(
 	LTS_push_point(L, position);
 	if (lua_pcall(L, 2, 2, 0) != 0) {
 		ctx->status = LTS_INPUT_RTERROR;
-		goto fail;
+		goto fail_no_pop;
 	}
 
 	switch (lua_type(L, -2)) {
 	case LUA_TNIL:
-		goto fail;
-	
+		goto fail_pop;
+
 	case LUA_TSTRING:
 		break;
 
 	default:
 		ctx->status = LTS_INPUT_RETTYPE_1;
-		goto fail;
+		goto fail_pop;
 	}
 
 	size_t offset;
@@ -128,29 +128,30 @@ static const char *read(
 	case LUA_TNIL:
 		offset = 1;
 		break;
-	
+
 	case LUA_TNUMBER:
 		offset = lua_tointeger(L, -1);
 		break;
-	
+
 	default:
 		ctx->status = LTS_INPUT_RETTYPE_2;
-		goto fail;
+		goto fail_pop;
 	}
 
 	size_t len;
 	const char *str = lua_tolstring(L, -2, &len);
 	lua_pop(L, 2);
 
-	if (offset > len) goto fail;
+	if (offset > len) goto fail_no_pop;
 	if (offset < 1) offset += len + 1;
 	if (offset < 1) offset = 1;
 
 	*bytes_read = len - offset + 1;
 	return str + offset - 1;
 
-fail:
+fail_pop:
 	lua_pop(L, 2);
+fail_no_pop:
 	*bytes_read = 0;
 	return NULL;
 }
