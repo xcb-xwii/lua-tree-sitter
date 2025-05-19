@@ -59,7 +59,7 @@ static int LTS_query_runner_new(lua_State *L) {
 
 static int LTS_query_runner_delete(lua_State *L) {
 	LTS_QueryRunner self = *LTS_log_gc(LTS_check_query_runner(L, 1), LTS_QUERY_RUNNER_METATABLE_NAME);
-	
+
 	luaL_unref(L, LUA_REGISTRYINDEX, self.predicates_ref);
 	return 0;
 }
@@ -96,6 +96,7 @@ static bool run_predicates(
 		lua_pushlstring(L, name, len);
 		lua_rawget(L, predicates_idx);
 
+		lua_checkstack(L, count);
 		for (; i < count; i++) {
 			TSQueryPredicateStep step = steps[i];
 			switch (step.type) {
