@@ -34,7 +34,7 @@ jobs:
       - name: Build lua-tree-sitter
         run: make lua_tree_sitter.dll ${{ matrix.lua.make_opts }}
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: lua-tree-sitter-windows-x86_64-${{ matrix.lua.ver }}
           path: lua_tree_sitter.dll
@@ -63,7 +63,7 @@ jobs:
               make lua_tree_sitter.so ${{ matrix.lua.make_opts }}
             "
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: lua-tree-sitter-linux-x86_64-${{ matrix.lua.ver }}
           path: lua_tree_sitter.so
