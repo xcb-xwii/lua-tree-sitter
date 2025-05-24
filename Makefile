@@ -8,7 +8,7 @@ TS_INC := -Itree-sitter/lib/include -Itree-sitter/lib/src
 
 CFLAGS := -O3 -fvisibility=hidden -fPIC -flto=auto
 LTS_CFLAGS := -std=c11 -pedantic -Wall -Wextra -Werror
-TS_CFLAGS := -std=c11 -DTREE_SITTER_HIDE_SYMBOLS -DTREE_SITTER_HIDDEN_SYMBOLS
+TS_CFLAGS := -std=c11 -DTREE_SITTER_HIDE_SYMBOLS -DTREE_SITTER_HIDDEN_SYMBOLS -D_POSIX_C_SOURCE=200112L -D_DEFAULT_SOURCE
 
 LDFLAGS := -shared
 LUA_LDFLAGS = -llua
